@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#08110f" />
+    <meta name="description" content="A transparent football totals simulator with matchup and player availability controls." />
+    <title>Sporty Sim — Football totals lab</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Sporty Sim home">
+        <span class="brand-mark">S</span>
+        <span>
+          <strong>SPORTY</strong><em>SIM</em>
+        </span>
+      </a>
+      <div class="topbar-actions">
+        <span class="status-pill"><span class="live-dot"></span> Model ready</span>
+        <button class="icon-button" id="resetButton" type="button" title="Reset all assumptions" aria-label="Reset all assumptions">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v6h6M20 20v-6h-6M5.7 15A7 7 0 0 0 18.4 17M18.3 9A7 7 0 0 0 5.6 7"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Football totals lab <span>v0.1</span></div>
+          <h1>Turn assumptions into<br><span>probabilities.</span></h1>
+          <p>Build the matchup, price uncertain player availability, and simulate the full range of game outcomes.</p>
+        </div>
+        <div class="hero-meta">
+          <span>Drive-level model</span>
+          <strong>50,000</strong>
+          <span>games per run</span>
+        </div>
+      </section>
+
+      <section class="workspace-grid">
+        <div class="control-column">
+          <article class="panel slate-panel">
+            <div class="panel-heading">
+              <div>
+                <span class="step">01</span>
+                <h2>Choose the game</h2>
+              </div>
+              <span id="feedStatus" class="feed-status">Live schedule</span>
+            </div>
+
+            <div class="slate-filters">
+              <label>
+                League
+                <select id="leagueSelect">
+                  <option value="nfl">NFL</option>
+                  <option value="college-football">College football</option>
+                </select>
+              </label>
+              <label>
+                Game date
+                <input id="gameDate" type="date" />
+              </label>
+              <button class="secondary-button" id="loadGamesButton" type="button">Load slate</button>
+            </div>
+
+            <div id="gameList" class="game-list" aria-live="polite">
+              <div class="loading-state"><span></span>Loading tonight’s slate…</div>
+            </div>
+          </article>
+
+          <article class="panel assumptions-panel">
+            <div class="panel-heading">
+              <div>
+                <span class="step">02</span>
+                <h2>Shape the matchup</h2>
+              </div>
+              <button id="presetButton" class="text-button" type="button">Reset to neutral</button>
+            </div>
+
+            <div id="matchupInputs" class="matchup-inputs">
+              <div class="team-input-column" data-side="away">
+                <div class="team-input-header">
+                  <div class="mini-logo" data-team-logo="away"><span>A</span></div>
+                  <div><small>Away</small><strong data-team-name="away">Away team</strong></div>
+                </div>
+                <div class="rating-pair">
+                  <label class="number-field featured">Offense rating <input name="away.offense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
+                  <label class="number-field featured">Defense rating <input name="away.defense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
+                </div>
+                <div class="field-grid">
+                  <label>Plays / game<input name="away.plays" type="number" min="45" max="90" step="0.1" value="63"></label>
+                  <label>Seconds / play<input name="away.pace" type="number" min="18" max="40" step="0.1" value="28"></label>
+                  <label>Pass rate %<input name="away.passRate" type="number" min="20" max="90" step="0.1" value="58"></label>
+                  <label>Yards / dropback<input name="away.passEfficiency" type="number" min="2" max="12" step="0.1" value="6.4"></label>
+                  <label>Yards / rush<input name="away.rushEfficiency" type="number" min="1" max="9" step="0.1" value="4.2"></label>
+                  <label>Success rate %<input name="away.successRate" type="number" min="20" max="70" step="0.1" value="42"></label>
+                  <label>Explosive rate %<input name="away.explosiveRate" type="number" min="1" max="30" step="0.1" value="10"></label>
+                  <label>Turnovers / drive %<input name="away.turnoverRate" type="number" min="1" max="35" step="0.1" value="11"></label>
+                  <label>Red-zone TD %<input name="away.redZoneTdRate" type="number" min="20" max="90" step="0.1" value="55"></label>
+                </div>
+              </div>
+
+              <div class="versus-line"><span>VS</span></div>
+
+              <div class="team-input-column" data-side="home">
+                <div class="team-input-header">
+                  <div class="mini-logo" data-team-logo="home"><span>H</span></div>
+                  <div><small>Home</small><strong data-team-name="home">Home team</strong></div>
+                </div>
+                <div class="rating-pair">
+                  <label class="number-field featured">Offense rating <input name="home.offense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
+                  <label class="number-field featured">Defense rating <input name="home.defense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
+                </div>
+                <div class="field-grid">
+                  <label>Plays / game<input name="home.plays" type="number" min="45" max="90" step="0.1" value="63"></label>
+                  <label>Seconds / play<input name="home.pace" type="number" min="18" max="40" step="0.1" value="28"></label>
+                  <label>Pass rate %<input name="home.passRate" type="number" min="20" max="90" step="0.1" value="58"></label>
+                  <label>Yards / dropback<input name="home.passEfficiency" type="number" min="2" max="12" step="0.1" value="6.4"></label>
+                  <label>Yards / rush<input name="home.rushEfficiency" type="number" min="1" max="9" step="0.1" value="4.2"></label>
+                  <label>Success rate %<input name="home.successRate" type="number" min="20" max="70" step="0.1" value="42"></label>
+                  <label>Explosive rate %<input name="home.explosiveRate" type="number" min="1" max="30" step="0.1" value="10"></label>
+                  <label>Turnovers / drive %<input name="home.turnoverRate" type="number" min="1" max="35" step="0.1" value="11"></label>
+                  <label>Red-zone TD %<input name="home.redZoneTdRate" type="number" min="20" max="90" step="0.1" value="55"></label>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel availability-panel">
+            <div class="panel-heading">
+              <div>
+                <span class="step">03</span>
+                <h2>Price availability</h2>
+              </div>
+              <button id="addPlayerButton" class="add-button" type="button"><span>+</span> Add player</button>
+            </div>
+            <p class="panel-intro">Each simulation independently samples whether uncertain players are active, limited, or out.</p>
+            <div id="playerList" class="player-list"></div>
+            <div id="emptyPlayers" class="empty-players">
+              <div>±</div>
+              <strong>No availability scenarios yet</strong>
+              <span>Add a star or role player whose status could change the game.</span>
+            </div>
+          </article>
+        </div>
+
+        <aside class="results-column">
+          <div class="results-sticky">
+            <article class="panel run-panel">
+              <div class="run-matchup">
+                <div class="run-team">
+                  <div class="score-logo" data-team-logo="away"><span>A</span></div>
+                  <strong data-team-abbr="away">AWAY</strong>
+                </div>
+                <div>
+                  <span id="kickoffLabel">Select a matchup</span>
+                  <em>at</em>
+                  <small id="venueLabel">—</small>
+                </div>
+                <div class="run-team">
+                  <div class="score-logo" data-team-logo="home"><span>H</span></div>
+                  <strong data-team-abbr="home">HOME</strong>
+                </div>
+              </div>
+
+              <div class="market-row">
+                <label>Market total<input id="marketTotal" type="number" min="10" max="100" step="0.5" value="44.5"></label>
+                <label>Weather drag
+                  <select id="weatherPenalty">
+                    <option value="0">None / dome</option>
+                    <option value="3">Light</option>
+                    <option value="7">Moderate</option>
+                    <option value="12">Severe</option>
+                  </select>
+                </label>
+              </div>
+
+              <button id="runButton" class="run-button" type="button">
+                <span class="button-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 7 8 5-8 5V7Z"/></svg> Run 50,000 simulations</span>
+                <span class="button-progress"></span>
+              </button>
+              <p class="model-note">Local Monte Carlo · deterministic seed · no wager recommendation</p>
+            </article>
+
+            <article id="resultsPanel" class="panel result-panel is-empty" aria-live="polite">
+              <div class="pre-result">
+                <div class="orbit"><span></span><span></span><span></span></div>
+                <h3>Your distribution will appear here</h3>
+                <p>Choose a game, tune the assumptions, and run the model.</p>
+              </div>
+
+              <div class="result-content">
+                <div class="result-heading">
+                  <span>Simulation result</span>
+                  <small id="runTimestamp">—</small>
+                </div>
+                <div class="lean-card">
+                  <div>
+                    <span>Model lean</span>
+                    <strong id="leanLabel">—</strong>
+                    <small id="edgeLabel">—</small>
+                  </div>
+                  <div class="confidence-ring" id="confidenceRing"><strong id="leanProbability">—</strong><span>probability</span></div>
+                </div>
+
+                <div class="score-projection">
+                  <div><span data-team-abbr="away">AWAY</span><strong id="awayProjection">—</strong></div>
+                  <span>projected score</span>
+                  <div><span data-team-abbr="home">HOME</span><strong id="homeProjection">—</strong></div>
+                </div>
+
+                <div class="metric-grid">
+                  <div><span>Mean total</span><strong id="meanTotal">—</strong></div>
+                  <div><span>Median</span><strong id="medianTotal">—</strong></div>
+                  <div><span>80% range</span><strong id="rangeTotal">—</strong></div>
+                  <div><span>Fair odds</span><strong id="fairOdds">—</strong></div>
+                </div>
+
+                <div class="chart-section">
+                  <div class="chart-header"><span>Outcome distribution</span><small><i></i> Market line</small></div>
+                  <div id="histogram" class="histogram"></div>
+                  <div id="chartAxis" class="chart-axis"></div>
+                </div>
+
+                <div class="probability-bars">
+                  <div><span>Over <b id="overLine">44.5</b></span><strong id="overProbability">—</strong></div>
+                  <div class="bar"><i id="overBar"></i></div>
+                  <div><span>Under <b id="underLine">44.5</b></span><strong id="underProbability">—</strong></div>
+                  <div class="bar under"><i id="underBar"></i></div>
+                </div>
+              </div>
+            </article>
+
+            <div class="responsible-note">
+              <strong>Model, not a promise.</strong>
+              <span>This prototype uses your assumptions and simplified drive distributions. Validate it prospectively before trusting any edge. If you bet, set limits.</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <dialog id="playerDialog">
+      <form id="playerForm" method="dialog">
+        <div class="dialog-heading">
+          <div><span class="eyebrow">Availability scenario</span><h2>Add player uncertainty</h2></div>
+          <button class="icon-button" value="cancel" formnovalidate aria-label="Close">×</button>
+        </div>
+        <input id="editPlayerId" type="hidden" />
+        <div class="dialog-fields">
+          <label class="wide">Player label<input id="playerName" required maxlength="50" placeholder="e.g. Starting quarterback"></label>
+          <label>Team<select id="playerTeam"><option value="away">Away</option><option value="home">Home</option></select></label>
+          <label>Unit<select id="playerUnit"><option value="offense">Offense</option><option value="defense">Defense</option></select></label>
+          <label>Position group<select id="playerGroup"><option value="quarterback">Quarterback</option><option value="skill">Skill position</option><option value="offensive-line">Offensive line</option><option value="front-seven">Front seven</option><option value="secondary">Secondary</option><option value="special-teams">Special teams</option></select></label>
+          <label>Chance to play %<input id="playProbability" type="number" required min="0" max="100" step="1" value="50"></label>
+          <label>Chance limited %<input id="limitedProbability" type="number" required min="0" max="100" step="1" value="20"><small>Included within chance to play</small></label>
+          <label>Loss if absent<input id="pointsImpact" type="number" required min="0" max="15" step="0.25" value="2"><small>Expected points lost by that unit</small></label>
+          <label>Limited severity %<input id="limitedImpact" type="number" required min="0" max="100" step="5" value="40"><small>Share of the full absence penalty</small></label>
+          <label>Expected snap share %<input id="snapShare" type="number" required min="10" max="100" step="5" value="80"></label>
+        </div>
+        <div class="dialog-actions">
+          <button class="secondary-button" value="cancel" formnovalidate>Cancel</button>
+          <button id="savePlayerButton" class="run-button" value="default">Save scenario</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status"></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
