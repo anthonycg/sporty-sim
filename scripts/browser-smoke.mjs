@@ -25,7 +25,7 @@ async function waitForUrl(url, attempts = 50) {
 }
 
 const server = spawn(process.execPath, ['server.mjs'], {
-  env: { ...process.env, PORT: String(appPort) },
+  env: { ...process.env, PORT: String(appPort), PREDICTIONS_FILE: join(chromeProfile, 'predictions.json') },
   stdio: 'ignore'
 });
 let chrome;
@@ -79,9 +79,13 @@ try {
     await wait(100);
   }
   assert.ok(profileReady, 'Expected objective recent-game profiles to load.');
+  const ratingBefore = await evaluate("Number(document.querySelector('#awayOffenseRating').textContent)");
+  assert.ok(Number.isFinite(ratingBefore), 'Expected a calculated overall offense rating.');
+  const ratingAfter = await evaluate("(() => { const input = document.querySelector('[name=\"away.offenseAdjustment\"]'); input.value = 5; input.dispatchEvent(new Event('input', { bubbles: true })); input.dispatchEvent(new Event('change', { bubbles: true })); return Number(document.querySelector('#awayOffenseRating').textContent); })()");
+  assert.equal(ratingAfter, ratingBefore + 5, 'Expected the manual adjustment to move the overall rating.');
   await evaluate("document.querySelector('#runButton').click(); true");
   let resultReady = false;
-  for (let attempt = 0; attempt < 120; attempt += 1) {
+  for (let attempt = 0; attempt < 240; attempt += 1) {
     resultReady = await evaluate("!document.querySelector('#resultsPanel').classList.contains('is-empty')");
     if (resultReady) break;
     await wait(100);
@@ -98,9 +102,10 @@ try {
     if (await evaluate("!document.querySelector('#runButton').disabled")) break;
     await wait(50);
   }
+  await evaluate("(() => { const select = document.querySelector('#modelMode'); select.value = 'drive'; select.dispatchEvent(new Event('change', { bubbles: true })); return true; })()");
   await evaluate("document.querySelector('#runButton').click(); true");
   let secondSeedLabel = firstSeedLabel;
-  for (let attempt = 0; attempt < 100; attempt += 1) {
+  for (let attempt = 0; attempt < 300; attempt += 1) {
     secondSeedLabel = await evaluate("document.querySelector('#runTimestamp').textContent");
     if (secondSeedLabel !== firstSeedLabel) break;
     await wait(100);

@@ -3,6 +3,7 @@ import { readFile, stat } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadHistoricalProfile } from './lib/historical-profile.mjs';
+import { createPredictionLedger } from './lib/prediction-ledger.mjs';
 
 const ROOT = fileURLToPath(new URL('.', import.meta.url));
 const PUBLIC_DIR = join(ROOT, 'public');
@@ -10,6 +11,7 @@ const PORT = Number(process.env.PORT || 4173);
 const ESPN_BASE = 'https://site.api.espn.com/apis/site/v2/sports/football';
 const LEAGUES = new Set(['nfl', 'college-football']);
 const cache = new Map();
+const predictionLedger = createPredictionLedger(process.env.PREDICTIONS_FILE || join(ROOT, 'data', 'predictions.json'));
 
 const mimeTypes = {
   '.html': 'text/html; charset=utf-8',
@@ -27,6 +29,21 @@ function sendJson(response, status, value) {
     'cache-control': 'no-store'
   });
   response.end(JSON.stringify(value));
+}
+
+async function readJsonBody(request, limit = 100_000) {
+  const chunks = [];
+  let size = 0;
+  for await (const chunk of request) {
+    size += chunk.length;
+    if (size > limit) throw new Error('Request body is too large.');
+    chunks.push(chunk);
+  }
+  try {
+    return JSON.parse(Buffer.concat(chunks).toString('utf8') || '{}');
+  } catch {
+    throw new Error('Request body must be valid JSON.');
+  }
 }
 
 function validDate(value) {
@@ -106,6 +123,28 @@ async function fetchGames(league, date) {
   return value;
 }
 
+async function fetchOutcome(eventId, league) {
+  if (!LEAGUES.has(league)) throw new Error('Unknown league in prediction ledger.');
+  const endpoint = `${ESPN_BASE}/${league}/summary?event=${eventId}`;
+  const response = await fetch(endpoint, {
+    headers: { 'user-agent': 'SportySim/0.4 local analytics prototype' },
+    signal: AbortSignal.timeout(8_000)
+  });
+  if (!response.ok) throw new Error(`Final-score provider returned ${response.status}`);
+  const payload = await response.json();
+  const competition = payload.header?.competitions?.[0] || {};
+  const home = competition.competitors?.find((team) => team.homeAway === 'home');
+  const away = competition.competitors?.find((team) => team.homeAway === 'away');
+  const homeScore = Number(home?.score);
+  const awayScore = Number(away?.score);
+  return {
+    completed: Boolean(competition.status?.type?.completed),
+    homeScore,
+    awayScore,
+    total: Number.isFinite(homeScore) && Number.isFinite(awayScore) ? homeScore + awayScore : null
+  };
+}
+
 async function serveStatic(request, response, pathname) {
   const requested = pathname === '/' ? '/index.html' : pathname;
   const safePath = normalize(requested).replace(/^(\.\.[/\\])+/, '');
@@ -135,7 +174,7 @@ async function serveStatic(request, response, pathname) {
 const server = createServer(async (request, response) => {
   const url = new URL(request.url || '/', `http://${request.headers.host || 'localhost'}`);
   if (request.method === 'GET' && url.pathname === '/api/health') {
-    sendJson(response, 200, { ok: true, version: '0.3.2' });
+    sendJson(response, 200, { ok: true, version: '0.4.0' });
     return;
   }
 
@@ -173,8 +212,37 @@ const server = createServer(async (request, response) => {
     return;
   }
 
+  if (request.method === 'GET' && url.pathname === '/api/backtest') {
+    try {
+      sendJson(response, 200, { summary: await predictionLedger.summary() });
+    } catch (error) {
+      sendJson(response, 500, { error: error.message || 'Could not load the prediction ledger.' });
+    }
+    return;
+  }
+
+  if (request.method === 'POST' && url.pathname === '/api/predictions') {
+    try {
+      const record = await predictionLedger.record(await readJsonBody(request));
+      sendJson(response, 201, { record, summary: await predictionLedger.summary() });
+    } catch (error) {
+      sendJson(response, 400, { error: error.message || 'Could not record the prediction.' });
+    }
+    return;
+  }
+
+  if (request.method === 'POST' && url.pathname === '/api/backtest/settle') {
+    try {
+      const { updated, summary } = await predictionLedger.settle(fetchOutcome);
+      sendJson(response, 200, { updated, summary });
+    } catch (error) {
+      sendJson(response, 502, { error: error.message || 'Could not refresh final scores.' });
+    }
+    return;
+  }
+
   if (request.method !== 'GET' && request.method !== 'HEAD') {
-    response.writeHead(405, { allow: 'GET, HEAD' });
+    response.writeHead(405, { allow: 'GET, HEAD, POST' });
     response.end();
     return;
   }

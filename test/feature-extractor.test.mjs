@@ -30,6 +30,7 @@ test('extractor converts play-by-play and box score into counters', () => {
   assert.equal(game.counters.explosive, 1);
   assert.equal(game.counters.successful, 3);
   assert.equal(game.counters.drivePoints, 7);
+  assert.ok(Number.isFinite(game.counters.estimatedEpa));
 });
 
 test('profile reports observed and shrunk values', () => {
@@ -37,9 +38,29 @@ test('profile reports observed and shrunk values', () => {
   const opponent = extractTeamGame(summary, '2');
   const profile = buildTeamProfile([offense], [opponent], { league: 'nfl', seasonType: 'preseason' });
   assert.equal(profile.games, 1);
-  assert.equal(profile.offenseRating, 50);
-  assert.equal(profile.defenseRating, 50);
+  assert.equal(profile.offenseRating, profile.summaryOffenseRating);
+  assert.equal(profile.defenseRating, profile.summaryDefenseRating);
+  assert.notEqual(profile.offenseRating, 50);
   assert.equal(profile.metrics.passEfficiency.observed, 35 / 3);
   assert.ok(profile.metrics.passEfficiency.value < profile.metrics.passEfficiency.observed);
   assert.ok(profile.metrics.passEfficiency.value > profile.metrics.passEfficiency.baseline);
+  assert.ok(Number.isFinite(profile.metrics.epaPerPlay.value));
+  assert.equal(profile.playModel.sample.passPlays, 3);
+});
+
+test('profile removes production attributable to a weak opponent', () => {
+  const offense = extractTeamGame(summary, '1');
+  const opponent = extractTeamGame(summary, '2');
+  const unadjusted = buildTeamProfile([offense], [opponent], { league: 'nfl', seasonType: 'preseason' });
+  const context = {
+    eventId: offense.eventId,
+    profile: {
+      defenseAllowed: { passEfficiency: { value: 8.4 } },
+      metrics: { passEfficiency: { value: 6.1 } }
+    }
+  };
+  const adjusted = buildTeamProfile([offense], [opponent], { league: 'nfl', seasonType: 'preseason', opponentContexts: [context] });
+  assert.ok(adjusted.metrics.passEfficiency.opponentAdjusted < adjusted.metrics.passEfficiency.observed);
+  assert.ok(adjusted.metrics.passEfficiency.value < unadjusted.metrics.passEfficiency.value);
+  assert.match(adjusted.method, /Opponent-adjusted/);
 });

@@ -28,7 +28,7 @@
     <main>
       <section class="hero">
         <div>
-          <div class="eyebrow">Football totals lab <span>v0.3.2</span></div>
+          <div class="eyebrow">Football totals lab <span>v0.4.0</span></div>
           <h1>Turn assumptions into<br><span>probabilities.</span></h1>
           <p>Build the matchup, price uncertain player availability, and simulate the full range of game outcomes.</p>
         </div>
@@ -90,9 +90,13 @@
                   <div class="mini-logo" data-team-logo="away"><span>A</span></div>
                   <div><small>Away</small><strong data-team-name="away">Away team</strong></div>
                 </div>
-                <div class="rating-pair">
-                  <label class="number-field featured">Offense residual <input name="away.offense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
-                  <label class="number-field featured">Defense residual <input name="away.defense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
+                <div class="overall-ratings">
+                  <div class="overall-rating"><span>Overall offense</span><strong id="awayOffenseRating">50</strong><small>/100</small></div>
+                  <div class="overall-rating"><span>Overall defense</span><strong id="awayDefenseRating">50</strong><small>/100</small></div>
+                </div>
+                <div class="adjustment-pair">
+                  <label class="number-field adjustment-field">Offensive adjustment <input name="away.offenseAdjustment" type="number" min="-25" max="25" step="1" value="0"><span>pts</span></label>
+                  <label class="number-field adjustment-field">Defensive adjustment <input name="away.defenseAdjustment" type="number" min="-25" max="25" step="1" value="0"><span>pts</span></label>
                 </div>
                 <div class="field-grid">
                   <label>Plays / game<input name="away.plays" type="number" min="45" max="90" step="0.1" value="63"></label>
@@ -104,6 +108,7 @@
                   <label>Explosive rate %<input name="away.explosiveRate" type="number" min="1" max="30" step="0.1" value="10"></label>
                   <label>Turnovers / drive %<input name="away.turnoverRate" type="number" min="1" max="35" step="0.1" value="11"></label>
                   <label>Red-zone TD %<input name="away.redZoneTdRate" type="number" min="20" max="90" step="0.1" value="55"></label>
+                  <label>Estimated EPA / play<input name="away.epaPerPlay" type="number" min="-1" max="1" step="0.01" value="0"></label>
                   <div class="field-divider">Defense production allowed</div>
                   <label>Net yds / dropback<input name="away.passDefenseEfficiency" type="number" min="2" max="12" step="0.1" value="6.4"></label>
                   <label>Yards / rush allowed<input name="away.rushDefenseEfficiency" type="number" min="1" max="9" step="0.1" value="4.2"></label>
@@ -111,6 +116,7 @@
                   <label>Explosive allowed %<input name="away.explosiveAllowedRate" type="number" min="1" max="30" step="0.1" value="10"></label>
                   <label>Sack / pressure rate %<input name="away.pressureRate" type="number" min="1" max="25" step="0.1" value="6.5"></label>
                   <label>Takeaways / drive %<input name="away.takeawayRate" type="number" min="1" max="35" step="0.1" value="11"></label>
+                  <label>EPA allowed / play<input name="away.epaAllowedPerPlay" type="number" min="-1" max="1" step="0.01" value="0"></label>
                 </div>
               </div>
 
@@ -121,9 +127,13 @@
                   <div class="mini-logo" data-team-logo="home"><span>H</span></div>
                   <div><small>Home</small><strong data-team-name="home">Home team</strong></div>
                 </div>
-                <div class="rating-pair">
-                  <label class="number-field featured">Offense residual <input name="home.offense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
-                  <label class="number-field featured">Defense residual <input name="home.defense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
+                <div class="overall-ratings">
+                  <div class="overall-rating"><span>Overall offense</span><strong id="homeOffenseRating">50</strong><small>/100</small></div>
+                  <div class="overall-rating"><span>Overall defense</span><strong id="homeDefenseRating">50</strong><small>/100</small></div>
+                </div>
+                <div class="adjustment-pair">
+                  <label class="number-field adjustment-field">Offensive adjustment <input name="home.offenseAdjustment" type="number" min="-25" max="25" step="1" value="0"><span>pts</span></label>
+                  <label class="number-field adjustment-field">Defensive adjustment <input name="home.defenseAdjustment" type="number" min="-25" max="25" step="1" value="0"><span>pts</span></label>
                 </div>
                 <div class="field-grid">
                   <label>Plays / game<input name="home.plays" type="number" min="45" max="90" step="0.1" value="63"></label>
@@ -135,6 +145,7 @@
                   <label>Explosive rate %<input name="home.explosiveRate" type="number" min="1" max="30" step="0.1" value="10"></label>
                   <label>Turnovers / drive %<input name="home.turnoverRate" type="number" min="1" max="35" step="0.1" value="11"></label>
                   <label>Red-zone TD %<input name="home.redZoneTdRate" type="number" min="20" max="90" step="0.1" value="55"></label>
+                  <label>Estimated EPA / play<input name="home.epaPerPlay" type="number" min="-1" max="1" step="0.01" value="0"></label>
                   <div class="field-divider">Defense production allowed</div>
                   <label>Net yds / dropback<input name="home.passDefenseEfficiency" type="number" min="2" max="12" step="0.1" value="6.4"></label>
                   <label>Yards / rush allowed<input name="home.rushDefenseEfficiency" type="number" min="1" max="9" step="0.1" value="4.2"></label>
@@ -142,6 +153,7 @@
                   <label>Explosive allowed %<input name="home.explosiveAllowedRate" type="number" min="1" max="30" step="0.1" value="10"></label>
                   <label>Sack / pressure rate %<input name="home.pressureRate" type="number" min="1" max="25" step="0.1" value="6.5"></label>
                   <label>Takeaways / drive %<input name="home.takeawayRate" type="number" min="1" max="35" step="0.1" value="11"></label>
+                  <label>EPA allowed / play<input name="home.epaAllowedPerPlay" type="number" min="-1" max="1" step="0.01" value="0"></label>
                 </div>
               </div>
             </div>
@@ -162,6 +174,26 @@
               <strong>No availability scenarios yet</strong>
               <span>Add a star or role player whose status could change the game.</span>
             </div>
+          </article>
+
+          <article class="panel backtest-panel">
+            <div class="panel-heading">
+              <div>
+                <span class="step">04</span>
+                <h2>Validate the model</h2>
+              </div>
+              <button id="refreshBacktestButton" class="add-button" type="button">Refresh results</button>
+            </div>
+            <p class="panel-intro">Pregame forecasts are timestamped automatically. Completed games are scored without rewriting the original prediction.</p>
+            <div class="backtest-grid">
+              <div><span>Recorded</span><strong id="backtestRecorded">0</strong></div>
+              <div><span>Graded</span><strong id="backtestSettled">0</strong></div>
+              <div><span>Model MAE</span><strong id="backtestMae">—</strong></div>
+              <div><span>Line MAE</span><strong id="backtestMarketMae">—</strong></div>
+              <div><span>Brier score</span><strong id="backtestBrier">—</strong></div>
+              <div><span>Lean accuracy</span><strong id="backtestAccuracy">—</strong></div>
+            </div>
+            <p id="backtestStatus" class="backtest-status">No graded forecasts yet. Accuracy metrics become meaningful only after a substantial out-of-sample set.</p>
           </article>
         </div>
 

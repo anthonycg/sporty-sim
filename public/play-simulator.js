@@ -1,5 +1,5 @@
 import { applyAvailability, clamp, mulberry32, sampleAvailability } from './simulator.js';
-import { baselineFor } from './model-baselines.js';
+import { baselineFor, playBaselineFor } from './model-baselines.js';
 
 function normal(random) {
   const first = Math.max(Number.EPSILON, random());
@@ -60,25 +60,39 @@ function applyClock(state, seconds) {
   return false;
 }
 
-function matchup(team, opponent, state = null) {
+function matchup(team, opponent, state = null, baseline = {}) {
   const redZoneEdge = state?.yard >= 80 ? (Number(team.redZoneTdRate) - 55) / 60 : 0;
-  return clamp(((Number(team.offense) - 50) - (Number(opponent.defense) - 50)) / 100 + redZoneEdge, -0.75, 0.75);
+  const expectedEpa = Number(team.epaPerPlay ?? baseline.epaPerPlay ?? 0)
+    + (Number(opponent.epaAllowedPerPlay ?? baseline.epaPerPlay ?? 0) - Number(baseline.epaPerPlay ?? 0));
+  const epaEdge = (expectedEpa - Number(baseline.epaPerPlay ?? 0)) * 1.15;
+  return clamp(((Number(team.offense) - 50) - (Number(opponent.defense) - 50)) / 100 + redZoneEdge + epaEdge, -0.75, 0.75);
 }
 
-function passPlay(team, opponent, state, random, baseline) {
-  const edge = matchup(team, opponent, state);
+function trainedRate(team, opponent, key, fallback, baseline) {
+  const offense = Number(team.trained?.offense?.[key]);
+  const defense = Number(opponent.trained?.defenseAllowed?.[key]);
+  const prior = Number(baseline[key]);
+  if (!Number.isFinite(offense) && !Number.isFinite(defense)) return fallback;
+  return ((Number.isFinite(offense) ? offense : prior) + (Number.isFinite(defense) ? defense : prior) - prior) / 100;
+}
+
+function passPlay(team, opponent, state, random, baseline, playBaseline) {
+  const edge = matchup(team, opponent, state, baseline);
   const expectedEfficiency = Number(team.passEfficiency) + (Number(opponent.passDefenseEfficiency) - baseline.passEfficiency);
   const expectedSuccess = Number(team.successRate) + (Number(opponent.successAllowedRate) - baseline.successRate);
   const expectedExplosive = Number(team.explosiveRate) + (Number(opponent.explosiveAllowedRate) - baseline.explosiveRate);
   const obviousPass = state.distance >= 8 || (state.clock <= 900 && scoreDifference(state, state.possession) < 0);
   const turnoverFactor = clamp((Number(team.turnoverRate) + Number(opponent.takeawayRate)) / 22, 0.35, 2.4);
-  const sackProbability = clamp(Number(opponent.pressureRate) / 100 * Math.exp(-edge * 0.25) * (obviousPass ? 1.18 : 1), 0.025, 0.16);
-  const interceptionProbability = clamp(0.021 * turnoverFactor * Math.exp(-edge * 0.2) * (obviousPass ? 1.12 : 1), 0.006, 0.075);
-  const completionProbability = clamp(
+  const fallbackSack = Number(opponent.pressureRate) / 100;
+  const sackProbability = clamp(trainedRate(team, opponent, 'sackRate', fallbackSack, playBaseline) * Math.exp(-edge * 0.25) * (obviousPass ? 1.18 : 1), 0.025, 0.16);
+  const fallbackInterception = 0.021 * turnoverFactor;
+  const interceptionProbability = clamp(trainedRate(team, opponent, 'interceptionRate', fallbackInterception, playBaseline) * Math.exp(-edge * 0.2) * (obviousPass ? 1.12 : 1), 0.006, 0.075);
+  const fallbackCompletion = clamp(
     0.64 + (expectedEfficiency - 6.4) * 0.026 + (expectedSuccess - 42) * 0.003 + edge * 0.04,
     0.42,
     0.78
   );
+  const completionProbability = clamp(trainedRate(team, opponent, 'completionRate', fallbackCompletion, playBaseline) + edge * 0.025, 0.42, 0.78);
   const draw = random();
   if (draw < sackProbability) {
     return { yards: -Math.max(1, Math.round(5 + exponential(random, 2.1))), turnover: false, clockStopped: false, kind: 'sack' };
@@ -91,7 +105,8 @@ function passPlay(team, opponent, state, random, baseline) {
     return { yards: 0, turnover: false, clockStopped: true, kind: 'incomplete' };
   }
 
-  const explosiveChance = clamp(0.075 + (expectedExplosive - 10) * 0.009 + edge * 0.018, 0.025, 0.24);
+  const fallbackExplosive = 0.075 + (expectedExplosive - 10) * 0.009;
+  const explosiveChance = clamp(trainedRate(team, opponent, 'passExplosiveRate', fallbackExplosive, playBaseline) + edge * 0.018, 0.025, 0.24);
   let yards;
   if (random() < explosiveChance) yards = 18 + Math.round(exponential(random, 9));
   else yards = Math.round(10.2 + (expectedEfficiency - 6.4) * 0.8 + edge * 1.1 + normal(random) * 5.3);
@@ -101,18 +116,20 @@ function passPlay(team, opponent, state, random, baseline) {
   return { yards, turnover: fumble, clockStopped: outOfBounds, kind: fumble ? 'fumble' : 'completion' };
 }
 
-function rushPlay(team, opponent, state, random, baseline) {
-  const edge = matchup(team, opponent, state);
+function rushPlay(team, opponent, state, random, baseline, playBaseline) {
+  const edge = matchup(team, opponent, state, baseline);
   const expectedEfficiency = Number(team.rushEfficiency) + (Number(opponent.rushDefenseEfficiency) - baseline.rushEfficiency);
   const expectedSuccess = Number(team.successRate) + (Number(opponent.successAllowedRate) - baseline.successRate);
   const expectedExplosive = Number(team.explosiveRate) + (Number(opponent.explosiveAllowedRate) - baseline.explosiveRate);
   const turnoverFactor = clamp((Number(team.turnoverRate) + Number(opponent.takeawayRate)) / 22, 0.35, 2.4);
-  const explosiveChance = clamp(0.065 + (expectedExplosive - 10) * 0.007 + edge * 0.012, 0.02, 0.18);
+  const fallbackExplosive = 0.065 + (expectedExplosive - 10) * 0.007;
+  const explosiveChance = clamp(trainedRate(team, opponent, 'rushExplosiveRate', fallbackExplosive, playBaseline) + edge * 0.012, 0.02, 0.18);
   let yards;
   if (random() < explosiveChance) yards = 11 + Math.round(exponential(random, 7));
   else yards = Math.round(expectedEfficiency - 0.8 + (expectedSuccess - 42) * 0.035 + edge * 0.7 + normal(random) * 3.5);
   yards = clamp(yards, -6, 70);
-  const fumble = random() < clamp(0.012 * turnoverFactor, 0.004, 0.035) && random() < 0.5;
+  const fallbackFumble = 0.006 * turnoverFactor;
+  const fumble = random() < clamp(trainedRate(team, opponent, 'rushFumbleRate', fallbackFumble, playBaseline), 0.002, 0.02);
   const outOfBounds = yards > 4 && state.clock <= 300 && random() < 0.16;
   return { yards, turnover: fumble, clockStopped: outOfBounds, kind: fumble ? 'fumble' : 'rush' };
 }
@@ -210,6 +227,7 @@ function simulateGame(config, random) {
   const secondHalfReceiver = other(openingReceiver);
   const availability = sampleAvailability(config.players, random);
   const baseline = baselineFor(config.league, config.seasonType);
+  const playBaseline = playBaselineFor(config.league, config.seasonType);
   const weather = Number(config.environment?.weatherPenalty || 0);
   const environmentChanges = {
     passEfficiency: -weather * 0.025,
@@ -257,8 +275,8 @@ function simulateGame(config, random) {
     const opponent = teams[other(side)];
     const isPass = choosePass(team, state, random);
     const result = isPass
-      ? passPlay(team, opponent, state, random, baseline)
-      : rushPlay(team, opponent, state, random, baseline);
+      ? passPlay(team, opponent, state, random, baseline, playBaseline)
+      : rushPlay(team, opponent, state, random, baseline, playBaseline);
     state.plays += 1;
     crossedHalf = applyClock(state, clockRunoff(state, result, team, random));
     applyPlayResult(state, result);

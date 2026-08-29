@@ -1,6 +1,9 @@
 import { americanFairOdds, neutralTeam } from './simulator.js';
+import { baselineFor } from './model-baselines.js';
+import { applyRatingAdjustment, calculateTeamRatings } from './team-ratings.js';
 
-const STORAGE_KEY = 'sporty-sim:v0.3';
+const STORAGE_KEY = 'sporty-sim:v0.4';
+const MODEL_VERSION = '0.4.0';
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
@@ -8,6 +11,7 @@ const state = {
   games: [],
   selectedGame: null,
   players: [],
+  profiles: {},
   worker: null,
   lastSeed: null
 };
@@ -30,6 +34,7 @@ const elements = {
   playerForm: $('#playerForm'),
   runButton: $('#runButton'),
   results: $('#resultsPanel'),
+  refreshBacktest: $('#refreshBacktestButton'),
   toast: $('#toast')
 };
 
@@ -133,19 +138,23 @@ function selectGame(id, options = {}) {
   if (!options.preserveInputs) {
     resetTeamInputs(false);
     state.players = [];
+    state.profiles = {};
     renderPlayers();
   }
   elements.weather.value = game.indoor ? '0' : elements.weather.value;
   elements.results.classList.add('is-empty');
   elements.profileSummary.classList.remove('is-visible');
   elements.profileSummary.innerHTML = '';
+  renderOverallRatings();
   persistState();
 }
 
 function setInputValue(side, key, value) {
   const input = document.querySelector(`[name="${side}.${key}"]`);
   if (!input || !Number.isFinite(value)) return;
-  input.value = ['offense', 'defense'].includes(key) ? Math.round(value) : Number(value).toFixed(1);
+  input.value = ['offense', 'defense'].includes(key)
+    ? Math.round(value)
+    : ['epaPerPlay', 'epaAllowedPerPlay'].includes(key) ? Number(value).toFixed(3) : Number(value).toFixed(1);
 }
 
 async function autoRateTeams() {
@@ -175,9 +184,8 @@ async function autoRateTeams() {
     if (!away.profile || !home.profile) throw new Error('Both teams need at least one completed game before kickoff.');
     for (const [side, payload] of [['away', away], ['home', home]]) {
       const profile = payload.profile;
-      setInputValue(side, 'offense', profile.offenseRating);
-      setInputValue(side, 'defense', profile.defenseRating);
-      for (const key of ['plays', 'pace', 'passRate', 'passEfficiency', 'rushEfficiency', 'successRate', 'explosiveRate', 'turnoverRate', 'redZoneTdRate']) {
+      state.profiles[side] = profile;
+      for (const key of ['plays', 'pace', 'passRate', 'passEfficiency', 'rushEfficiency', 'successRate', 'explosiveRate', 'turnoverRate', 'redZoneTdRate', 'epaPerPlay']) {
         setInputValue(side, key, profile.metrics[key]?.value);
       }
       const defenseMap = {
@@ -186,7 +194,8 @@ async function autoRateTeams() {
         successAllowedRate: 'successRate',
         explosiveAllowedRate: 'explosiveRate',
         pressureRate: 'sackRate',
-        takeawayRate: 'turnoverRate'
+        takeawayRate: 'turnoverRate',
+        epaAllowedPerPlay: 'epaPerPlay'
       };
       for (const [inputKey, profileKey] of Object.entries(defenseMap)) {
         setInputValue(side, inputKey, profile.defenseAllowed[profileKey]?.value);
@@ -194,14 +203,15 @@ async function autoRateTeams() {
     }
     elements.profileSummary.innerHTML = [['away', away], ['home', home]].map(([side, payload]) => `
       <div class="profile-card">
-        <div><strong>${escapeHtml(game[side].name)}</strong><span>${payload.profile.games} games · ${payload.profile.plays} plays · cutoff ${new Date(payload.cutoff).toLocaleDateString()}</span></div>
-        <b>Form O ${payload.profile.summaryOffenseRating} · D ${payload.profile.summaryDefenseRating}</b>
+        <div><strong>${escapeHtml(game[side].name)}</strong><span>${payload.profile.games} games · ${payload.opponentContexts || 0} opponent-adjusted · trained on ${payload.profile.playModel.sample.passPlays} pass / ${payload.profile.playModel.sample.rushPlays} rush · EPA ${payload.profile.metrics.epaPerPlay.value.toFixed(2)}</span></div>
+        <b>Calculated O ${payload.profile.summaryOffenseRating} · D ${payload.profile.summaryDefenseRating}</b>
       </div>
     `).join('');
     elements.profileSummary.classList.add('is-visible');
     elements.results.classList.add('is-empty');
+    renderOverallRatings();
     persistState();
-    showToast('Recent-game profiles applied with league-average shrinkage.');
+    showToast('Opponent-adjusted EPA profiles and trained play rates applied.');
   } catch (error) {
     showToast(error.message || 'Could not build recent-game profiles.');
   } finally {
@@ -216,16 +226,52 @@ function resetTeamInputs(notify = true) {
     const key = input.name.split('.')[1];
     input.value = defaults[key];
   });
+  state.profiles = {};
+  renderOverallRatings();
   if (notify) showToast('Team assumptions reset to neutral.');
   elements.results.classList.add('is-empty');
   persistState();
 }
 
-function readTeam(side) {
+function readTeamInputs(side) {
   const team = {};
   $$(`[name^="${side}."]`).forEach((input) => {
     team[input.name.split('.')[1]] = Number(input.value);
   });
+  return team;
+}
+
+function ratingDetails(side) {
+  const team = readTeamInputs(side);
+  const baseline = baselineFor(elements.league.value, state.selectedGame?.seasonType || 'regular');
+  const calculated = calculateTeamRatings(team, baseline);
+  return {
+    team,
+    calculated,
+    overall: {
+      offense: applyRatingAdjustment(calculated.offense, team.offenseAdjustment),
+      defense: applyRatingAdjustment(calculated.defense, team.defenseAdjustment)
+    }
+  };
+}
+
+function renderOverallRatings() {
+  for (const side of ['away', 'home']) {
+    const { overall } = ratingDetails(side);
+    $(`#${side}OffenseRating`).textContent = overall.offense;
+    $(`#${side}DefenseRating`).textContent = overall.defense;
+  }
+}
+
+function readTeam(side) {
+  const { team, overall } = ratingDetails(side);
+  // Components create the calculated grade. Only the independent manual adjustment
+  // enters the 50-centered rating term so the same production is not counted twice.
+  team.offense = applyRatingAdjustment(50, team.offenseAdjustment);
+  team.defense = applyRatingAdjustment(50, team.defenseAdjustment);
+  team.overallOffense = overall.offense;
+  team.overallDefense = overall.defense;
+  if (state.profiles[side]?.playModel) team.trained = structuredClone(state.profiles[side].playModel);
   return team;
 }
 
@@ -360,6 +406,7 @@ function runModel() {
     } else if (data.type === 'complete') {
       $('.button-progress', elements.runButton).style.width = '100%';
       renderResults(data.result, config);
+      recordPrediction(data.result, config);
       setTimeout(resetRunButton, 250);
       persistState();
     } else if (data.type === 'error') {
@@ -393,6 +440,78 @@ function resetRunButton() {
 
 function percentage(value) {
   return `${(value * 100).toFixed(1)}%`;
+}
+
+function formatMetric(value, digits = 2) {
+  return Number.isFinite(value) ? Number(value).toFixed(digits) : '—';
+}
+
+function renderBacktest(summary) {
+  $('#backtestRecorded').textContent = summary.recorded ?? 0;
+  $('#backtestSettled').textContent = summary.settled ?? 0;
+  $('#backtestMae').textContent = formatMetric(summary.meanAbsoluteError, 1);
+  $('#backtestMarketMae').textContent = formatMetric(summary.marketMeanAbsoluteError, 1);
+  $('#backtestBrier').textContent = formatMetric(summary.brierScore, 3);
+  $('#backtestAccuracy').textContent = Number.isFinite(summary.leanAccuracy) ? percentage(summary.leanAccuracy) : '—';
+  $('#backtestStatus').textContent = summary.settled
+    ? `${summary.runs} stored runs collapsed to one final forecast per game/model · ${summary.pending} pending · ${summary.decisive} graded without pushes.`
+    : `${summary.pending || 0} pending forecast${summary.pending === 1 ? '' : 's'} from ${summary.runs || 0} stored runs. Accuracy metrics need a substantial out-of-sample set.`;
+}
+
+async function loadBacktest(refresh = false) {
+  if (refresh) {
+    elements.refreshBacktest.disabled = true;
+    elements.refreshBacktest.textContent = 'Checking finals…';
+  }
+  try {
+    const response = await fetch(refresh ? '/api/backtest/settle' : '/api/backtest', refresh ? { method: 'POST' } : undefined);
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || 'Could not load the scorecard.');
+    renderBacktest(payload.summary || payload);
+    if (refresh) showToast(payload.updated ? `${payload.updated} forecast${payload.updated === 1 ? '' : 's'} graded.` : 'No new final scores yet.');
+  } catch (error) {
+    $('#backtestStatus').textContent = error.message || 'Could not load the scorecard.';
+  } finally {
+    if (refresh) {
+      elements.refreshBacktest.disabled = false;
+      elements.refreshBacktest.textContent = 'Refresh results';
+    }
+  }
+}
+
+async function recordPrediction(rawResult, config) {
+  const game = state.selectedGame;
+  if (!game?.id || Date.now() >= Date.parse(game.kickoff)) return;
+  const result = rawResult.primary || rawResult;
+  try {
+    const response = await fetch('/api/predictions', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        eventId: game.id,
+        kickoff: game.kickoff,
+        league: game.league,
+        seasonType: game.seasonType,
+        matchup: game.name,
+        modelVersion: MODEL_VERSION,
+        engine: rawResult.mode === 'compare' ? 'play-comparison-primary' : result.model,
+        seed: rawResult.mode === 'compare' ? `${rawResult.drive.seed}/${rawResult.play.seed}` : result.seed,
+        marketTotal: config.marketTotal,
+        projectedTotal: result.mean,
+        projectedHome: result.homeMean,
+        projectedAway: result.awayMean,
+        overProbability: result.overProbability,
+        underProbability: result.underProbability,
+        profileMethod: state.profiles.home?.method || 'manual assumptions',
+        profileGames: (state.profiles.home?.games || 0) + (state.profiles.away?.games || 0)
+      })
+    });
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || 'Forecast could not be recorded.');
+    renderBacktest(payload.summary);
+  } catch (error) {
+    showToast(error.message || 'Simulation completed, but its forecast was not recorded.');
+  }
 }
 
 function renderResults(result, config) {
@@ -458,7 +577,8 @@ function persistState() {
     weather: elements.weather.value,
     modelMode: elements.modelMode.value,
     inputs,
-    players: state.players
+    players: state.players,
+    profiles: state.profiles
   }));
 }
 
@@ -479,13 +599,16 @@ function restoreState() {
     if (input) input.value = value;
   });
   state.players = Array.isArray(saved.players) ? saved.players : [];
+  state.profiles = saved.profiles && typeof saved.profiles === 'object' ? saved.profiles : {};
   renderPlayers();
+  renderOverallRatings();
 }
 
 function resetEverything() {
   localStorage.removeItem(STORAGE_KEY);
   resetTeamInputs(false);
   state.players = [];
+  state.profiles = {};
   renderPlayers();
   elements.weather.value = '0';
   if (state.selectedGame?.market.total) elements.marketTotal.value = state.selectedGame.market.total;
@@ -500,6 +623,7 @@ elements.addPlayer.addEventListener('click', () => openPlayerDialog());
 elements.autoRate.addEventListener('click', autoRateTeams);
 elements.playerForm.addEventListener('submit', savePlayer);
 elements.runButton.addEventListener('click', runModel);
+elements.refreshBacktest.addEventListener('click', () => loadBacktest(true));
 $('#presetButton').addEventListener('click', () => resetTeamInputs());
 $('#resetButton').addEventListener('click', resetEverything);
 elements.league.addEventListener('change', loadGames);
@@ -508,13 +632,19 @@ elements.modelMode.addEventListener('change', () => {
   $('.button-label', elements.runButton).innerHTML = runButtonMarkup();
 });
 $$('input, select').forEach((input) => {
+  input.addEventListener('input', () => {
+    if (input.matches('[name^="home."], [name^="away."]')) renderOverallRatings();
+  });
   input.addEventListener('change', () => {
     if (input.closest('#playerDialog')) return;
+    if (input.matches('[name^="home."], [name^="away."]')) renderOverallRatings();
     elements.results.classList.add('is-empty');
     persistState();
   });
 });
 
 restoreState();
+renderOverallRatings();
 $('.button-label', elements.runButton).innerHTML = runButtonMarkup();
 loadGames();
+loadBacktest();

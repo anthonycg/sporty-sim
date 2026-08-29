@@ -53,3 +53,18 @@ test('play model uses defensive pass components directly', () => {
   }, 6_000, 55);
   assert.ok(porous.awayMean > baseline.awayMean + 2, `${porous.awayMean} should exceed ${baseline.awayMean}`);
 });
+
+test('play model consumes fitted historical outcome rates', () => {
+  const baseline = runPlaySimulation(config, 6_000, 61);
+  const trained = runPlaySimulation({
+    ...config,
+    home: {
+      ...DEFAULT_TEAM,
+      trained: {
+        offense: { completionRate: 74, sackRate: 4, interceptionRate: 1, passExplosiveRate: 14, rushExplosiveRate: 9, rushFumbleRate: 0.3 },
+        defenseAllowed: { completionRate: 64, sackRate: 6.5, interceptionRate: 2.1, passExplosiveRate: 7.5, rushExplosiveRate: 6.5, rushFumbleRate: 0.6 }
+      }
+    }
+  }, 6_000, 61);
+  assert.ok(trained.homeMean > baseline.homeMean + 1, `${trained.homeMean} should exceed ${baseline.homeMean}`);
+});

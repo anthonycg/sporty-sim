@@ -3,6 +3,8 @@ import { baselineFor } from './model-baselines.js';
 export const DEFAULT_TEAM = Object.freeze({
   offense: 50,
   defense: 50,
+  offenseAdjustment: 0,
+  defenseAdjustment: 0,
   pace: 28,
   plays: 63,
   passRate: 58,
@@ -12,12 +14,14 @@ export const DEFAULT_TEAM = Object.freeze({
   explosiveRate: 10,
   turnoverRate: 11,
   redZoneTdRate: 55,
+  epaPerPlay: 0,
   passDefenseEfficiency: 6.4,
   rushDefenseEfficiency: 4.2,
   successAllowedRate: 42,
   explosiveAllowedRate: 10,
   pressureRate: 6.5,
-  takeawayRate: 11
+  takeawayRate: 11,
+  epaAllowedPerPlay: 0
 });
 
 export function neutralTeam(league = 'nfl', seasonType = 'regular') {
@@ -33,12 +37,14 @@ export function neutralTeam(league = 'nfl', seasonType = 'regular') {
     explosiveRate: baseline.explosiveRate,
     turnoverRate: baseline.turnoverRate,
     redZoneTdRate: baseline.redZoneTdRate,
+    epaPerPlay: baseline.epaPerPlay,
     passDefenseEfficiency: baseline.passEfficiency,
     rushDefenseEfficiency: baseline.rushEfficiency,
     successAllowedRate: baseline.successRate,
     explosiveAllowedRate: baseline.explosiveRate,
     pressureRate: baseline.sackRate,
-    takeawayRate: baseline.turnoverRate
+    takeawayRate: baseline.turnoverRate,
+    epaAllowedPerPlay: baseline.epaPerPlay
   };
 }
 
@@ -85,29 +91,34 @@ export function sampleAvailability(players, random) {
         add(side, 'explosiveRate', -0.22 * impact);
         add(side, 'turnoverRate', 0.25 * impact);
         add(side, 'redZoneTdRate', -1.1 * impact);
+        add(side, 'epaPerPlay', -0.012 * impact);
       } else if (group === 'offensive-line') {
         add(side, 'passEfficiency', -0.14 * impact);
         add(side, 'rushEfficiency', -0.12 * impact);
         add(side, 'successRate', -0.5 * impact);
         add(side, 'turnoverRate', 0.18 * impact);
+        add(side, 'epaPerPlay', -0.008 * impact);
       } else {
         add(side, 'passEfficiency', -0.15 * impact);
         add(side, 'rushEfficiency', -0.05 * impact);
         add(side, 'successRate', -0.4 * impact);
         add(side, 'explosiveRate', -0.28 * impact);
         add(side, 'redZoneTdRate', -0.8 * impact);
+        add(side, 'epaPerPlay', -0.008 * impact);
       }
     } else if (group === 'secondary') {
       add(side, 'passDefenseEfficiency', 0.22 * impact);
       add(side, 'successAllowedRate', 0.35 * impact);
       add(side, 'explosiveAllowedRate', 0.3 * impact);
       add(side, 'takeawayRate', -0.25 * impact);
+      add(side, 'epaAllowedPerPlay', 0.01 * impact);
     } else {
       add(side, 'rushDefenseEfficiency', 0.15 * impact);
       add(side, 'passDefenseEfficiency', 0.06 * impact);
       add(side, 'successAllowedRate', 0.35 * impact);
       add(side, 'pressureRate', -0.4 * impact);
       add(side, 'takeawayRate', -0.12 * impact);
+      add(side, 'epaAllowedPerPlay', 0.008 * impact);
     }
   };
 
@@ -173,8 +184,10 @@ function matchupPointsPerDrive(team, opponent, baseline, environment) {
   const redZone = (Number(team.redZoneTdRate) - baseline.redZoneTdRate) * 0.009;
   const turnover = (expectedTurnover - baseline.turnoverRate) * -0.025;
   const pressure = (Number(opponent.pressureRate) - baseline.sackRate) * -0.014;
+  const expectedEpa = Number(team.epaPerPlay ?? baseline.epaPerPlay) + (Number(opponent.epaAllowedPerPlay ?? baseline.epaPerPlay) - baseline.epaPerPlay);
+  const epa = (expectedEpa - baseline.epaPerPlay) * 1.35;
   const weather = Number(environment.weatherPenalty || 0) * -0.012;
-  const raw = baseline.pointsPerDrive * Math.exp(rating + pass + rush + success + explosive + redZone + turnover + pressure + weather);
+  const raw = baseline.pointsPerDrive * Math.exp(rating + pass + rush + success + explosive + redZone + turnover + pressure + epa + weather);
   const estimatedDrives = clamp(Number(team.plays) / 6.1, 8.5, 14);
   return clamp(raw, 0.45, 4.1);
 }

@@ -108,14 +108,20 @@ input[type='number'] { font-family: 'DM Mono', monospace; }
 .versus-line { display: flex; justify-content: center; position: relative; }
 .versus-line::before { content: ''; position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line); }
 .versus-line span { position: relative; align-self: start; margin-top: 11px; background: #102019; padding: 4px 2px; color: var(--muted); font: 8px 'DM Mono', monospace; }
-.rating-pair, .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
-.rating-pair { margin-bottom: 9px; }
+.overall-ratings, .adjustment-pair, .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.overall-ratings { margin-bottom: 9px; }
+.overall-rating { position: relative; min-height: 92px; display: grid; align-content: center; justify-items: center; border: 1px solid rgba(219, 255, 82, .2); border-radius: 7px; background: rgba(219, 255, 82, .035); }
+.overall-rating span { color: var(--muted); font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+.overall-rating strong { color: var(--accent); font: 500 34px 'DM Mono', monospace; line-height: 1.05; letter-spacing: -.06em; }
+.overall-rating small { color: var(--muted); font: 8px 'DM Mono', monospace; }
+.adjustment-pair { margin-bottom: 9px; }
 .field-grid label, .number-field { display: grid; gap: 6px; }
 .field-grid label:last-child { grid-column: 1 / -1; }
 .field-divider { grid-column: 1 / -1; color: var(--accent); border-top: 1px solid var(--line); padding-top: 12px; margin-top: 4px; font: 500 8px 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; }
 .number-field { position: relative; }
 .number-field span { position: absolute; right: 9px; bottom: 11px; color: var(--muted); font: 8px 'DM Mono', monospace; pointer-events: none; }
 .number-field input { padding-right: 36px; color: var(--accent); font-size: 16px; }
+.adjustment-field input { color: var(--ink); font-size: 12px; }
 
 .availability-panel { padding-bottom: 22px; }
 .add-button { color: var(--accent); }
@@ -134,6 +140,13 @@ input[type='number'] { font-family: 'DM Mono', monospace; }
 .empty-players strong { font-size: 11px; }
 .empty-players span { color: var(--muted); font-size: 10px; }
 .empty-players.is-hidden { display: none; }
+
+.backtest-panel { padding-bottom: 20px; }
+.backtest-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; margin: 18px 22px 12px; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--line); }
+.backtest-grid div { display: grid; gap: 5px; justify-items: center; padding: 15px 8px; background: rgba(4, 13, 10, .78); }
+.backtest-grid span { color: var(--muted); font-size: 7px; text-transform: uppercase; letter-spacing: .06em; }
+.backtest-grid strong { color: var(--ink); font: 500 14px 'DM Mono', monospace; }
+.backtest-status { margin: 0 22px; color: var(--muted); font: 9px/1.55 'DM Mono', monospace; }
 
 .run-panel { padding: 20px; }
 .run-matchup { display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 6px; text-align: center; align-items: start; }
@@ -219,8 +232,9 @@ dialog::backdrop { background: rgba(2, 7, 5, .78); backdrop-filter: blur(5px); }
   .matchup-inputs { grid-template-columns: 1fr; gap: 24px; }.versus-line { height: 1px; }.versus-line::before { top: 0; left: 0; right: 0; width: auto; height: 1px; }.versus-line span { margin-top: -9px; padding: 4px 8px; }
   .game-list { grid-auto-columns: 82%; }.slate-filters { grid-template-columns: 1fr 1fr; }.slate-filters button { grid-column: 1 / -1; }
   .panel-heading .panel-actions { align-items: flex-end; flex-direction: column; }.profile-summary { grid-template-columns: 1fr; }
+  .backtest-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 460px) {
-  .status-pill { display: none; }.hero h1 { font-size: 36px; }.field-grid, .rating-pair { grid-template-columns: 1fr 1fr; }
+  .status-pill { display: none; }.hero h1 { font-size: 36px; }.field-grid, .overall-ratings, .adjustment-pair { grid-template-columns: 1fr 1fr; }
   .dialog-fields { grid-template-columns: 1fr; }.dialog-fields .wide { grid-column: auto; }.metric-grid { grid-template-columns: 1fr 1fr; }.metric-grid div:nth-child(2) { border-right: 0; }.metric-grid div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
 }
