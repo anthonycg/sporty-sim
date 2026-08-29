@@ -1,3 +1,5 @@
+import { baselineFor } from './model-baselines.js';
+
 export const DEFAULT_TEAM = Object.freeze({
   offense: 50,
   defense: 50,
@@ -9,8 +11,36 @@ export const DEFAULT_TEAM = Object.freeze({
   successRate: 42,
   explosiveRate: 10,
   turnoverRate: 11,
-  redZoneTdRate: 55
+  redZoneTdRate: 55,
+  passDefenseEfficiency: 6.4,
+  rushDefenseEfficiency: 4.2,
+  successAllowedRate: 42,
+  explosiveAllowedRate: 10,
+  pressureRate: 6.5,
+  takeawayRate: 11
 });
+
+export function neutralTeam(league = 'nfl', seasonType = 'regular') {
+  const baseline = baselineFor(league, seasonType);
+  return {
+    ...DEFAULT_TEAM,
+    plays: baseline.plays,
+    pace: baseline.pace,
+    passRate: baseline.passRate,
+    passEfficiency: baseline.passEfficiency,
+    rushEfficiency: baseline.rushEfficiency,
+    successRate: baseline.successRate,
+    explosiveRate: baseline.explosiveRate,
+    turnoverRate: baseline.turnoverRate,
+    redZoneTdRate: baseline.redZoneTdRate,
+    passDefenseEfficiency: baseline.passEfficiency,
+    rushDefenseEfficiency: baseline.rushEfficiency,
+    successAllowedRate: baseline.successRate,
+    explosiveAllowedRate: baseline.explosiveRate,
+    pressureRate: baseline.sackRate,
+    takeawayRate: baseline.turnoverRate
+  };
+}
 
 export function clamp(value, minimum, maximum) {
   return Math.min(maximum, Math.max(minimum, value));
@@ -33,9 +63,53 @@ function normal(random) {
   return Math.sqrt(-2 * Math.log(first)) * Math.cos(2 * Math.PI * second);
 }
 
-function sampleAvailability(players, random) {
-  const modifiers = { home: 0, away: 0, volatility: 0, absences: [] };
+export function sampleAvailability(players, random) {
+  const modifiers = {
+    teams: { home: {}, away: {} },
+    volatility: 0,
+    absences: []
+  };
   const missingByUnit = new Map();
+
+  const add = (side, key, amount) => {
+    modifiers.teams[side][key] = (modifiers.teams[side][key] || 0) + amount;
+  };
+
+  const applyComponentImpact = (player, impact) => {
+    const side = player.team;
+    const group = player.unitGroup || player.unit;
+    if (player.unit === 'offense') {
+      if (group === 'quarterback') {
+        add(side, 'passEfficiency', -0.32 * impact);
+        add(side, 'successRate', -0.65 * impact);
+        add(side, 'explosiveRate', -0.22 * impact);
+        add(side, 'turnoverRate', 0.25 * impact);
+        add(side, 'redZoneTdRate', -1.1 * impact);
+      } else if (group === 'offensive-line') {
+        add(side, 'passEfficiency', -0.14 * impact);
+        add(side, 'rushEfficiency', -0.12 * impact);
+        add(side, 'successRate', -0.5 * impact);
+        add(side, 'turnoverRate', 0.18 * impact);
+      } else {
+        add(side, 'passEfficiency', -0.15 * impact);
+        add(side, 'rushEfficiency', -0.05 * impact);
+        add(side, 'successRate', -0.4 * impact);
+        add(side, 'explosiveRate', -0.28 * impact);
+        add(side, 'redZoneTdRate', -0.8 * impact);
+      }
+    } else if (group === 'secondary') {
+      add(side, 'passDefenseEfficiency', 0.22 * impact);
+      add(side, 'successAllowedRate', 0.35 * impact);
+      add(side, 'explosiveAllowedRate', 0.3 * impact);
+      add(side, 'takeawayRate', -0.25 * impact);
+    } else {
+      add(side, 'rushDefenseEfficiency', 0.15 * impact);
+      add(side, 'passDefenseEfficiency', 0.06 * impact);
+      add(side, 'successAllowedRate', 0.35 * impact);
+      add(side, 'pressureRate', -0.4 * impact);
+      add(side, 'takeawayRate', -0.12 * impact);
+    }
+  };
 
   for (const player of players || []) {
     const playProbability = clamp(Number(player.playProbability) / 100, 0, 1);
@@ -56,7 +130,7 @@ function sampleAvailability(players, random) {
       const affectedSide = player.unit === 'defense'
         ? (player.team === 'home' ? 'away' : 'home')
         : player.team;
-      modifiers[affectedSide] += player.unit === 'defense' ? impact : -impact;
+      applyComponentImpact(player, impact);
       modifiers.volatility += impact * 0.08;
       modifiers.absences.push({ name: player.name, outcome, impact, affectedSide });
       if (outcome === 'out') {
@@ -70,31 +144,43 @@ function sampleAvailability(players, random) {
   for (const [unitKey, count] of missingByUnit) {
     if (count < 2) continue;
     const [team, unit] = unitKey.split(':');
-    const affectedSide = unit === 'defense' || ['secondary', 'front-seven'].includes(unit)
-      ? (team === 'home' ? 'away' : 'home')
-      : team;
-    modifiers[affectedSide] += (unit === 'defense' || ['secondary', 'front-seven'].includes(unit) ? 1 : -1) * 0.35 * (count - 1);
+    const continuityImpact = 0.35 * (count - 1);
+    applyComponentImpact({ team, unit: ['secondary', 'front-seven'].includes(unit) ? 'defense' : 'offense', unitGroup: unit }, continuityImpact);
     modifiers.volatility += 0.08 * (count - 1);
   }
   return modifiers;
 }
 
-function matchupPointsPerDrive(team, opponent, basePointsPerDrive, playerPoints, environment) {
-  const rating = (Number(team.offense) - 50) * 0.011 - (Number(opponent.defense) - 50) * 0.011;
-  const pass = (Number(team.passEfficiency) - 6.4) * 0.075;
-  const rush = (Number(team.rushEfficiency) - 4.2) * 0.085;
-  const success = (Number(team.successRate) - 42) * 0.018;
-  const explosive = (Number(team.explosiveRate) - 10) * 0.016;
-  const redZone = (Number(team.redZoneTdRate) - 55) * 0.009;
-  const turnover = (Number(team.turnoverRate) - 11) * -0.025;
+export function applyAvailability(team, componentChanges = {}) {
+  const adjusted = { ...team };
+  for (const [key, change] of Object.entries(componentChanges)) {
+    adjusted[key] = Number(adjusted[key]) + change;
+  }
+  return adjusted;
+}
+
+function matchupPointsPerDrive(team, opponent, baseline, environment) {
+  const rating = (Number(team.offense) - 50) * 0.004 - (Number(opponent.defense) - 50) * 0.004;
+  const expectedPass = Number(team.passEfficiency) + (Number(opponent.passDefenseEfficiency) - baseline.passEfficiency);
+  const expectedRush = Number(team.rushEfficiency) + (Number(opponent.rushDefenseEfficiency) - baseline.rushEfficiency);
+  const expectedSuccess = Number(team.successRate) + (Number(opponent.successAllowedRate) - baseline.successRate);
+  const expectedExplosive = Number(team.explosiveRate) + (Number(opponent.explosiveAllowedRate) - baseline.explosiveRate);
+  const expectedTurnover = (Number(team.turnoverRate) + Number(opponent.takeawayRate)) / 2;
+  const pass = (expectedPass - baseline.passEfficiency) * 0.075;
+  const rush = (expectedRush - baseline.rushEfficiency) * 0.085;
+  const success = (expectedSuccess - baseline.successRate) * 0.018;
+  const explosive = (expectedExplosive - baseline.explosiveRate) * 0.016;
+  const redZone = (Number(team.redZoneTdRate) - baseline.redZoneTdRate) * 0.009;
+  const turnover = (expectedTurnover - baseline.turnoverRate) * -0.025;
+  const pressure = (Number(opponent.pressureRate) - baseline.sackRate) * -0.014;
   const weather = Number(environment.weatherPenalty || 0) * -0.012;
-  const raw = basePointsPerDrive * Math.exp(rating + pass + rush + success + explosive + redZone + turnover + weather);
+  const raw = baseline.pointsPerDrive * Math.exp(rating + pass + rush + success + explosive + redZone + turnover + pressure + weather);
   const estimatedDrives = clamp(Number(team.plays) / 6.1, 8.5, 14);
-  return clamp(raw + playerPoints / estimatedDrives, 0.45, 4.1);
+  return clamp(raw, 0.45, 4.1);
 }
 
 function scoreDrive(random, pointsPerDrive, team, opponent, volatility) {
-  const turnoverRate = clamp(Number(team.turnoverRate) / 100, 0.03, 0.28);
+  const turnoverRate = clamp((Number(team.turnoverRate) + Number(opponent.takeawayRate)) / 200, 0.03, 0.28);
   const defenseScoreChance = turnoverRate * clamp((Number(opponent.defense) - 35) / 1500, 0.004, 0.022);
   const multiplier = pointsPerDrive / 2.05;
   const touchdown = clamp(0.214 * multiplier, 0.045, 0.47);
@@ -121,11 +207,12 @@ function driveDuration(team, scoreDifference, random) {
 }
 
 function simulateGame(config, random) {
-  const isPreseason = config.seasonType === 'preseason';
-  const basePpd = isPreseason ? 1.6 : config.league === 'college-football' ? 2.32 : 2.05;
+  const baseline = baselineFor(config.league, config.seasonType);
   const availability = sampleAvailability(config.players, random);
-  const homePpd = matchupPointsPerDrive(config.home, config.away, basePpd, availability.home, config.environment);
-  const awayPpd = matchupPointsPerDrive(config.away, config.home, basePpd, availability.away, config.environment);
+  const homeTeam = applyAvailability(config.home, availability.teams.home);
+  const awayTeam = applyAvailability(config.away, availability.teams.away);
+  const homePpd = matchupPointsPerDrive(homeTeam, awayTeam, baseline, config.environment);
+  const awayPpd = matchupPointsPerDrive(awayTeam, homeTeam, baseline, config.environment);
   let home = 0;
   let away = 0;
   let elapsed = 0;
@@ -133,8 +220,8 @@ function simulateGame(config, random) {
   let drives = 0;
 
   while (elapsed < 3600 && drives < 34) {
-    const team = config[side];
-    const opponent = config[side === 'home' ? 'away' : 'home'];
+    const team = side === 'home' ? homeTeam : awayTeam;
+    const opponent = side === 'home' ? awayTeam : homeTeam;
     const difference = side === 'home' ? home - away : away - home;
     elapsed += driveDuration(team, difference, random);
     if (elapsed > 3660) break;
@@ -176,7 +263,7 @@ function quantile(sorted, probability) {
     : sorted[lower] + remainder * (sorted[lower + 1] - sorted[lower]);
 }
 
-export function runSimulation(config, iterations = 50_000, seed = 20260827, onProgress) {
+export function runSimulation(config, iterations = 200_000, seed = 20260827, onProgress) {
   const random = mulberry32(seed);
   const totals = new Array(iterations);
   let homeTotal = 0;

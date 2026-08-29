@@ -1,6 +1,6 @@
-import { DEFAULT_TEAM, americanFairOdds } from './simulator.js';
+import { americanFairOdds, neutralTeam } from './simulator.js';
 
-const STORAGE_KEY = 'sporty-sim:v0.1';
+const STORAGE_KEY = 'sporty-sim:v0.3';
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
@@ -8,7 +8,8 @@ const state = {
   games: [],
   selectedGame: null,
   players: [],
-  worker: null
+  worker: null,
+  lastSeed: null
 };
 
 const elements = {
@@ -19,6 +20,9 @@ const elements = {
   loadGames: $('#loadGamesButton'),
   marketTotal: $('#marketTotal'),
   weather: $('#weatherPenalty'),
+  modelMode: $('#modelMode'),
+  autoRate: $('#autoRateButton'),
+  profileSummary: $('#profileSummary'),
   addPlayer: $('#addPlayerButton'),
   playerList: $('#playerList'),
   emptyPlayers: $('#emptyPlayers'),
@@ -133,13 +137,84 @@ function selectGame(id, options = {}) {
   }
   elements.weather.value = game.indoor ? '0' : elements.weather.value;
   elements.results.classList.add('is-empty');
+  elements.profileSummary.classList.remove('is-visible');
+  elements.profileSummary.innerHTML = '';
   persistState();
 }
 
+function setInputValue(side, key, value) {
+  const input = document.querySelector(`[name="${side}.${key}"]`);
+  if (!input || !Number.isFinite(value)) return;
+  input.value = ['offense', 'defense'].includes(key) ? Math.round(value) : Number(value).toFixed(1);
+}
+
+async function autoRateTeams() {
+  const game = state.selectedGame;
+  if (!game?.home?.id || !game?.away?.id || !game.kickoff) {
+    showToast('Choose a scheduled matchup before auto-rating.');
+    return;
+  }
+  elements.autoRate.disabled = true;
+  elements.autoRate.textContent = 'Analyzing recent plays…';
+  try {
+    const load = async (side) => {
+      const query = new URLSearchParams({
+        league: game.league,
+        teamId: game[side].id,
+        before: game.kickoff,
+        seasonType: game.seasonType,
+        seasonYear: String(game.seasonYear),
+        limit: '3'
+      });
+      const response = await fetch(`/api/team-profile?${query}`);
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || `Could not rate ${game[side].name}.`);
+      return payload;
+    };
+    const [away, home] = await Promise.all([load('away'), load('home')]);
+    if (!away.profile || !home.profile) throw new Error('Both teams need at least one completed game before kickoff.');
+    for (const [side, payload] of [['away', away], ['home', home]]) {
+      const profile = payload.profile;
+      setInputValue(side, 'offense', profile.offenseRating);
+      setInputValue(side, 'defense', profile.defenseRating);
+      for (const key of ['plays', 'pace', 'passRate', 'passEfficiency', 'rushEfficiency', 'successRate', 'explosiveRate', 'turnoverRate', 'redZoneTdRate']) {
+        setInputValue(side, key, profile.metrics[key]?.value);
+      }
+      const defenseMap = {
+        passDefenseEfficiency: 'passEfficiency',
+        rushDefenseEfficiency: 'rushEfficiency',
+        successAllowedRate: 'successRate',
+        explosiveAllowedRate: 'explosiveRate',
+        pressureRate: 'sackRate',
+        takeawayRate: 'turnoverRate'
+      };
+      for (const [inputKey, profileKey] of Object.entries(defenseMap)) {
+        setInputValue(side, inputKey, profile.defenseAllowed[profileKey]?.value);
+      }
+    }
+    elements.profileSummary.innerHTML = [['away', away], ['home', home]].map(([side, payload]) => `
+      <div class="profile-card">
+        <div><strong>${escapeHtml(game[side].name)}</strong><span>${payload.profile.games} games · ${payload.profile.plays} plays · cutoff ${new Date(payload.cutoff).toLocaleDateString()}</span></div>
+        <b>Form O ${payload.profile.summaryOffenseRating} · D ${payload.profile.summaryDefenseRating}</b>
+      </div>
+    `).join('');
+    elements.profileSummary.classList.add('is-visible');
+    elements.results.classList.add('is-empty');
+    persistState();
+    showToast('Recent-game profiles applied with league-average shrinkage.');
+  } catch (error) {
+    showToast(error.message || 'Could not build recent-game profiles.');
+  } finally {
+    elements.autoRate.disabled = false;
+    elements.autoRate.textContent = '↯ Auto-rate recent games';
+  }
+}
+
 function resetTeamInputs(notify = true) {
+  const defaults = neutralTeam(state.selectedGame?.league || elements.league.value, state.selectedGame?.seasonType || 'regular');
   $$('[name^="home."], [name^="away."]').forEach((input) => {
     const key = input.name.split('.')[1];
-    input.value = DEFAULT_TEAM[key];
+    input.value = defaults[key];
   });
   if (notify) showToast('Team assumptions reset to neutral.');
   elements.results.classList.add('is-empty');
@@ -271,9 +346,14 @@ function runModel() {
   if (state.worker) state.worker.terminate();
   state.worker = new Worker('/sim-worker.js', { type: 'module' });
   elements.runButton.disabled = true;
-  $('.button-label', elements.runButton).textContent = 'Simulating 50,000 games…';
+  const mode = elements.modelMode.value;
+  $('.button-label', elements.runButton).textContent = mode === 'compare' ? 'Running both 200k-game models…' : 'Simulating 200k games…';
   $('.button-progress', elements.runButton).style.width = '4%';
-  const seed = Math.floor(Date.now() / 60_000);
+  let seed;
+  do {
+    seed = crypto.getRandomValues(new Uint32Array(1))[0];
+  } while (seed === state.lastSeed);
+  state.lastSeed = seed;
   state.worker.onmessage = ({ data }) => {
     if (data.type === 'progress') {
       $('.button-progress', elements.runButton).style.width = `${Math.max(4, data.progress * 100)}%`;
@@ -291,12 +371,21 @@ function runModel() {
     showToast('The simulation worker stopped unexpectedly.');
     resetRunButton();
   };
-  state.worker.postMessage({ config, iterations: 50_000, seed });
+  state.worker.postMessage({ config, iterations: 200_000, seed, mode });
+}
+
+function runButtonMarkup() {
+  const label = elements.modelMode.value === 'compare'
+    ? 'Run 200k × 2 models'
+    : elements.modelMode.value === 'play'
+      ? 'Run 200k play-level games'
+      : 'Run 200k drive-level games';
+  return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 7 8 5-8 5V7Z"/></svg> ${label}`;
 }
 
 function resetRunButton() {
   elements.runButton.disabled = false;
-  $('.button-label', elements.runButton).innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 7 8 5-8 5V7Z"/></svg> Run 50,000 simulations';
+  $('.button-label', elements.runButton).innerHTML = runButtonMarkup();
   $('.button-progress', elements.runButton).style.width = '0';
   state.worker?.terminate();
   state.worker = null;
@@ -307,6 +396,8 @@ function percentage(value) {
 }
 
 function renderResults(result, config) {
+  const comparison = result.mode === 'compare' ? result : null;
+  result = result.primary || result;
   const overLean = result.overProbability >= result.underProbability;
   const leanProbability = overLean ? result.overProbability : result.underProbability;
   const lean = overLean ? 'OVER' : 'UNDER';
@@ -327,7 +418,16 @@ function renderResults(result, config) {
   $('#underProbability').textContent = percentage(result.underProbability);
   $('#overBar').style.width = percentage(result.overProbability);
   $('#underBar').style.width = percentage(result.underProbability);
-  $('#runTimestamp').textContent = `${result.iterations.toLocaleString()} runs · ${new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`;
+  const seedLabel = comparison ? `${comparison.drive.seed}/${comparison.play.seed}` : result.seed;
+  $('#runTimestamp').textContent = `${comparison ? '400k total runs' : '200k runs'} · seed ${seedLabel}`;
+  const comparisonPanel = $('#modelComparison');
+  comparisonPanel.classList.toggle('is-visible', Boolean(comparison));
+  if (comparison) {
+    $('#driveModelMean').textContent = comparison.drive.mean.toFixed(1);
+    $('#playModelMean').textContent = comparison.play.mean.toFixed(1);
+    $('#driveModelLean').textContent = `${comparison.drive.overProbability >= .5 ? 'Over' : 'Under'} ${percentage(Math.max(comparison.drive.overProbability, comparison.drive.underProbability))}`;
+    $('#playModelLean').textContent = `${comparison.play.overProbability >= .5 ? 'Over' : 'Under'} ${percentage(Math.max(comparison.play.overProbability, comparison.play.underProbability))}`;
+  }
   renderHistogram(result.histogram, config.marketTotal);
   elements.results.classList.remove('is-empty');
   elements.results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -356,6 +456,7 @@ function persistState() {
     selectedGameId: state.selectedGame?.id,
     marketTotal: elements.marketTotal.value,
     weather: elements.weather.value,
+    modelMode: elements.modelMode.value,
     inputs,
     players: state.players
   }));
@@ -372,6 +473,7 @@ function restoreState() {
   if (!saved) return;
   elements.marketTotal.value = saved.marketTotal || '44.5';
   elements.weather.value = saved.weather || '0';
+  elements.modelMode.value = saved.modelMode || 'compare';
   Object.entries(saved.inputs || {}).forEach(([name, value]) => {
     const input = document.querySelector(`[name="${CSS.escape(name)}"]`);
     if (input) input.value = value;
@@ -395,12 +497,16 @@ function resetEverything() {
 
 elements.loadGames.addEventListener('click', loadGames);
 elements.addPlayer.addEventListener('click', () => openPlayerDialog());
+elements.autoRate.addEventListener('click', autoRateTeams);
 elements.playerForm.addEventListener('submit', savePlayer);
 elements.runButton.addEventListener('click', runModel);
 $('#presetButton').addEventListener('click', () => resetTeamInputs());
 $('#resetButton').addEventListener('click', resetEverything);
 elements.league.addEventListener('change', loadGames);
 elements.date.addEventListener('change', loadGames);
+elements.modelMode.addEventListener('change', () => {
+  $('.button-label', elements.runButton).innerHTML = runButtonMarkup();
+});
 $$('input, select').forEach((input) => {
   input.addEventListener('change', () => {
     if (input.closest('#playerDialog')) return;
@@ -410,4 +516,5 @@ $$('input, select').forEach((input) => {
 });
 
 restoreState();
+$('.button-label', elements.runButton).innerHTML = runButtonMarkup();
 loadGames();

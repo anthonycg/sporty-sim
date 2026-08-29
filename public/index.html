@@ -28,13 +28,13 @@
     <main>
       <section class="hero">
         <div>
-          <div class="eyebrow">Football totals lab <span>v0.1</span></div>
+          <div class="eyebrow">Football totals lab <span>v0.3.2</span></div>
           <h1>Turn assumptions into<br><span>probabilities.</span></h1>
           <p>Build the matchup, price uncertain player availability, and simulate the full range of game outcomes.</p>
         </div>
         <div class="hero-meta">
           <span>Drive-level model</span>
-          <strong>50,000</strong>
+          <strong>200k</strong>
           <span>games per run</span>
         </div>
       </section>
@@ -76,8 +76,13 @@
                 <span class="step">02</span>
                 <h2>Shape the matchup</h2>
               </div>
-              <button id="presetButton" class="text-button" type="button">Reset to neutral</button>
+              <div class="panel-actions">
+                <button id="autoRateButton" class="add-button" type="button">↯ Auto-rate recent games</button>
+                <button id="presetButton" class="text-button" type="button">Reset to neutral</button>
+              </div>
             </div>
+
+            <div id="profileSummary" class="profile-summary" aria-live="polite"></div>
 
             <div id="matchupInputs" class="matchup-inputs">
               <div class="team-input-column" data-side="away">
@@ -86,8 +91,8 @@
                   <div><small>Away</small><strong data-team-name="away">Away team</strong></div>
                 </div>
                 <div class="rating-pair">
-                  <label class="number-field featured">Offense rating <input name="away.offense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
-                  <label class="number-field featured">Defense rating <input name="away.defense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
+                  <label class="number-field featured">Offense residual <input name="away.offense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
+                  <label class="number-field featured">Defense residual <input name="away.defense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
                 </div>
                 <div class="field-grid">
                   <label>Plays / game<input name="away.plays" type="number" min="45" max="90" step="0.1" value="63"></label>
@@ -99,6 +104,13 @@
                   <label>Explosive rate %<input name="away.explosiveRate" type="number" min="1" max="30" step="0.1" value="10"></label>
                   <label>Turnovers / drive %<input name="away.turnoverRate" type="number" min="1" max="35" step="0.1" value="11"></label>
                   <label>Red-zone TD %<input name="away.redZoneTdRate" type="number" min="20" max="90" step="0.1" value="55"></label>
+                  <div class="field-divider">Defense production allowed</div>
+                  <label>Net yds / dropback<input name="away.passDefenseEfficiency" type="number" min="2" max="12" step="0.1" value="6.4"></label>
+                  <label>Yards / rush allowed<input name="away.rushDefenseEfficiency" type="number" min="1" max="9" step="0.1" value="4.2"></label>
+                  <label>Success allowed %<input name="away.successAllowedRate" type="number" min="20" max="70" step="0.1" value="42"></label>
+                  <label>Explosive allowed %<input name="away.explosiveAllowedRate" type="number" min="1" max="30" step="0.1" value="10"></label>
+                  <label>Sack / pressure rate %<input name="away.pressureRate" type="number" min="1" max="25" step="0.1" value="6.5"></label>
+                  <label>Takeaways / drive %<input name="away.takeawayRate" type="number" min="1" max="35" step="0.1" value="11"></label>
                 </div>
               </div>
 
@@ -110,8 +122,8 @@
                   <div><small>Home</small><strong data-team-name="home">Home team</strong></div>
                 </div>
                 <div class="rating-pair">
-                  <label class="number-field featured">Offense rating <input name="home.offense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
-                  <label class="number-field featured">Defense rating <input name="home.defense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
+                  <label class="number-field featured">Offense residual <input name="home.offense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
+                  <label class="number-field featured">Defense residual <input name="home.defense" type="number" min="0" max="100" step="1" value="50"><span>/100</span></label>
                 </div>
                 <div class="field-grid">
                   <label>Plays / game<input name="home.plays" type="number" min="45" max="90" step="0.1" value="63"></label>
@@ -123,6 +135,13 @@
                   <label>Explosive rate %<input name="home.explosiveRate" type="number" min="1" max="30" step="0.1" value="10"></label>
                   <label>Turnovers / drive %<input name="home.turnoverRate" type="number" min="1" max="35" step="0.1" value="11"></label>
                   <label>Red-zone TD %<input name="home.redZoneTdRate" type="number" min="20" max="90" step="0.1" value="55"></label>
+                  <div class="field-divider">Defense production allowed</div>
+                  <label>Net yds / dropback<input name="home.passDefenseEfficiency" type="number" min="2" max="12" step="0.1" value="6.4"></label>
+                  <label>Yards / rush allowed<input name="home.rushDefenseEfficiency" type="number" min="1" max="9" step="0.1" value="4.2"></label>
+                  <label>Success allowed %<input name="home.successAllowedRate" type="number" min="20" max="70" step="0.1" value="42"></label>
+                  <label>Explosive allowed %<input name="home.explosiveAllowedRate" type="number" min="1" max="30" step="0.1" value="10"></label>
+                  <label>Sack / pressure rate %<input name="home.pressureRate" type="number" min="1" max="25" step="0.1" value="6.5"></label>
+                  <label>Takeaways / drive %<input name="home.takeawayRate" type="number" min="1" max="35" step="0.1" value="11"></label>
                 </div>
               </div>
             </div>
@@ -177,11 +196,19 @@
                 </label>
               </div>
 
+              <label class="model-mode">Simulation engine
+                <select id="modelMode">
+                  <option value="compare">Compare drive + play models</option>
+                  <option value="play">Play-level only</option>
+                  <option value="drive">Drive-level only</option>
+                </select>
+              </label>
+
               <button id="runButton" class="run-button" type="button">
-                <span class="button-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 7 8 5-8 5V7Z"/></svg> Run 50,000 simulations</span>
+                <span class="button-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 7 8 5-8 5V7Z"/></svg> Run 200k simulations</span>
                 <span class="button-progress"></span>
               </button>
-              <p class="model-note">Local Monte Carlo · deterministic seed · no wager recommendation</p>
+              <p class="model-note">Local Monte Carlo · fresh seed recorded each run · no wager recommendation</p>
             </article>
 
             <article id="resultsPanel" class="panel result-panel is-empty" aria-live="polite">
@@ -209,6 +236,12 @@
                   <div><span data-team-abbr="away">AWAY</span><strong id="awayProjection">—</strong></div>
                   <span>projected score</span>
                   <div><span data-team-abbr="home">HOME</span><strong id="homeProjection">—</strong></div>
+                </div>
+
+                <div id="modelComparison" class="model-comparison">
+                  <div><span>Drive model</span><strong id="driveModelMean">—</strong><small id="driveModelLean">—</small></div>
+                  <i>vs</i>
+                  <div><span>Play model</span><strong id="playModelMean">—</strong><small id="playModelLean">—</small></div>
                 </div>
 
                 <div class="metric-grid">

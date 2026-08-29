@@ -1,9 +1,9 @@
 {
   "name": "sporty-sim",
-  "version": "0.1.0",
+  "version": "0.3.2",
   "private": true,
   "type": "module",
-  "description": "Transparent football totals simulator with probabilistic player availability.",
+  "description": "Objective recent-game football profiles with drive- and play-level totals simulation.",
   "scripts": {
     "start": "node server.mjs",
     "dev": "node --watch server.mjs",

@@ -69,9 +69,19 @@ try {
   await wait(2_000);
   const cards = await evaluate("document.querySelectorAll('.game-card').length");
   assert.ok(cards > 0, 'Expected live matchup cards to load.');
+  const layout = await evaluate("({ viewport: innerWidth, documentWidth: document.documentElement.scrollWidth, workspace: document.querySelector('.workspace-grid').getBoundingClientRect().width, controls: document.querySelector('.control-column').getBoundingClientRect().width, results: document.querySelector('.results-column').getBoundingClientRect().width, offenders: [...document.querySelectorAll('body *')].map(e => ({ tag: e.tagName, cls: e.className, width: Math.round(e.getBoundingClientRect().width), right: Math.round(e.getBoundingClientRect().right) })).filter(x => x.right > innerWidth + 2).sort((a,b) => b.right-a.right).slice(0,5) })");
+  assert.ok(layout.documentWidth <= layout.viewport + 1, `Page overflowed horizontally: ${JSON.stringify(layout)}`);
+  await evaluate("document.querySelector('#autoRateButton').click(); true");
+  let profileReady = false;
+  for (let attempt = 0; attempt < 100; attempt += 1) {
+    profileReady = await evaluate("document.querySelector('#profileSummary').classList.contains('is-visible')");
+    if (profileReady) break;
+    await wait(100);
+  }
+  assert.ok(profileReady, 'Expected objective recent-game profiles to load.');
   await evaluate("document.querySelector('#runButton').click(); true");
   let resultReady = false;
-  for (let attempt = 0; attempt < 50; attempt += 1) {
+  for (let attempt = 0; attempt < 120; attempt += 1) {
     resultReady = await evaluate("!document.querySelector('#resultsPanel').classList.contains('is-empty')");
     if (resultReady) break;
     await wait(100);
@@ -80,6 +90,22 @@ try {
   const summary = await evaluate("({ game: document.querySelector('[data-team-abbr=\"away\"]').textContent, mean: document.querySelector('#meanTotal').textContent, probability: document.querySelector('#leanProbability').textContent })");
   assert.match(summary.mean, /^\d+\.\d$/);
   assert.match(summary.probability, /^\d+\.\d%$/);
+  const comparisonVisible = await evaluate("document.querySelector('#modelComparison').classList.contains('is-visible') && document.querySelector('#driveModelMean').textContent !== '—' && document.querySelector('#playModelMean').textContent !== '—'");
+  assert.ok(comparisonVisible, 'Expected drive/play comparison to render.');
+  const firstSeedLabel = await evaluate("document.querySelector('#runTimestamp').textContent");
+  assert.match(firstSeedLabel, /seed \d+\/\d+$/);
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    if (await evaluate("!document.querySelector('#runButton').disabled")) break;
+    await wait(50);
+  }
+  await evaluate("document.querySelector('#runButton').click(); true");
+  let secondSeedLabel = firstSeedLabel;
+  for (let attempt = 0; attempt < 100; attempt += 1) {
+    secondSeedLabel = await evaluate("document.querySelector('#runTimestamp').textContent");
+    if (secondSeedLabel !== firstSeedLabel) break;
+    await wait(100);
+  }
+  assert.notEqual(secondSeedLabel, firstSeedLabel, 'Expected a fresh seed on each run.');
   console.log(`Browser smoke passed: ${summary.game}, mean ${summary.mean}, lean ${summary.probability}`);
   socket.close();
 } finally {

@@ -2,6 +2,7 @@ import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadHistoricalProfile } from './lib/historical-profile.mjs';
 
 const ROOT = fileURLToPath(new URL('.', import.meta.url));
 const PUBLIC_DIR = join(ROOT, 'public');
@@ -60,6 +61,7 @@ function normalizeGame(event, league) {
   return {
     id: event.id,
     league,
+    seasonYear: event.season?.year || new Date(event.date).getUTCFullYear(),
     seasonType: event.season?.type === 1 ? 'preseason' : 'regular',
     name: event.name,
     shortName: event.shortName,
@@ -133,7 +135,7 @@ async function serveStatic(request, response, pathname) {
 const server = createServer(async (request, response) => {
   const url = new URL(request.url || '/', `http://${request.headers.host || 'localhost'}`);
   if (request.method === 'GET' && url.pathname === '/api/health') {
-    sendJson(response, 200, { ok: true, version: '0.1.0' });
+    sendJson(response, 200, { ok: true, version: '0.3.2' });
     return;
   }
 
@@ -148,6 +150,25 @@ const server = createServer(async (request, response) => {
       sendJson(response, 200, await fetchGames(league, date));
     } catch (error) {
       sendJson(response, 502, { error: error.message || 'Could not load schedule.' });
+    }
+    return;
+  }
+
+  if (request.method === 'GET' && url.pathname === '/api/team-profile') {
+    const league = url.searchParams.get('league') || 'nfl';
+    const teamId = url.searchParams.get('teamId') || '';
+    const before = url.searchParams.get('before') || '';
+    const seasonType = url.searchParams.get('seasonType') === 'preseason' ? 'preseason' : 'regular';
+    const seasonYear = Number(url.searchParams.get('seasonYear')) || new Date(before).getUTCFullYear();
+    const limit = Math.min(6, Math.max(1, Number(url.searchParams.get('limit')) || 3));
+    if (!LEAGUES.has(league) || !/^\d+$/.test(teamId) || !Number.isFinite(Date.parse(before))) {
+      sendJson(response, 400, { error: 'Use a valid league, numeric teamId, and ISO before timestamp.' });
+      return;
+    }
+    try {
+      sendJson(response, 200, await loadHistoricalProfile({ league, teamId, before, limit, seasonType, seasonYear }));
+    } catch (error) {
+      sendJson(response, 502, { error: error.message || 'Could not build the historical profile.' });
     }
     return;
   }
