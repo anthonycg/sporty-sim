@@ -74,6 +74,29 @@ Every eligible run is written before kickoff with its model version, seed, marke
 
 Repeated forecasts are retained rather than overwritten. The scorecard automatically uses only the latest run for each game, model version, and engine, so repeated simulations of one matchup are not treated as independent games.
 
+## Walk-forward historical backtest
+
+The batch backtester recreates every matchup chronologically. Each profile uses the game's kickoff as a hard cutoff, so later games cannot enter an earlier rating. By default it runs the production workload—200k complete games through the drive model and another 200k through the play model—for every historical game.
+
+```bash
+npm run backtest -- --league nfl --season 2026
+```
+
+Useful filters:
+
+```bash
+# One event, still at the production 200k-per-engine workload
+npm run backtest -- --league nfl --season 2026 --event 401872656
+
+# A week range or explicit cutoff
+npm run backtest -- --league nfl --season 2026 --week-start 1 --week-end 4 --through 2026-10-08T23:59:59-05:00
+
+# Separate checkpoint file
+npm run backtest -- --league nfl --season 2026 --output data/backtests/nfl-2026-audit.json
+```
+
+Results checkpoint after every game under `data/backtests/`, so an interrupted run resumes without repeating finished games. The JSON contains every game, its cutoff-safe profile sample, archived ESPN total, actual score, both model distributions, calibration buckets, edge buckets, MAE, RMSE, bias, Brier score, log loss, and direct market-line comparisons. Historical runs use neutral player availability and weather because the app does not yet have timestamped archives for those inputs.
+
 ## Verification
 
 ```bash

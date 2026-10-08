@@ -1,0 +1,5700 @@
+{
+  "metadata": {
+    "modelVersion": "0.4.0",
+    "league": "nfl",
+    "season": 2026,
+    "seasonType": "regular",
+    "iterations": 200000,
+    "engines": [
+      "drive",
+      "play"
+    ],
+    "startedAt": "2026-10-08T23:04:04.997Z",
+    "through": "2026-10-08T23:38:29.801Z",
+    "updatedAt": "2026-10-08T23:38:33.075Z",
+    "completedAt": "2026-10-08T23:38:33.068Z"
+  },
+  "games": [
+    {
+      "eventId": "401872656",
+      "week": 1,
+      "kickoff": "2026-09-10T00:20Z",
+      "matchup": "New England Patriots at Seattle Seahawks",
+      "home": {
+        "id": "26",
+        "name": "Seattle Seahawks"
+      },
+      "away": {
+        "id": "17",
+        "name": "New England Patriots"
+      },
+      "actual": {
+        "home": 13,
+        "away": 10,
+        "total": 23
+      },
+      "market": {
+        "total": 44.5,
+        "provider": "DraftKings",
+        "overOdds": -108,
+        "underOdds": -112,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 1683551554,
+          "mean": 46.58616,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.793170282949404,
+          "homeMean": 23.29797,
+          "awayMean": 23.28819,
+          "overProbability": 0.53527,
+          "underProbability": 0.46473,
+          "pushProbability": 0,
+          "edge": 2.0861599999999996
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 58072704,
+          "mean": 43.080975,
+          "median": 43,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.449980289419123,
+          "homeMean": 21.58537,
+          "awayMean": 21.495605,
+          "overProbability": 0.433635,
+          "underProbability": 0.566365,
+          "pushProbability": 0,
+          "edge": -1.4190249999999978
+        }
+      }
+    },
+    {
+      "eventId": "401872657",
+      "week": 1,
+      "kickoff": "2026-09-11T00:35Z",
+      "matchup": "San Francisco 49ers at Los Angeles Rams",
+      "home": {
+        "id": "14",
+        "name": "Los Angeles Rams"
+      },
+      "away": {
+        "id": "25",
+        "name": "San Francisco 49ers"
+      },
+      "actual": {
+        "home": 7,
+        "away": 27,
+        "total": 34
+      },
+      "market": {
+        "total": 47.5,
+        "provider": "DraftKings",
+        "overOdds": -115,
+        "underOdds": -105,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 980748673,
+          "mean": 46.59297,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.820776627201498,
+          "homeMean": 23.30312,
+          "awayMean": 23.28985,
+          "overProbability": 0.45173,
+          "underProbability": 0.54827,
+          "pushProbability": 0,
+          "edge": -0.9070299999999989
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3157425249,
+          "mean": 43.01845,
+          "median": 43,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.528089551175233,
+          "homeMean": 21.517965,
+          "awayMean": 21.500485,
+          "overProbability": 0.336875,
+          "underProbability": 0.663125,
+          "pushProbability": 0,
+          "edge": -4.481549999999999
+        }
+      }
+    },
+    {
+      "eventId": "401872925",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00Z",
+      "matchup": "Tampa Bay Buccaneers at Cincinnati Bengals",
+      "home": {
+        "id": "4",
+        "name": "Cincinnati Bengals"
+      },
+      "away": {
+        "id": "27",
+        "name": "Tampa Bay Buccaneers"
+      },
+      "actual": {
+        "home": 33,
+        "away": 27,
+        "total": 60
+      },
+      "market": {
+        "total": 50.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 3661421929,
+          "mean": 46.55131,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.811801377234818,
+          "homeMean": 23.28516,
+          "awayMean": 23.26615,
+          "overProbability": 0.375765,
+          "underProbability": 0.624235,
+          "pushProbability": 0,
+          "edge": -3.948689999999999
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3005204137,
+          "mean": 43.05737,
+          "median": 43,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.421289684252475,
+          "homeMean": 21.53056,
+          "awayMean": 21.52681,
+          "overProbability": 0.25694,
+          "underProbability": 0.74306,
+          "pushProbability": 0,
+          "edge": -7.442630000000001
+        }
+      }
+    },
+    {
+      "eventId": "401872923",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00Z",
+      "matchup": "New Orleans Saints at Detroit Lions",
+      "home": {
+        "id": "8",
+        "name": "Detroit Lions"
+      },
+      "away": {
+        "id": "18",
+        "name": "New Orleans Saints"
+      },
+      "actual": {
+        "home": 31,
+        "away": 30,
+        "total": 61
+      },
+      "market": {
+        "total": 49.5,
+        "provider": "DraftKings",
+        "overOdds": -115,
+        "underOdds": -105,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 984075047,
+          "mean": 46.591105,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.803388709984723,
+          "homeMean": 23.296675,
+          "awayMean": 23.29443,
+          "overProbability": 0.410935,
+          "underProbability": 0.589065,
+          "pushProbability": 0,
+          "edge": -2.908895000000001
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 488555379,
+          "mean": 42.94483,
+          "median": 43,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.418627369818601,
+          "homeMean": 21.4828,
+          "awayMean": 21.46203,
+          "overProbability": 0.26903,
+          "underProbability": 0.73097,
+          "pushProbability": 0,
+          "edge": -6.555169999999997
+        }
+      }
+    },
+    {
+      "eventId": "401872924",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00Z",
+      "matchup": "New York Jets at Tennessee Titans",
+      "home": {
+        "id": "10",
+        "name": "Tennessee Titans"
+      },
+      "away": {
+        "id": "20",
+        "name": "New York Jets"
+      },
+      "actual": {
+        "home": 10,
+        "away": 23,
+        "total": 33
+      },
+      "market": {
+        "total": 39.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 651927146,
+          "mean": 46.614105,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.819655569115913,
+          "homeMean": 23.30133,
+          "awayMean": 23.312775,
+          "overProbability": 0.68964,
+          "underProbability": 0.31036,
+          "pushProbability": 0,
+          "edge": 7.114105000000002
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 402759208,
+          "mean": 42.93394,
+          "median": 43,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.450045745182596,
+          "homeMean": 21.402715,
+          "awayMean": 21.531225,
+          "overProbability": 0.633405,
+          "underProbability": 0.366595,
+          "pushProbability": 0,
+          "edge": 3.4339399999999998
+        }
+      }
+    },
+    {
+      "eventId": "401872659",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00Z",
+      "matchup": "Baltimore Ravens at Indianapolis Colts",
+      "home": {
+        "id": "11",
+        "name": "Indianapolis Colts"
+      },
+      "away": {
+        "id": "33",
+        "name": "Baltimore Ravens"
+      },
+      "actual": {
+        "home": 23,
+        "away": 41,
+        "total": 64
+      },
+      "market": {
+        "total": 48.5,
+        "provider": "DraftKings",
+        "overOdds": -105,
+        "underOdds": -115,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2932603639,
+          "mean": 46.611575,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.805140021751217,
+          "homeMean": 23.316825,
+          "awayMean": 23.29475,
+          "overProbability": 0.428845,
+          "underProbability": 0.571155,
+          "pushProbability": 0,
+          "edge": -1.888424999999998
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 551109091,
+          "mean": 43.14043,
+          "median": 43,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.421250376754397,
+          "homeMean": 21.62573,
+          "awayMean": 21.5147,
+          "overProbability": 0.292925,
+          "underProbability": 0.707075,
+          "pushProbability": 0,
+          "edge": -5.359569999999998
+        }
+      }
+    },
+    {
+      "eventId": "401872658",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00Z",
+      "matchup": "Atlanta Falcons at Pittsburgh Steelers",
+      "home": {
+        "id": "23",
+        "name": "Pittsburgh Steelers"
+      },
+      "away": {
+        "id": "1",
+        "name": "Atlanta Falcons"
+      },
+      "actual": {
+        "home": 20,
+        "away": 13,
+        "total": 33
+      },
+      "market": {
+        "total": 40.5,
+        "provider": "DraftKings",
+        "overOdds": -112,
+        "underOdds": -108,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 1810523208,
+          "mean": 46.63157,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.769885596297067,
+          "homeMean": 23.32818,
+          "awayMean": 23.30339,
+          "overProbability": 0.65599,
+          "underProbability": 0.34401,
+          "pushProbability": 0,
+          "edge": 6.1315700000000035
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3414224754,
+          "mean": 43.007525,
+          "median": 43,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.43288878376454,
+          "homeMean": 21.491775,
+          "awayMean": 21.51575,
+          "overProbability": 0.59991,
+          "underProbability": 0.40009,
+          "pushProbability": 0,
+          "edge": 2.507525000000001
+        }
+      }
+    },
+    {
+      "eventId": "401872661",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00Z",
+      "matchup": "Chicago Bears at Carolina Panthers",
+      "home": {
+        "id": "29",
+        "name": "Carolina Panthers"
+      },
+      "away": {
+        "id": "3",
+        "name": "Chicago Bears"
+      },
+      "actual": {
+        "home": 37,
+        "away": 59,
+        "total": 96
+      },
+      "market": {
+        "total": 47.5,
+        "provider": "DraftKings",
+        "overOdds": -105,
+        "underOdds": -115,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 1207047116,
+          "mean": 46.67371,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.790573767466539,
+          "homeMean": 23.344925,
+          "awayMean": 23.328785,
+          "overProbability": 0.45494,
+          "underProbability": 0.54506,
+          "pushProbability": 0,
+          "edge": -0.8262900000000002
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 984864782,
+          "mean": 43.036575,
+          "median": 43,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.425992387747222,
+          "homeMean": 21.54187,
+          "awayMean": 21.494705,
+          "overProbability": 0.334505,
+          "underProbability": 0.665495,
+          "pushProbability": 0,
+          "edge": -4.463425000000001
+        }
+      }
+    },
+    {
+      "eventId": "401872922",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00Z",
+      "matchup": "Cleveland Browns at Jacksonville Jaguars",
+      "home": {
+        "id": "30",
+        "name": "Jacksonville Jaguars"
+      },
+      "away": {
+        "id": "5",
+        "name": "Cleveland Browns"
+      },
+      "actual": {
+        "home": 34,
+        "away": 10,
+        "total": 44
+      },
+      "market": {
+        "total": 40.5,
+        "provider": "DraftKings",
+        "overOdds": -102,
+        "underOdds": -118,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 3169797688,
+          "mean": 46.57608,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.830218068935816,
+          "homeMean": 23.263745,
+          "awayMean": 23.312335,
+          "overProbability": 0.653445,
+          "underProbability": 0.346555,
+          "pushProbability": 0,
+          "edge": 6.0760799999999975
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3084182338,
+          "mean": 42.95869,
+          "median": 43,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.453450793108544,
+          "homeMean": 21.5402,
+          "awayMean": 21.41849,
+          "overProbability": 0.59755,
+          "underProbability": 0.40245,
+          "pushProbability": 0,
+          "edge": 2.458689999999997
+        }
+      }
+    },
+    {
+      "eventId": "401872660",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00Z",
+      "matchup": "Buffalo Bills at Houston Texans",
+      "home": {
+        "id": "34",
+        "name": "Houston Texans"
+      },
+      "away": {
+        "id": "2",
+        "name": "Buffalo Bills"
+      },
+      "actual": {
+        "home": 31,
+        "away": 36,
+        "total": 67
+      },
+      "market": {
+        "total": 44.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 1533323547,
+          "mean": 46.64271,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.806153115762958,
+          "homeMean": 23.29423,
+          "awayMean": 23.34848,
+          "overProbability": 0.539705,
+          "underProbability": 0.460295,
+          "pushProbability": 0,
+          "edge": 2.142710000000001
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3293356319,
+          "mean": 42.96783,
+          "median": 43,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.511881139508256,
+          "homeMean": 21.544775,
+          "awayMean": 21.423055,
+          "overProbability": 0.429115,
+          "underProbability": 0.570885,
+          "pushProbability": 0,
+          "edge": -1.5321700000000007
+        }
+      }
+    },
+    {
+      "eventId": "401872928",
+      "week": 1,
+      "kickoff": "2026-09-13T20:25Z",
+      "matchup": "Miami Dolphins at Las Vegas Raiders",
+      "home": {
+        "id": "13",
+        "name": "Las Vegas Raiders"
+      },
+      "away": {
+        "id": "15",
+        "name": "Miami Dolphins"
+      },
+      "actual": {
+        "home": 27,
+        "away": 13,
+        "total": 40
+      },
+      "market": {
+        "total": 40.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 3474927478,
+          "mean": 46.615335,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.801560702968999,
+          "homeMean": 23.29818,
+          "awayMean": 23.317155,
+          "overProbability": 0.656305,
+          "underProbability": 0.343695,
+          "pushProbability": 0,
+          "edge": 6.115335000000002
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 920220572,
+          "mean": 43.04661,
+          "median": 43,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.38391966012131,
+          "homeMean": 21.55686,
+          "awayMean": 21.48975,
+          "overProbability": 0.601525,
+          "underProbability": 0.398475,
+          "pushProbability": 0,
+          "edge": 2.546610000000001
+        }
+      }
+    },
+    {
+      "eventId": "401872927",
+      "week": 1,
+      "kickoff": "2026-09-13T20:25Z",
+      "matchup": "Green Bay Packers at Minnesota Vikings",
+      "home": {
+        "id": "16",
+        "name": "Minnesota Vikings"
+      },
+      "away": {
+        "id": "9",
+        "name": "Green Bay Packers"
+      },
+      "actual": {
+        "home": 39,
+        "away": 22,
+        "total": 61
+      },
+      "market": {
+        "total": 46.5,
+        "provider": "DraftKings",
+        "overOdds": -102,
+        "underOdds": -118,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 528155059,
+          "mean": 46.63518,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.830243178178392,
+          "homeMean": 23.304195,
+          "awayMean": 23.330985,
+          "overProbability": 0.495495,
+          "underProbability": 0.504505,
+          "pushProbability": 0,
+          "edge": 0.1351799999999983
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 1265313815,
+          "mean": 43.00795,
+          "median": 43,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.469010306507856,
+          "homeMean": 21.518095,
+          "awayMean": 21.489855,
+          "overProbability": 0.374315,
+          "underProbability": 0.625685,
+          "pushProbability": 0,
+          "edge": -3.492049999999999
+        }
+      }
+    },
+    {
+      "eventId": "401872929",
+      "week": 1,
+      "kickoff": "2026-09-13T20:25Z",
+      "matchup": "Washington Commanders at Philadelphia Eagles",
+      "home": {
+        "id": "21",
+        "name": "Philadelphia Eagles"
+      },
+      "away": {
+        "id": "28",
+        "name": "Washington Commanders"
+      },
+      "actual": {
+        "home": 24,
+        "away": 22,
+        "total": 46
+      },
+      "market": {
+        "total": 43.5,
+        "provider": "DraftKings",
+        "overOdds": -115,
+        "underOdds": -105,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 3723795349,
+          "mean": 46.62507,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.81714288465529,
+          "homeMean": 23.32825,
+          "awayMean": 23.29682,
+          "overProbability": 0.57453,
+          "underProbability": 0.42547,
+          "pushProbability": 0,
+          "edge": 3.125070000000001
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 1991517309,
+          "mean": 43.07537,
+          "median": 43,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.44791650823412,
+          "homeMean": 21.58286,
+          "awayMean": 21.49251,
+          "overProbability": 0.496835,
+          "underProbability": 0.503165,
+          "pushProbability": 0,
+          "edge": -0.4246300000000005
+        }
+      }
+    },
+    {
+      "eventId": "401872926",
+      "week": 1,
+      "kickoff": "2026-09-13T20:25Z",
+      "matchup": "Arizona Cardinals at Los Angeles Chargers",
+      "home": {
+        "id": "24",
+        "name": "Los Angeles Chargers"
+      },
+      "away": {
+        "id": "22",
+        "name": "Arizona Cardinals"
+      },
+      "actual": {
+        "home": 14,
+        "away": 26,
+        "total": 40
+      },
+      "market": {
+        "total": 47.5,
+        "provider": "DraftKings",
+        "overOdds": -102,
+        "underOdds": -118,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 169121444,
+          "mean": 46.60009,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.860414567821449,
+          "homeMean": 23.27854,
+          "awayMean": 23.32155,
+          "overProbability": 0.451735,
+          "underProbability": 0.548265,
+          "pushProbability": 0,
+          "edge": -0.8999099999999984
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 1843630310,
+          "mean": 42.927505,
+          "median": 43,
+          "low80": 30,
+          "high80": 56,
+          "standardDeviation": 10.461407623974317,
+          "homeMean": 21.47854,
+          "awayMean": 21.448965,
+          "overProbability": 0.33407,
+          "underProbability": 0.66593,
+          "pushProbability": 0,
+          "edge": -4.5724950000000035
+        }
+      }
+    },
+    {
+      "eventId": "401872930",
+      "week": 1,
+      "kickoff": "2026-09-14T00:20Z",
+      "matchup": "Dallas Cowboys at New York Giants",
+      "home": {
+        "id": "19",
+        "name": "New York Giants"
+      },
+      "away": {
+        "id": "6",
+        "name": "Dallas Cowboys"
+      },
+      "actual": {
+        "home": 28,
+        "away": 20,
+        "total": 48
+      },
+      "market": {
+        "total": 47.5,
+        "provider": "DraftKings",
+        "overOdds": -115,
+        "underOdds": -105,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2291575063,
+          "mean": 46.56826,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.802265414505912,
+          "homeMean": 23.289695,
+          "awayMean": 23.278565,
+          "overProbability": 0.452015,
+          "underProbability": 0.547985,
+          "pushProbability": 0,
+          "edge": -0.9317399999999978
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 2421239427,
+          "mean": 43.074085,
+          "median": 43,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.42799963621582,
+          "homeMean": 21.574325,
+          "awayMean": 21.49976,
+          "overProbability": 0.335855,
+          "underProbability": 0.664145,
+          "pushProbability": 0,
+          "edge": -4.425915000000003
+        }
+      }
+    },
+    {
+      "eventId": "401872931",
+      "week": 1,
+      "kickoff": "2026-09-15T00:15Z",
+      "matchup": "Denver Broncos at Kansas City Chiefs",
+      "home": {
+        "id": "12",
+        "name": "Kansas City Chiefs"
+      },
+      "away": {
+        "id": "7",
+        "name": "Denver Broncos"
+      },
+      "actual": {
+        "home": 31,
+        "away": 10,
+        "total": 41
+      },
+      "market": {
+        "total": 42.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        },
+        "away": {
+          "games": 0,
+          "opponentContexts": 0,
+          "method": "Neutral fallback"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 3975992680,
+          "mean": 46.604055,
+          "median": 46,
+          "low80": 29,
+          "high80": 65,
+          "standardDeviation": 13.822789246630352,
+          "homeMean": 23.269955,
+          "awayMean": 23.3341,
+          "overProbability": 0.6097,
+          "underProbability": 0.3903,
+          "pushProbability": 0,
+          "edge": 4.1040550000000025
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 2156279058,
+          "mean": 42.984275,
+          "median": 43,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.517263319150539,
+          "homeMean": 21.556855,
+          "awayMean": 21.42742,
+          "overProbability": 0.523615,
+          "underProbability": 0.476385,
+          "pushProbability": 0,
+          "edge": 0.4842749999999967
+        }
+      }
+    },
+    {
+      "eventId": "401872932",
+      "week": 2,
+      "kickoff": "2026-09-18T00:15Z",
+      "matchup": "Detroit Lions at Buffalo Bills",
+      "home": {
+        "id": "2",
+        "name": "Buffalo Bills"
+      },
+      "away": {
+        "id": "8",
+        "name": "Detroit Lions"
+      },
+      "actual": {
+        "home": 41,
+        "away": 31,
+        "total": 72
+      },
+      "market": {
+        "total": 54.5,
+        "provider": "DraftKings",
+        "overOdds": -118,
+        "underOdds": -102,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 3123115197,
+          "mean": 63.974005,
+          "median": 64,
+          "low80": 45,
+          "high80": 83,
+          "standardDeviation": 14.970119547288034,
+          "homeMean": 31.220855,
+          "awayMean": 32.75315,
+          "overProbability": 0.728055,
+          "underProbability": 0.271945,
+          "pushProbability": 0,
+          "edge": 9.474004999999998
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 1787854309,
+          "mean": 48.37223,
+          "median": 48,
+          "low80": 35,
+          "high80": 62,
+          "standardDeviation": 10.573052294732205,
+          "homeMean": 23.503845,
+          "awayMean": 24.868385,
+          "overProbability": 0.29291,
+          "underProbability": 0.70709,
+          "pushProbability": 0,
+          "edge": -6.127769999999998
+        }
+      }
+    },
+    {
+      "eventId": "401872933",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00Z",
+      "matchup": "Carolina Panthers at Atlanta Falcons",
+      "home": {
+        "id": "1",
+        "name": "Atlanta Falcons"
+      },
+      "away": {
+        "id": "29",
+        "name": "Carolina Panthers"
+      },
+      "actual": {
+        "home": 3,
+        "away": 34,
+        "total": 37
+      },
+      "market": {
+        "total": 43.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 3425297822,
+          "mean": 64.923655,
+          "median": 64,
+          "low80": 46,
+          "high80": 84,
+          "standardDeviation": 14.884835452264106,
+          "homeMean": 34.874375,
+          "awayMean": 30.04928,
+          "overProbability": 0.926655,
+          "underProbability": 0.073345,
+          "pushProbability": 0,
+          "edge": 21.423654999999997
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 1827126724,
+          "mean": 47.826095,
+          "median": 48,
+          "low80": 34,
+          "high80": 62,
+          "standardDeviation": 10.569532253181155,
+          "homeMean": 25.262135,
+          "awayMean": 22.56396,
+          "overProbability": 0.67263,
+          "underProbability": 0.32737,
+          "pushProbability": 0,
+          "edge": 4.326095000000002
+        }
+      }
+    },
+    {
+      "eventId": "401872937",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00Z",
+      "matchup": "Minnesota Vikings at Chicago Bears",
+      "home": {
+        "id": "3",
+        "name": "Chicago Bears"
+      },
+      "away": {
+        "id": "16",
+        "name": "Minnesota Vikings"
+      },
+      "actual": {
+        "home": 3,
+        "away": 9,
+        "total": 12
+      },
+      "market": {
+        "total": 46.5,
+        "provider": "DraftKings",
+        "overOdds": -115,
+        "underOdds": -105,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 1503045658,
+          "mean": 72.26288,
+          "median": 72,
+          "low80": 53,
+          "high80": 92,
+          "standardDeviation": 14.949957996783231,
+          "homeMean": 40.19946,
+          "awayMean": 32.06342,
+          "overProbability": 0.960705,
+          "underProbability": 0.039295,
+          "pushProbability": 0,
+          "edge": 25.762879999999996
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3067328120,
+          "mean": 47.49943,
+          "median": 48,
+          "low80": 34,
+          "high80": 61,
+          "standardDeviation": 10.34933281303765,
+          "homeMean": 26.008635,
+          "awayMean": 21.490795,
+          "overProbability": 0.545135,
+          "underProbability": 0.454865,
+          "pushProbability": 0,
+          "edge": 0.9994299999999967
+        }
+      }
+    },
+    {
+      "eventId": "401872939",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00Z",
+      "matchup": "Philadelphia Eagles at Tennessee Titans",
+      "home": {
+        "id": "10",
+        "name": "Tennessee Titans"
+      },
+      "away": {
+        "id": "21",
+        "name": "Philadelphia Eagles"
+      },
+      "actual": {
+        "home": 20,
+        "away": 24,
+        "total": 44
+      },
+      "market": {
+        "total": 39.5,
+        "provider": "DraftKings",
+        "overOdds": -112,
+        "underOdds": -108,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 937239312,
+          "mean": 55.43363,
+          "median": 55,
+          "low80": 37,
+          "high80": 74,
+          "standardDeviation": 14.230143534869896,
+          "homeMean": 24.26703,
+          "awayMean": 31.1666,
+          "overProbability": 0.87202,
+          "underProbability": 0.12798,
+          "pushProbability": 0,
+          "edge": 15.93363
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 7231482,
+          "mean": 43.760785,
+          "median": 44,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.220142424825465,
+          "homeMean": 19.22121,
+          "awayMean": 24.539575,
+          "overProbability": 0.664875,
+          "underProbability": 0.335125,
+          "pushProbability": 0,
+          "edge": 4.2607849999999985
+        }
+      }
+    },
+    {
+      "eventId": "401872946",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00Z",
+      "matchup": "Pittsburgh Steelers at New England Patriots",
+      "home": {
+        "id": "17",
+        "name": "New England Patriots"
+      },
+      "away": {
+        "id": "23",
+        "name": "Pittsburgh Steelers"
+      },
+      "actual": {
+        "home": 20,
+        "away": 3,
+        "total": 23
+      },
+      "market": {
+        "total": 41.5,
+        "provider": "DraftKings",
+        "overOdds": -105,
+        "underOdds": -115,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2573325650,
+          "mean": 48.085145,
+          "median": 47,
+          "low80": 30,
+          "high80": 66,
+          "standardDeviation": 13.938607008202569,
+          "homeMean": 21.617055,
+          "awayMean": 26.46809,
+          "overProbability": 0.66742,
+          "underProbability": 0.33258,
+          "pushProbability": 0,
+          "edge": 6.585144999999997
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 936542064,
+          "mean": 41.925925,
+          "median": 41,
+          "low80": 29,
+          "high80": 55,
+          "standardDeviation": 10.434276587014072,
+          "homeMean": 18.47355,
+          "awayMean": 23.452375,
+          "overProbability": 0.49286,
+          "underProbability": 0.50714,
+          "pushProbability": 0,
+          "edge": 0.42592499999999944
+        }
+      }
+    },
+    {
+      "eventId": "401872936",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00Z",
+      "matchup": "Green Bay Packers at New York Jets",
+      "home": {
+        "id": "20",
+        "name": "New York Jets"
+      },
+      "away": {
+        "id": "9",
+        "name": "Green Bay Packers"
+      },
+      "actual": {
+        "home": 17,
+        "away": 20,
+        "total": 37
+      },
+      "market": {
+        "total": 44.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 632377945,
+          "mean": 54.441775,
+          "median": 54,
+          "low80": 36,
+          "high80": 73,
+          "standardDeviation": 14.303315694253389,
+          "homeMean": 29.856985,
+          "awayMean": 24.58479,
+          "overProbability": 0.743295,
+          "underProbability": 0.256705,
+          "pushProbability": 0,
+          "edge": 9.941775
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 642817721,
+          "mean": 41.721225,
+          "median": 41,
+          "low80": 29,
+          "high80": 55,
+          "standardDeviation": 10.28415040243058,
+          "homeMean": 21.92619,
+          "awayMean": 19.795035,
+          "overProbability": 0.381405,
+          "underProbability": 0.618595,
+          "pushProbability": 0,
+          "edge": -2.778775000000003
+        }
+      }
+    },
+    {
+      "eventId": "401872935",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00Z",
+      "matchup": "Cleveland Browns at Tampa Bay Buccaneers",
+      "home": {
+        "id": "27",
+        "name": "Tampa Bay Buccaneers"
+      },
+      "away": {
+        "id": "5",
+        "name": "Cleveland Browns"
+      },
+      "actual": {
+        "home": 19,
+        "away": 23,
+        "total": 42
+      },
+      "market": {
+        "total": 41.5,
+        "provider": "DraftKings",
+        "overOdds": -108,
+        "underOdds": -112,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 1766378580,
+          "mean": 56.7003,
+          "median": 57,
+          "low80": 39,
+          "high80": 75,
+          "standardDeviation": 14.036334276085288,
+          "homeMean": 30.93065,
+          "awayMean": 25.76965,
+          "overProbability": 0.859395,
+          "underProbability": 0.140605,
+          "pushProbability": 0,
+          "edge": 15.200299999999999
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 883826166,
+          "mean": 45.75567,
+          "median": 45,
+          "low80": 33,
+          "high80": 59,
+          "standardDeviation": 10.227155169008054,
+          "homeMean": 24.789895,
+          "awayMean": 20.965775,
+          "overProbability": 0.63672,
+          "underProbability": 0.36328,
+          "pushProbability": 0,
+          "edge": 4.255670000000002
+        }
+      }
+    },
+    {
+      "eventId": "401872938",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00Z",
+      "matchup": "New Orleans Saints at Baltimore Ravens",
+      "home": {
+        "id": "33",
+        "name": "Baltimore Ravens"
+      },
+      "away": {
+        "id": "18",
+        "name": "New Orleans Saints"
+      },
+      "actual": {
+        "home": 17,
+        "away": 24,
+        "total": 41
+      },
+      "market": {
+        "total": 45.5,
+        "provider": "DraftKings",
+        "overOdds": -105,
+        "underOdds": -115,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2241763519,
+          "mean": 74.734015,
+          "median": 74,
+          "low80": 55,
+          "high80": 95,
+          "standardDeviation": 15.676311651016377,
+          "homeMean": 44.420725,
+          "awayMean": 30.31329,
+          "overProbability": 0.973545,
+          "underProbability": 0.026455,
+          "pushProbability": 0,
+          "edge": 29.234015
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 4102255563,
+          "mean": 51.923385,
+          "median": 52,
+          "low80": 38,
+          "high80": 66,
+          "standardDeviation": 10.876964426796869,
+          "homeMean": 29.627975,
+          "awayMean": 22.29541,
+          "overProbability": 0.70314,
+          "underProbability": 0.29686,
+          "pushProbability": 0,
+          "edge": 6.423385000000003
+        }
+      }
+    },
+    {
+      "eventId": "401872934",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00Z",
+      "matchup": "Cincinnati Bengals at Houston Texans",
+      "home": {
+        "id": "34",
+        "name": "Houston Texans"
+      },
+      "away": {
+        "id": "4",
+        "name": "Cincinnati Bengals"
+      },
+      "actual": {
+        "home": 6,
+        "away": 20,
+        "total": 26
+      },
+      "market": {
+        "total": 45.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 613192803,
+          "mean": 65.65449,
+          "median": 65,
+          "low80": 47,
+          "high80": 85,
+          "standardDeviation": 15.163420222359353,
+          "homeMean": 30.300845,
+          "awayMean": 35.353645,
+          "overProbability": 0.91269,
+          "underProbability": 0.08731,
+          "pushProbability": 0,
+          "edge": 20.154489999999996
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 4175916327,
+          "mean": 49.45409,
+          "median": 50,
+          "low80": 37,
+          "high80": 63,
+          "standardDeviation": 10.62381627627166,
+          "homeMean": 24.176525,
+          "awayMean": 25.277565,
+          "overProbability": 0.62236,
+          "underProbability": 0.37764,
+          "pushProbability": 0,
+          "edge": 3.9540900000000008
+        }
+      }
+    },
+    {
+      "eventId": "401872940",
+      "week": 2,
+      "kickoff": "2026-09-20T20:05Z",
+      "matchup": "Jacksonville Jaguars at Denver Broncos",
+      "home": {
+        "id": "7",
+        "name": "Denver Broncos"
+      },
+      "away": {
+        "id": "30",
+        "name": "Jacksonville Jaguars"
+      },
+      "actual": {
+        "home": 20,
+        "away": 13,
+        "total": 33
+      },
+      "market": {
+        "total": 45.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 4209351424,
+          "mean": 54.621295,
+          "median": 54,
+          "low80": 37,
+          "high80": 72,
+          "standardDeviation": 13.441460021993045,
+          "homeMean": 20.27998,
+          "awayMean": 34.341315,
+          "overProbability": 0.74853,
+          "underProbability": 0.25147,
+          "pushProbability": 0,
+          "edge": 9.121295000000003
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 4278780426,
+          "mean": 41.71648,
+          "median": 41,
+          "low80": 29,
+          "high80": 55,
+          "standardDeviation": 10.027146972575872,
+          "homeMean": 17.63815,
+          "awayMean": 24.07833,
+          "overProbability": 0.324965,
+          "underProbability": 0.675035,
+          "pushProbability": 0,
+          "edge": -3.783520000000003
+        }
+      }
+    },
+    {
+      "eventId": "401872941",
+      "week": 2,
+      "kickoff": "2026-09-20T20:05Z",
+      "matchup": "Las Vegas Raiders at Los Angeles Chargers",
+      "home": {
+        "id": "24",
+        "name": "Los Angeles Chargers"
+      },
+      "away": {
+        "id": "13",
+        "name": "Las Vegas Raiders"
+      },
+      "actual": {
+        "home": 14,
+        "away": 26,
+        "total": 40
+      },
+      "market": {
+        "total": 43.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 1051574703,
+          "mean": 52.26202,
+          "median": 52,
+          "low80": 34,
+          "high80": 71,
+          "standardDeviation": 14.08628288511637,
+          "homeMean": 23.25254,
+          "awayMean": 29.00948,
+          "overProbability": 0.72469,
+          "underProbability": 0.27531,
+          "pushProbability": 0,
+          "edge": 8.76202
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3346182427,
+          "mean": 42.78345,
+          "median": 43,
+          "low80": 30,
+          "high80": 55,
+          "standardDeviation": 10.335273392478246,
+          "homeMean": 19.80982,
+          "awayMean": 22.97363,
+          "overProbability": 0.487265,
+          "underProbability": 0.512735,
+          "pushProbability": 0,
+          "edge": -0.716549999999998
+        }
+      }
+    },
+    {
+      "eventId": "401872944",
+      "week": 2,
+      "kickoff": "2026-09-20T20:25Z",
+      "matchup": "Washington Commanders at Dallas Cowboys",
+      "home": {
+        "id": "6",
+        "name": "Dallas Cowboys"
+      },
+      "away": {
+        "id": "28",
+        "name": "Washington Commanders"
+      },
+      "actual": {
+        "home": 37,
+        "away": 20,
+        "total": 57
+      },
+      "market": {
+        "total": 51.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2747290828,
+          "mean": 61.866465,
+          "median": 61,
+          "low80": 43,
+          "high80": 81,
+          "standardDeviation": 14.872635388648717,
+          "homeMean": 29.315605,
+          "awayMean": 32.55086,
+          "overProbability": 0.74675,
+          "underProbability": 0.25325,
+          "pushProbability": 0,
+          "edge": 10.366464999999998
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 903426830,
+          "mean": 45.656565,
+          "median": 45,
+          "low80": 33,
+          "high80": 59,
+          "standardDeviation": 10.38027780942541,
+          "homeMean": 22.06312,
+          "awayMean": 23.593445,
+          "overProbability": 0.28017,
+          "underProbability": 0.71983,
+          "pushProbability": 0,
+          "edge": -5.8434349999999995
+        }
+      }
+    },
+    {
+      "eventId": "401872943",
+      "week": 2,
+      "kickoff": "2026-09-20T20:25Z",
+      "matchup": "Seattle Seahawks at Arizona Cardinals",
+      "home": {
+        "id": "22",
+        "name": "Arizona Cardinals"
+      },
+      "away": {
+        "id": "26",
+        "name": "Seattle Seahawks"
+      },
+      "actual": {
+        "home": 7,
+        "away": 31,
+        "total": 38
+      },
+      "market": {
+        "total": 40.5,
+        "provider": "DraftKings",
+        "overOdds": -115,
+        "underOdds": -105,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2776991605,
+          "mean": 48.540375,
+          "median": 48,
+          "low80": 31,
+          "high80": 67,
+          "standardDeviation": 13.776655975212108,
+          "homeMean": 23.217525,
+          "awayMean": 25.32285,
+          "overProbability": 0.70772,
+          "underProbability": 0.29228,
+          "pushProbability": 0,
+          "edge": 8.040374999999997
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3910458845,
+          "mean": 41.98955,
+          "median": 41,
+          "low80": 29,
+          "high80": 55,
+          "standardDeviation": 10.246347680879197,
+          "homeMean": 20.363185,
+          "awayMean": 21.626365,
+          "overProbability": 0.567655,
+          "underProbability": 0.432345,
+          "pushProbability": 0,
+          "edge": 1.4895500000000013
+        }
+      }
+    },
+    {
+      "eventId": "401872942",
+      "week": 2,
+      "kickoff": "2026-09-20T20:25Z",
+      "matchup": "Miami Dolphins at San Francisco 49ers",
+      "home": {
+        "id": "25",
+        "name": "San Francisco 49ers"
+      },
+      "away": {
+        "id": "15",
+        "name": "Miami Dolphins"
+      },
+      "actual": {
+        "home": 35,
+        "away": 13,
+        "total": 48
+      },
+      "market": {
+        "total": 44.5,
+        "provider": "DraftKings",
+        "overOdds": -115,
+        "underOdds": -105,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2783143638,
+          "mean": 53.314035,
+          "median": 53,
+          "low80": 36,
+          "high80": 71,
+          "standardDeviation": 13.97937863493207,
+          "homeMean": 30.90847,
+          "awayMean": 22.405565,
+          "overProbability": 0.72159,
+          "underProbability": 0.27841,
+          "pushProbability": 0,
+          "edge": 8.814034999999997
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 4242307964,
+          "mean": 44.06051,
+          "median": 44,
+          "low80": 31,
+          "high80": 58,
+          "standardDeviation": 10.355760645163835,
+          "homeMean": 24.497345,
+          "awayMean": 19.563165,
+          "overProbability": 0.47419,
+          "underProbability": 0.52581,
+          "pushProbability": 0,
+          "edge": -0.43948999999999927
+        }
+      }
+    },
+    {
+      "eventId": "401872945",
+      "week": 2,
+      "kickoff": "2026-09-21T00:20Z",
+      "matchup": "Indianapolis Colts at Kansas City Chiefs",
+      "home": {
+        "id": "12",
+        "name": "Kansas City Chiefs"
+      },
+      "away": {
+        "id": "11",
+        "name": "Indianapolis Colts"
+      },
+      "actual": {
+        "home": 33,
+        "away": 30,
+        "total": 63
+      },
+      "market": {
+        "total": 46.5,
+        "provider": "DraftKings",
+        "overOdds": -102,
+        "underOdds": -118,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 3073567259,
+          "mean": 64.67314,
+          "median": 64,
+          "low80": 46,
+          "high80": 83,
+          "standardDeviation": 14.463222066345283,
+          "homeMean": 40.36378,
+          "awayMean": 24.30936,
+          "overProbability": 0.89942,
+          "underProbability": 0.10058,
+          "pushProbability": 0,
+          "edge": 18.173140000000004
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3211918367,
+          "mean": 46.71918,
+          "median": 47,
+          "low80": 34,
+          "high80": 59,
+          "standardDeviation": 10.359597006060577,
+          "homeMean": 27.506775,
+          "awayMean": 19.212405,
+          "overProbability": 0.514375,
+          "underProbability": 0.485625,
+          "pushProbability": 0,
+          "edge": 0.21918000000000148
+        }
+      }
+    },
+    {
+      "eventId": "401872947",
+      "week": 2,
+      "kickoff": "2026-09-22T00:15Z",
+      "matchup": "New York Giants at Los Angeles Rams",
+      "home": {
+        "id": "14",
+        "name": "Los Angeles Rams"
+      },
+      "away": {
+        "id": "19",
+        "name": "New York Giants"
+      },
+      "actual": {
+        "home": 28,
+        "away": 6,
+        "total": 34
+      },
+      "market": {
+        "total": 47.5,
+        "provider": "DraftKings",
+        "overOdds": -108,
+        "underOdds": -112,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 1,
+          "opponentContexts": 0,
+          "method": "Estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 139827921,
+          "mean": 64.42583,
+          "median": 64,
+          "low80": 46,
+          "high80": 83,
+          "standardDeviation": 14.610744293535053,
+          "homeMean": 25.72621,
+          "awayMean": 38.69962,
+          "overProbability": 0.87376,
+          "underProbability": 0.12624,
+          "pushProbability": 0,
+          "edge": 16.925830000000005
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 1101726545,
+          "mean": 46.59946,
+          "median": 47,
+          "low80": 34,
+          "high80": 59,
+          "standardDeviation": 10.23599568719915,
+          "homeMean": 19.874825,
+          "awayMean": 26.724635,
+          "overProbability": 0.47346,
+          "underProbability": 0.52654,
+          "pushProbability": 0,
+          "edge": -0.9005399999999995
+        }
+      }
+    },
+    {
+      "eventId": "401872948",
+      "week": 3,
+      "kickoff": "2026-09-25T00:15Z",
+      "matchup": "Atlanta Falcons at Green Bay Packers",
+      "home": {
+        "id": "9",
+        "name": "Green Bay Packers"
+      },
+      "away": {
+        "id": "1",
+        "name": "Atlanta Falcons"
+      },
+      "actual": {
+        "home": 14,
+        "away": 35,
+        "total": 49
+      },
+      "market": {
+        "total": 43.5,
+        "provider": "DraftKings",
+        "overOdds": -105,
+        "underOdds": -115,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 4008059800,
+          "mean": 44.72929,
+          "median": 44,
+          "low80": 27,
+          "high80": 62,
+          "standardDeviation": 13.475241225890223,
+          "homeMean": 24.59698,
+          "awayMean": 20.13231,
+          "overProbability": 0.521695,
+          "underProbability": 0.478305,
+          "pushProbability": 0,
+          "edge": 1.2292899999999989
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 1368971810,
+          "mean": 37.08188,
+          "median": 37,
+          "low80": 24,
+          "high80": 51,
+          "standardDeviation": 9.973724262558576,
+          "homeMean": 20.75464,
+          "awayMean": 16.32724,
+          "overProbability": 0.269825,
+          "underProbability": 0.730175,
+          "pushProbability": 0,
+          "edge": -6.418120000000002
+        }
+      }
+    },
+    {
+      "eventId": "401872953",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00Z",
+      "matchup": "Los Angeles Chargers at Buffalo Bills",
+      "home": {
+        "id": "2",
+        "name": "Buffalo Bills"
+      },
+      "away": {
+        "id": "24",
+        "name": "Los Angeles Chargers"
+      },
+      "actual": {
+        "home": 24,
+        "away": 16,
+        "total": 40
+      },
+      "market": {
+        "total": 50.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 1116274612,
+          "mean": 70.12266,
+          "median": 70,
+          "low80": 51,
+          "high80": 89,
+          "standardDeviation": 14.894832141533861,
+          "homeMean": 39.07999,
+          "awayMean": 31.04267,
+          "overProbability": 0.90586,
+          "underProbability": 0.09414,
+          "pushProbability": 0,
+          "edge": 19.622659999999996
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 4205913558,
+          "mean": 48.03548,
+          "median": 48,
+          "low80": 34,
+          "high80": 62,
+          "standardDeviation": 10.493239784243698,
+          "homeMean": 26.453635,
+          "awayMean": 21.581845,
+          "overProbability": 0.427345,
+          "underProbability": 0.572655,
+          "pushProbability": 0,
+          "edge": -2.4645200000000003
+        }
+      }
+    },
+    {
+      "eventId": "401872949",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00Z",
+      "matchup": "Carolina Panthers at Cleveland Browns",
+      "home": {
+        "id": "5",
+        "name": "Cleveland Browns"
+      },
+      "away": {
+        "id": "29",
+        "name": "Carolina Panthers"
+      },
+      "actual": {
+        "home": 21,
+        "away": 18,
+        "total": 39
+      },
+      "market": {
+        "total": 41.5,
+        "provider": "DraftKings",
+        "overOdds": -115,
+        "underOdds": -105,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 37271303,
+          "mean": 64.88795,
+          "median": 65,
+          "low80": 47,
+          "high80": 84,
+          "standardDeviation": 14.55140765691037,
+          "homeMean": 27.522505,
+          "awayMean": 37.365445,
+          "overProbability": 0.949825,
+          "underProbability": 0.050175,
+          "pushProbability": 0,
+          "edge": 23.387950000000004
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 2407496915,
+          "mean": 48.97056,
+          "median": 49,
+          "low80": 36,
+          "high80": 62,
+          "standardDeviation": 10.52735832421481,
+          "homeMean": 23.037015,
+          "awayMean": 25.933545,
+          "overProbability": 0.746155,
+          "underProbability": 0.253845,
+          "pushProbability": 0,
+          "edge": 7.470559999999999
+        }
+      }
+    },
+    {
+      "eventId": "401872954",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00Z",
+      "matchup": "New York Jets at Detroit Lions",
+      "home": {
+        "id": "8",
+        "name": "Detroit Lions"
+      },
+      "away": {
+        "id": "20",
+        "name": "New York Jets"
+      },
+      "actual": {
+        "home": 31,
+        "away": 24,
+        "total": 55
+      },
+      "market": {
+        "total": 49.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2472908061,
+          "mean": 70.72661,
+          "median": 71,
+          "low80": 51,
+          "high80": 90,
+          "standardDeviation": 15.104670731529968,
+          "homeMean": 31.181345,
+          "awayMean": 39.545265,
+          "overProbability": 0.92444,
+          "underProbability": 0.07556,
+          "pushProbability": 0,
+          "edge": 21.226609999999994
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 773500869,
+          "mean": 45.99518,
+          "median": 45,
+          "low80": 33,
+          "high80": 59,
+          "standardDeviation": 10.344844453521645,
+          "homeMean": 21.333865,
+          "awayMean": 24.661315,
+          "overProbability": 0.37354,
+          "underProbability": 0.62646,
+          "pushProbability": 0,
+          "edge": -3.5048200000000023
+        }
+      }
+    },
+    {
+      "eventId": "401872951",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00Z",
+      "matchup": "Houston Texans at Indianapolis Colts",
+      "home": {
+        "id": "11",
+        "name": "Indianapolis Colts"
+      },
+      "away": {
+        "id": "34",
+        "name": "Houston Texans"
+      },
+      "actual": {
+        "home": 19,
+        "away": 17,
+        "total": 36
+      },
+      "market": {
+        "total": 42.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 1620253690,
+          "mean": 76.57279,
+          "median": 76,
+          "low80": 57,
+          "high80": 97,
+          "standardDeviation": 15.77638303337928,
+          "homeMean": 35.6516,
+          "awayMean": 40.92119,
+          "overProbability": 0.987985,
+          "underProbability": 0.012015,
+          "pushProbability": 0,
+          "edge": 34.07279
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 4243939032,
+          "mean": 53.328995,
+          "median": 54,
+          "low80": 40,
+          "high80": 66,
+          "standardDeviation": 10.814722247470186,
+          "homeMean": 25.03473,
+          "awayMean": 28.294265,
+          "overProbability": 0.847225,
+          "underProbability": 0.152775,
+          "pushProbability": 0,
+          "edge": 10.828994999999999
+        }
+      }
+    },
+    {
+      "eventId": "401872952",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00Z",
+      "matchup": "Kansas City Chiefs at Miami Dolphins",
+      "home": {
+        "id": "15",
+        "name": "Miami Dolphins"
+      },
+      "away": {
+        "id": "12",
+        "name": "Kansas City Chiefs"
+      },
+      "actual": {
+        "home": 10,
+        "away": 24,
+        "total": 34
+      },
+      "market": {
+        "total": 45.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2794465091,
+          "mean": 64.5831,
+          "median": 64,
+          "low80": 47,
+          "high80": 83,
+          "standardDeviation": 14.377805618033396,
+          "homeMean": 23.974115,
+          "awayMean": 40.608985,
+          "overProbability": 0.912695,
+          "underProbability": 0.087305,
+          "pushProbability": 0,
+          "edge": 19.0831
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 2224348039,
+          "mean": 46.98424,
+          "median": 47,
+          "low80": 34,
+          "high80": 59,
+          "standardDeviation": 10.278045126494254,
+          "homeMean": 18.734575,
+          "awayMean": 28.249665,
+          "overProbability": 0.531105,
+          "underProbability": 0.468895,
+          "pushProbability": 0,
+          "edge": 1.4842399999999998
+        }
+      }
+    },
+    {
+      "eventId": "401872956",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00Z",
+      "matchup": "Tennessee Titans at New York Giants",
+      "home": {
+        "id": "19",
+        "name": "New York Giants"
+      },
+      "away": {
+        "id": "10",
+        "name": "Tennessee Titans"
+      },
+      "actual": {
+        "home": 12,
+        "away": 7,
+        "total": 19
+      },
+      "market": {
+        "total": 37.5,
+        "provider": "DraftKings",
+        "overOdds": -112,
+        "underOdds": -108,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 177880055,
+          "mean": 57.903195,
+          "median": 57,
+          "low80": 40,
+          "high80": 76,
+          "standardDeviation": 14.166548760789404,
+          "homeMean": 24.031995,
+          "awayMean": 33.8712,
+          "overProbability": 0.92578,
+          "underProbability": 0.07422,
+          "pushProbability": 0,
+          "edge": 20.403194999999997
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 469671139,
+          "mean": 44.938065,
+          "median": 45,
+          "low80": 31,
+          "high80": 58,
+          "standardDeviation": 10.25543266058407,
+          "homeMean": 19.439695,
+          "awayMean": 25.49837,
+          "overProbability": 0.75517,
+          "underProbability": 0.24483,
+          "pushProbability": 0,
+          "edge": 7.438065000000002
+        }
+      }
+    },
+    {
+      "eventId": "401872950",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00Z",
+      "matchup": "Cincinnati Bengals at Pittsburgh Steelers",
+      "home": {
+        "id": "23",
+        "name": "Pittsburgh Steelers"
+      },
+      "away": {
+        "id": "4",
+        "name": "Cincinnati Bengals"
+      },
+      "actual": {
+        "home": 30,
+        "away": 27,
+        "total": 57
+      },
+      "market": {
+        "total": 42.5,
+        "provider": "DraftKings",
+        "overOdds": -112,
+        "underOdds": -108,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 4277138105,
+          "mean": 49.683575,
+          "median": 49,
+          "low80": 32,
+          "high80": 68,
+          "standardDeviation": 13.996873230086305,
+          "homeMean": 22.03043,
+          "awayMean": 27.653145,
+          "overProbability": 0.693115,
+          "underProbability": 0.306885,
+          "pushProbability": 0,
+          "edge": 7.183574999999998
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3965008281,
+          "mean": 41.30618,
+          "median": 41,
+          "low80": 28,
+          "high80": 55,
+          "standardDeviation": 10.363285859584899,
+          "homeMean": 19.032375,
+          "awayMean": 22.273805,
+          "overProbability": 0.45911,
+          "underProbability": 0.54089,
+          "pushProbability": 0,
+          "edge": -1.1938200000000023
+        }
+      }
+    },
+    {
+      "eventId": "401872955",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00Z",
+      "matchup": "Seattle Seahawks at Washington Commanders",
+      "home": {
+        "id": "28",
+        "name": "Washington Commanders"
+      },
+      "away": {
+        "id": "26",
+        "name": "Seattle Seahawks"
+      },
+      "actual": {
+        "home": 33,
+        "away": 31,
+        "total": 64
+      },
+      "market": {
+        "total": 40.5,
+        "provider": "DraftKings",
+        "overOdds": -108,
+        "underOdds": -112,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2775193854,
+          "mean": 56.667055,
+          "median": 57,
+          "low80": 39,
+          "high80": 75,
+          "standardDeviation": 14.142229407946584,
+          "homeMean": 22.68957,
+          "awayMean": 33.977485,
+          "overProbability": 0.872285,
+          "underProbability": 0.127715,
+          "pushProbability": 0,
+          "edge": 16.167054999999998
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 812773284,
+          "mean": 43.42326,
+          "median": 44,
+          "low80": 30,
+          "high80": 56,
+          "standardDeviation": 10.077693236665867,
+          "homeMean": 18.017295,
+          "awayMean": 25.405965,
+          "overProbability": 0.62398,
+          "underProbability": 0.37602,
+          "pushProbability": 0,
+          "edge": 2.923259999999999
+        }
+      }
+    },
+    {
+      "eventId": "401872957",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00Z",
+      "matchup": "New England Patriots at Jacksonville Jaguars",
+      "home": {
+        "id": "30",
+        "name": "Jacksonville Jaguars"
+      },
+      "away": {
+        "id": "17",
+        "name": "New England Patriots"
+      },
+      "actual": {
+        "home": 35,
+        "away": 6,
+        "total": 41
+      },
+      "market": {
+        "total": 46.5,
+        "provider": "DraftKings",
+        "overOdds": -115,
+        "underOdds": -105,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 3350766920,
+          "mean": 51.627155,
+          "median": 51,
+          "low80": 34,
+          "high80": 69,
+          "standardDeviation": 13.76338953913372,
+          "homeMean": 26.96783,
+          "awayMean": 24.659325,
+          "overProbability": 0.641865,
+          "underProbability": 0.358135,
+          "pushProbability": 0,
+          "edge": 5.127155000000002
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3332786802,
+          "mean": 42.34363,
+          "median": 42,
+          "low80": 30,
+          "high80": 55,
+          "standardDeviation": 10.256112734520874,
+          "homeMean": 20.787455,
+          "awayMean": 21.556175,
+          "overProbability": 0.34626,
+          "underProbability": 0.65374,
+          "pushProbability": 0,
+          "edge": -4.156370000000003
+        }
+      }
+    },
+    {
+      "eventId": "401872958",
+      "week": 3,
+      "kickoff": "2026-09-27T20:05Z",
+      "matchup": "Arizona Cardinals at San Francisco 49ers",
+      "home": {
+        "id": "25",
+        "name": "San Francisco 49ers"
+      },
+      "away": {
+        "id": "22",
+        "name": "Arizona Cardinals"
+      },
+      "actual": {
+        "home": 36,
+        "away": 30,
+        "total": 66
+      },
+      "market": {
+        "total": 48.5,
+        "provider": "DraftKings",
+        "overOdds": -105,
+        "underOdds": -115,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2520992385,
+          "mean": 60.48203,
+          "median": 60,
+          "low80": 43,
+          "high80": 78,
+          "standardDeviation": 13.786207494418353,
+          "homeMean": 37.27208,
+          "awayMean": 23.20995,
+          "overProbability": 0.805185,
+          "underProbability": 0.194815,
+          "pushProbability": 0,
+          "edge": 11.982030000000002
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3075987297,
+          "mean": 44.83202,
+          "median": 45,
+          "low80": 31,
+          "high80": 58,
+          "standardDeviation": 9.990239872970605,
+          "homeMean": 26.783595,
+          "awayMean": 18.048425,
+          "overProbability": 0.345145,
+          "underProbability": 0.654855,
+          "pushProbability": 0,
+          "edge": -3.66798
+        }
+      }
+    },
+    {
+      "eventId": "401872959",
+      "week": 3,
+      "kickoff": "2026-09-27T20:05Z",
+      "matchup": "Minnesota Vikings at Tampa Bay Buccaneers",
+      "home": {
+        "id": "27",
+        "name": "Tampa Bay Buccaneers"
+      },
+      "away": {
+        "id": "16",
+        "name": "Minnesota Vikings"
+      },
+      "actual": {
+        "home": 16,
+        "away": 23,
+        "total": 39
+      },
+      "market": {
+        "total": 42.5,
+        "provider": "DraftKings",
+        "overOdds": -112,
+        "underOdds": -108,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 3223795266,
+          "mean": 44.205945,
+          "median": 44,
+          "low80": 27,
+          "high80": 61,
+          "standardDeviation": 13.149793217263396,
+          "homeMean": 19.761235,
+          "awayMean": 24.44471,
+          "overProbability": 0.546595,
+          "underProbability": 0.453405,
+          "pushProbability": 0,
+          "edge": 1.7059449999999998
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 4271602048,
+          "mean": 37.72369,
+          "median": 37,
+          "low80": 25,
+          "high80": 51,
+          "standardDeviation": 9.84964429733081,
+          "homeMean": 18.669635,
+          "awayMean": 19.054055,
+          "overProbability": 0.315495,
+          "underProbability": 0.684505,
+          "pushProbability": 0,
+          "edge": -4.776310000000002
+        }
+      }
+    },
+    {
+      "eventId": "401872960",
+      "week": 3,
+      "kickoff": "2026-09-27T20:25Z",
+      "matchup": "Baltimore Ravens at Dallas Cowboys",
+      "home": {
+        "id": "6",
+        "name": "Dallas Cowboys"
+      },
+      "away": {
+        "id": "33",
+        "name": "Baltimore Ravens"
+      },
+      "actual": {
+        "home": 31,
+        "away": 34,
+        "total": 65
+      },
+      "market": {
+        "total": 54.5,
+        "provider": "DraftKings",
+        "overOdds": -108,
+        "underOdds": -112,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 1232124594,
+          "mean": 70.29434,
+          "median": 70,
+          "low80": 52,
+          "high80": 89,
+          "standardDeviation": 14.595410373277584,
+          "homeMean": 31.35628,
+          "awayMean": 38.93806,
+          "overProbability": 0.85824,
+          "underProbability": 0.14176,
+          "pushProbability": 0,
+          "edge": 15.794340000000005
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 1391995728,
+          "mean": 50.455705,
+          "median": 51,
+          "low80": 37,
+          "high80": 64,
+          "standardDeviation": 10.33696367183474,
+          "homeMean": 22.9769,
+          "awayMean": 27.478805,
+          "overProbability": 0.36976,
+          "underProbability": 0.63024,
+          "pushProbability": 0,
+          "edge": -4.044294999999998
+        }
+      }
+    },
+    {
+      "eventId": "401872961",
+      "week": 3,
+      "kickoff": "2026-09-27T20:25Z",
+      "matchup": "Las Vegas Raiders at New Orleans Saints",
+      "home": {
+        "id": "18",
+        "name": "New Orleans Saints"
+      },
+      "away": {
+        "id": "13",
+        "name": "Las Vegas Raiders"
+      },
+      "actual": {
+        "home": 27,
+        "away": 35,
+        "total": 62
+      },
+      "market": {
+        "total": 44.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 3493070257,
+          "mean": 57.419275,
+          "median": 57,
+          "low80": 39,
+          "high80": 77,
+          "standardDeviation": 14.853234108248083,
+          "homeMean": 27.671835,
+          "awayMean": 29.74744,
+          "overProbability": 0.799645,
+          "underProbability": 0.200355,
+          "pushProbability": 0,
+          "edge": 12.919274999999999
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3702759857,
+          "mean": 45.044995,
+          "median": 45,
+          "low80": 31,
+          "high80": 59,
+          "standardDeviation": 10.654835543076253,
+          "homeMean": 21.772305,
+          "awayMean": 23.27269,
+          "overProbability": 0.50621,
+          "underProbability": 0.49379,
+          "pushProbability": 0,
+          "edge": 0.5449950000000001
+        }
+      }
+    },
+    {
+      "eventId": "401872962",
+      "week": 3,
+      "kickoff": "2026-09-28T00:20Z",
+      "matchup": "Los Angeles Rams at Denver Broncos",
+      "home": {
+        "id": "7",
+        "name": "Denver Broncos"
+      },
+      "away": {
+        "id": "14",
+        "name": "Los Angeles Rams"
+      },
+      "actual": {
+        "home": 30,
+        "away": 26,
+        "total": 56
+      },
+      "market": {
+        "total": 44.5,
+        "provider": "DraftKings",
+        "overOdds": -108,
+        "underOdds": -112,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 638777772,
+          "mean": 54.367475,
+          "median": 54,
+          "low80": 37,
+          "high80": 72,
+          "standardDeviation": 13.845529499600843,
+          "homeMean": 22.63129,
+          "awayMean": 31.736185,
+          "overProbability": 0.748755,
+          "underProbability": 0.251245,
+          "pushProbability": 0,
+          "edge": 9.867474999999999
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3504356974,
+          "mean": 43.74365,
+          "median": 44,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.22062349749324,
+          "homeMean": 19.144885,
+          "awayMean": 24.598765,
+          "overProbability": 0.46477,
+          "underProbability": 0.53523,
+          "pushProbability": 0,
+          "edge": -0.7563499999999976
+        }
+      }
+    },
+    {
+      "eventId": "401872963",
+      "week": 3,
+      "kickoff": "2026-09-29T00:15Z",
+      "matchup": "Philadelphia Eagles at Chicago Bears",
+      "home": {
+        "id": "3",
+        "name": "Chicago Bears"
+      },
+      "away": {
+        "id": "21",
+        "name": "Philadelphia Eagles"
+      },
+      "actual": {
+        "home": 27,
+        "away": 7,
+        "total": 34
+      },
+      "market": {
+        "total": 42.5,
+        "provider": "DraftKings",
+        "overOdds": -108,
+        "underOdds": -112,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 2,
+          "opponentContexts": 1,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 1732366203,
+          "mean": 61.596795,
+          "median": 61,
+          "low80": 43,
+          "high80": 81,
+          "standardDeviation": 14.878940510935273,
+          "homeMean": 32.369565,
+          "awayMean": 29.22723,
+          "overProbability": 0.90587,
+          "underProbability": 0.09413,
+          "pushProbability": 0,
+          "edge": 19.096795
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3667372031,
+          "mean": 46.37157,
+          "median": 47,
+          "low80": 33,
+          "high80": 59,
+          "standardDeviation": 10.49566795088055,
+          "homeMean": 24.50157,
+          "awayMean": 21.87,
+          "overProbability": 0.650205,
+          "underProbability": 0.349795,
+          "pushProbability": 0,
+          "edge": 3.8715699999999984
+        }
+      }
+    },
+    {
+      "eventId": "401872964",
+      "week": 4,
+      "kickoff": "2026-10-02T00:15Z",
+      "matchup": "Pittsburgh Steelers at Cleveland Browns",
+      "home": {
+        "id": "5",
+        "name": "Cleveland Browns"
+      },
+      "away": {
+        "id": "23",
+        "name": "Pittsburgh Steelers"
+      },
+      "actual": {
+        "home": 27,
+        "away": 24,
+        "total": 51
+      },
+      "market": {
+        "total": 38.5,
+        "provider": "DraftKings",
+        "overOdds": -105,
+        "underOdds": -115,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2608730678,
+          "mean": 52.106585,
+          "median": 51,
+          "low80": 34,
+          "high80": 71,
+          "standardDeviation": 14.01919201087436,
+          "homeMean": 24.509535,
+          "awayMean": 27.59705,
+          "overProbability": 0.83388,
+          "underProbability": 0.16612,
+          "pushProbability": 0,
+          "edge": 13.606585000000003
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 361217628,
+          "mean": 43.34939,
+          "median": 44,
+          "low80": 30,
+          "high80": 57,
+          "standardDeviation": 10.267925137435066,
+          "homeMean": 22.14462,
+          "awayMean": 21.20477,
+          "overProbability": 0.65943,
+          "underProbability": 0.34057,
+          "pushProbability": 0,
+          "edge": 4.84939
+        }
+      }
+    },
+    {
+      "eventId": "401872965",
+      "week": 4,
+      "kickoff": "2026-10-04T13:30Z",
+      "matchup": "Indianapolis Colts at Washington Commanders",
+      "home": {
+        "id": "28",
+        "name": "Washington Commanders"
+      },
+      "away": {
+        "id": "11",
+        "name": "Indianapolis Colts"
+      },
+      "actual": {
+        "home": 13,
+        "away": 30,
+        "total": 43
+      },
+      "market": {
+        "total": 46.5,
+        "provider": "DraftKings",
+        "overOdds": -105,
+        "underOdds": -115,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 1410809173,
+          "mean": 67.43471,
+          "median": 67,
+          "low80": 48,
+          "high80": 87,
+          "standardDeviation": 15.044666404273267,
+          "homeMean": 35.362005,
+          "awayMean": 32.072705,
+          "overProbability": 0.92248,
+          "underProbability": 0.07752,
+          "pushProbability": 0,
+          "edge": 20.934709999999995
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 2216524861,
+          "mean": 47.92516,
+          "median": 48,
+          "low80": 34,
+          "high80": 62,
+          "standardDeviation": 10.413813373321766,
+          "homeMean": 24.247425,
+          "awayMean": 23.677735,
+          "overProbability": 0.56143,
+          "underProbability": 0.43857,
+          "pushProbability": 0,
+          "edge": 1.4251599999999982
+        }
+      }
+    },
+    {
+      "eventId": "401872971",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00Z",
+      "matchup": "New England Patriots at Buffalo Bills",
+      "home": {
+        "id": "2",
+        "name": "Buffalo Bills"
+      },
+      "away": {
+        "id": "17",
+        "name": "New England Patriots"
+      },
+      "actual": {
+        "home": 26,
+        "away": 29,
+        "total": 55
+      },
+      "market": {
+        "total": 49.5,
+        "provider": "DraftKings",
+        "overOdds": -108,
+        "underOdds": -112,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 723815516,
+          "mean": 63.0257,
+          "median": 63,
+          "low80": 44,
+          "high80": 82,
+          "standardDeviation": 14.51334728827056,
+          "homeMean": 38.046095,
+          "awayMean": 24.979605,
+          "overProbability": 0.825935,
+          "underProbability": 0.174065,
+          "pushProbability": 0,
+          "edge": 13.5257
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 1131627966,
+          "mean": 47.124195,
+          "median": 47,
+          "low80": 34,
+          "high80": 61,
+          "standardDeviation": 10.528569732015825,
+          "homeMean": 26.22661,
+          "awayMean": 20.897585,
+          "overProbability": 0.41484,
+          "underProbability": 0.58516,
+          "pushProbability": 0,
+          "edge": -2.3758049999999997
+        }
+      }
+    },
+    {
+      "eventId": "401872972",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00Z",
+      "matchup": "New York Jets at Chicago Bears",
+      "home": {
+        "id": "3",
+        "name": "Chicago Bears"
+      },
+      "away": {
+        "id": "20",
+        "name": "New York Jets"
+      },
+      "actual": {
+        "home": 23,
+        "away": 12,
+        "total": 35
+      },
+      "market": {
+        "total": 43.5,
+        "provider": "DraftKings",
+        "overOdds": -112,
+        "underOdds": -108,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 412479329,
+          "mean": 62.69382,
+          "median": 62,
+          "low80": 44,
+          "high80": 82,
+          "standardDeviation": 14.846578185144201,
+          "homeMean": 33.247215,
+          "awayMean": 29.446605,
+          "overProbability": 0.90357,
+          "underProbability": 0.09643,
+          "pushProbability": 0,
+          "edge": 19.193820000000002
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 1764934081,
+          "mean": 46.655315,
+          "median": 47,
+          "low80": 34,
+          "high80": 59,
+          "standardDeviation": 10.319072984080076,
+          "homeMean": 23.95734,
+          "awayMean": 22.697975,
+          "overProbability": 0.63567,
+          "underProbability": 0.36433,
+          "pushProbability": 0,
+          "edge": 3.1553150000000016
+        }
+      }
+    },
+    {
+      "eventId": "401872969",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00Z",
+      "matchup": "Jacksonville Jaguars at Cincinnati Bengals",
+      "home": {
+        "id": "4",
+        "name": "Cincinnati Bengals"
+      },
+      "away": {
+        "id": "30",
+        "name": "Jacksonville Jaguars"
+      },
+      "actual": {
+        "home": 17,
+        "away": 22,
+        "total": 39
+      },
+      "market": {
+        "total": 51.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2795328297,
+          "mean": 62.3793,
+          "median": 62,
+          "low80": 44,
+          "high80": 81,
+          "standardDeviation": 14.127843484057145,
+          "homeMean": 26.99601,
+          "awayMean": 35.38329,
+          "overProbability": 0.77028,
+          "underProbability": 0.22972,
+          "pushProbability": 0,
+          "edge": 10.8793
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 2446201193,
+          "mean": 46.00661,
+          "median": 45,
+          "low80": 33,
+          "high80": 59,
+          "standardDeviation": 10.28174189074477,
+          "homeMean": 22.709535,
+          "awayMean": 23.297075,
+          "overProbability": 0.297735,
+          "underProbability": 0.702265,
+          "pushProbability": 0,
+          "edge": -5.493389999999998
+        }
+      }
+    },
+    {
+      "eventId": "401872966",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00Z",
+      "matchup": "Arizona Cardinals at New York Giants",
+      "home": {
+        "id": "19",
+        "name": "New York Giants"
+      },
+      "away": {
+        "id": "22",
+        "name": "Arizona Cardinals"
+      },
+      "actual": {
+        "home": 36,
+        "away": 24,
+        "total": 60
+      },
+      "market": {
+        "total": 43.5,
+        "provider": "DraftKings",
+        "overOdds": -115,
+        "underOdds": -105,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2122011744,
+          "mean": 58.95203,
+          "median": 58,
+          "low80": 40,
+          "high80": 78,
+          "standardDeviation": 14.44316720387571,
+          "homeMean": 27.648685,
+          "awayMean": 31.303345,
+          "overProbability": 0.85677,
+          "underProbability": 0.14323,
+          "pushProbability": 0,
+          "edge": 15.45203
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 1606054890,
+          "mean": 44.346235,
+          "median": 44,
+          "low80": 31,
+          "high80": 58,
+          "standardDeviation": 10.055415273611814,
+          "homeMean": 21.169955,
+          "awayMean": 23.17628,
+          "overProbability": 0.551955,
+          "underProbability": 0.448045,
+          "pushProbability": 0,
+          "edge": 0.8462350000000001
+        }
+      }
+    },
+    {
+      "eventId": "401872970",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00Z",
+      "matchup": "Los Angeles Rams at Philadelphia Eagles",
+      "home": {
+        "id": "21",
+        "name": "Philadelphia Eagles"
+      },
+      "away": {
+        "id": "14",
+        "name": "Los Angeles Rams"
+      },
+      "actual": {
+        "home": 20,
+        "away": 24,
+        "total": 44
+      },
+      "market": {
+        "total": 42.5,
+        "provider": "DraftKings",
+        "overOdds": -120,
+        "underOdds": 100,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 743636331,
+          "mean": 57.433515,
+          "median": 57,
+          "low80": 39,
+          "high80": 76,
+          "standardDeviation": 14.298687693100975,
+          "homeMean": 22.14724,
+          "awayMean": 35.286275,
+          "overProbability": 0.855895,
+          "underProbability": 0.144105,
+          "pushProbability": 0,
+          "edge": 14.933515
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 1294643023,
+          "mean": 44.878095,
+          "median": 45,
+          "low80": 31,
+          "high80": 58,
+          "standardDeviation": 10.48767820687432,
+          "homeMean": 18.056735,
+          "awayMean": 26.82136,
+          "overProbability": 0.59253,
+          "underProbability": 0.40747,
+          "pushProbability": 0,
+          "edge": 2.378095000000002
+        }
+      }
+    },
+    {
+      "eventId": "401872968",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00Z",
+      "matchup": "Green Bay Packers at Tampa Bay Buccaneers",
+      "home": {
+        "id": "27",
+        "name": "Tampa Bay Buccaneers"
+      },
+      "away": {
+        "id": "9",
+        "name": "Green Bay Packers"
+      },
+      "actual": {
+        "home": 14,
+        "away": 17,
+        "total": 31
+      },
+      "market": {
+        "total": 38.5,
+        "provider": "DraftKings",
+        "overOdds": -115,
+        "underOdds": -105,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2592331562,
+          "mean": 53.91403,
+          "median": 54,
+          "low80": 36,
+          "high80": 72,
+          "standardDeviation": 14.407110715170964,
+          "homeMean": 28.692525,
+          "awayMean": 25.221505,
+          "overProbability": 0.859705,
+          "underProbability": 0.140295,
+          "pushProbability": 0,
+          "edge": 15.414029999999997
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 586190056,
+          "mean": 43.661795,
+          "median": 44,
+          "low80": 30,
+          "high80": 58,
+          "standardDeviation": 10.551280603701965,
+          "homeMean": 22.75173,
+          "awayMean": 20.910065,
+          "overProbability": 0.672185,
+          "underProbability": 0.327815,
+          "pushProbability": 0,
+          "edge": 5.161794999999998
+        }
+      }
+    },
+    {
+      "eventId": "401872973",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00Z",
+      "matchup": "Tennessee Titans at Baltimore Ravens",
+      "home": {
+        "id": "33",
+        "name": "Baltimore Ravens"
+      },
+      "away": {
+        "id": "10",
+        "name": "Tennessee Titans"
+      },
+      "actual": {
+        "home": 24,
+        "away": 18,
+        "total": 42
+      },
+      "market": {
+        "total": 41.5,
+        "provider": "DraftKings",
+        "overOdds": -115,
+        "underOdds": -105,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 1857509666,
+          "mean": 57.974675,
+          "median": 58,
+          "low80": 40,
+          "high80": 76,
+          "standardDeviation": 14.035609842272436,
+          "homeMean": 34.89431,
+          "awayMean": 23.080365,
+          "overProbability": 0.879505,
+          "underProbability": 0.120495,
+          "pushProbability": 0,
+          "edge": 16.474674999999998
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 2577668064,
+          "mean": 46.096955,
+          "median": 45,
+          "low80": 33,
+          "high80": 59,
+          "standardDeviation": 10.228962544072845,
+          "homeMean": 25.35783,
+          "awayMean": 20.739125,
+          "overProbability": 0.652315,
+          "underProbability": 0.347685,
+          "pushProbability": 0,
+          "edge": 4.596955000000001
+        }
+      }
+    },
+    {
+      "eventId": "401872967",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00Z",
+      "matchup": "Dallas Cowboys at Houston Texans",
+      "home": {
+        "id": "34",
+        "name": "Houston Texans"
+      },
+      "away": {
+        "id": "6",
+        "name": "Dallas Cowboys"
+      },
+      "actual": {
+        "home": 30,
+        "away": 34,
+        "total": 64
+      },
+      "market": {
+        "total": 48.5,
+        "provider": "DraftKings",
+        "overOdds": -115,
+        "underOdds": -105,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 3683556623,
+          "mean": 68.04664,
+          "median": 68,
+          "low80": 48,
+          "high80": 88,
+          "standardDeviation": 15.459443221232195,
+          "homeMean": 34.90703,
+          "awayMean": 33.13961,
+          "overProbability": 0.89921,
+          "underProbability": 0.10079,
+          "pushProbability": 0,
+          "edge": 19.546639999999996
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 207422715,
+          "mean": 50.69037,
+          "median": 51,
+          "low80": 37,
+          "high80": 65,
+          "standardDeviation": 10.693605531492281,
+          "homeMean": 25.90162,
+          "awayMean": 24.78875,
+          "overProbability": 0.569735,
+          "underProbability": 0.430265,
+          "pushProbability": 0,
+          "edge": 2.1903700000000015
+        }
+      }
+    },
+    {
+      "eventId": "401872974",
+      "week": 4,
+      "kickoff": "2026-10-04T20:05Z",
+      "matchup": "Miami Dolphins at Minnesota Vikings",
+      "home": {
+        "id": "16",
+        "name": "Minnesota Vikings"
+      },
+      "away": {
+        "id": "15",
+        "name": "Miami Dolphins"
+      },
+      "actual": {
+        "home": 15,
+        "away": 10,
+        "total": 25
+      },
+      "market": {
+        "total": 38.5,
+        "provider": "DraftKings",
+        "overOdds": -108,
+        "underOdds": -112,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 951212415,
+          "mean": 42.131295,
+          "median": 41,
+          "low80": 26,
+          "high80": 59,
+          "standardDeviation": 12.80132558069831,
+          "homeMean": 25.75703,
+          "awayMean": 16.374265,
+          "overProbability": 0.597705,
+          "underProbability": 0.402295,
+          "pushProbability": 0,
+          "edge": 3.6312950000000015
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 3584829323,
+          "mean": 36.375545,
+          "median": 37,
+          "low80": 24,
+          "high80": 49,
+          "standardDeviation": 9.798946930814719,
+          "homeMean": 22.22338,
+          "awayMean": 14.152165,
+          "overProbability": 0.38714,
+          "underProbability": 0.61286,
+          "pushProbability": 0,
+          "edge": -2.1244549999999975
+        }
+      }
+    },
+    {
+      "eventId": "401872976",
+      "week": 4,
+      "kickoff": "2026-10-04T20:25Z",
+      "matchup": "Kansas City Chiefs at Las Vegas Raiders",
+      "home": {
+        "id": "13",
+        "name": "Las Vegas Raiders"
+      },
+      "away": {
+        "id": "12",
+        "name": "Kansas City Chiefs"
+      },
+      "actual": {
+        "home": 27,
+        "away": 30,
+        "total": 57
+      },
+      "market": {
+        "total": 47.5,
+        "provider": "DraftKings",
+        "overOdds": -108,
+        "underOdds": -112,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 3974715973,
+          "mean": 60.166355,
+          "median": 60,
+          "low80": 42,
+          "high80": 79,
+          "standardDeviation": 14.647636704050642,
+          "homeMean": 27.398595,
+          "awayMean": 32.76776,
+          "overProbability": 0.79814,
+          "underProbability": 0.20186,
+          "pushProbability": 0,
+          "edge": 12.666355000000003
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 1256617549,
+          "mean": 46.37394,
+          "median": 47,
+          "low80": 33,
+          "high80": 59,
+          "standardDeviation": 10.338739714134443,
+          "homeMean": 20.45842,
+          "awayMean": 25.91552,
+          "overProbability": 0.46265,
+          "underProbability": 0.53735,
+          "pushProbability": 0,
+          "edge": -1.1260600000000025
+        }
+      }
+    },
+    {
+      "eventId": "401872975",
+      "week": 4,
+      "kickoff": "2026-10-04T20:25Z",
+      "matchup": "Denver Broncos at San Francisco 49ers",
+      "home": {
+        "id": "25",
+        "name": "San Francisco 49ers"
+      },
+      "away": {
+        "id": "7",
+        "name": "Denver Broncos"
+      },
+      "actual": {
+        "home": 24,
+        "away": 14,
+        "total": 38
+      },
+      "market": {
+        "total": 48.5,
+        "provider": "DraftKings",
+        "overOdds": -105,
+        "underOdds": -115,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 2453186256,
+          "mean": 62.74994,
+          "median": 62,
+          "low80": 45,
+          "high80": 81,
+          "standardDeviation": 14.036102735322872,
+          "homeMean": 37.481755,
+          "awayMean": 25.268185,
+          "overProbability": 0.84435,
+          "underProbability": 0.15565,
+          "pushProbability": 0,
+          "edge": 14.249940000000002
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 232135866,
+          "mean": 46.48408,
+          "median": 47,
+          "low80": 34,
+          "high80": 59,
+          "standardDeviation": 10.167368713367262,
+          "homeMean": 26.95714,
+          "awayMean": 19.52694,
+          "overProbability": 0.40913,
+          "underProbability": 0.59087,
+          "pushProbability": 0,
+          "edge": -2.0159200000000013
+        }
+      }
+    },
+    {
+      "eventId": "401872977",
+      "week": 4,
+      "kickoff": "2026-10-04T20:25Z",
+      "matchup": "Los Angeles Chargers at Seattle Seahawks",
+      "home": {
+        "id": "26",
+        "name": "Seattle Seahawks"
+      },
+      "away": {
+        "id": "24",
+        "name": "Los Angeles Chargers"
+      },
+      "actual": {
+        "home": 30,
+        "away": 23,
+        "total": 53
+      },
+      "market": {
+        "total": 43.5,
+        "provider": "DraftKings",
+        "overOdds": -110,
+        "underOdds": -110,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 1735993830,
+          "mean": 49.026265,
+          "median": 48,
+          "low80": 32,
+          "high80": 67,
+          "standardDeviation": 13.755745168834014,
+          "homeMean": 27.538735,
+          "awayMean": 21.48753,
+          "overProbability": 0.644365,
+          "underProbability": 0.355635,
+          "pushProbability": 0,
+          "edge": 5.526265000000002
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 1546993132,
+          "mean": 42.086195,
+          "median": 41,
+          "low80": 29,
+          "high80": 55,
+          "standardDeviation": 10.28015006806397,
+          "homeMean": 24.618185,
+          "awayMean": 17.46801,
+          "overProbability": 0.45947,
+          "underProbability": 0.54053,
+          "pushProbability": 0,
+          "edge": -1.4138050000000035
+        }
+      }
+    },
+    {
+      "eventId": "401872978",
+      "week": 4,
+      "kickoff": "2026-10-05T00:20Z",
+      "matchup": "Detroit Lions at Carolina Panthers",
+      "home": {
+        "id": "29",
+        "name": "Carolina Panthers"
+      },
+      "away": {
+        "id": "8",
+        "name": "Detroit Lions"
+      },
+      "actual": {
+        "home": 32,
+        "away": 26,
+        "total": 58
+      },
+      "market": {
+        "total": 52.5,
+        "provider": "DraftKings",
+        "overOdds": -112,
+        "underOdds": -108,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 1428282659,
+          "mean": 84.36053,
+          "median": 84,
+          "low80": 64,
+          "high80": 105,
+          "standardDeviation": 16.05394089060856,
+          "homeMean": 39.91193,
+          "awayMean": 44.4486,
+          "overProbability": 0.98001,
+          "underProbability": 0.01999,
+          "pushProbability": 0,
+          "edge": 31.860529999999997
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 530414055,
+          "mean": 55.31021,
+          "median": 55,
+          "low80": 41,
+          "high80": 69,
+          "standardDeviation": 10.875441129252822,
+          "homeMean": 27.220135,
+          "awayMean": 28.090075,
+          "overProbability": 0.58051,
+          "underProbability": 0.41949,
+          "pushProbability": 0,
+          "edge": 2.810209999999998
+        }
+      }
+    },
+    {
+      "eventId": "401872979",
+      "week": 4,
+      "kickoff": "2026-10-06T00:15Z",
+      "matchup": "Atlanta Falcons at New Orleans Saints",
+      "home": {
+        "id": "18",
+        "name": "New Orleans Saints"
+      },
+      "away": {
+        "id": "1",
+        "name": "Atlanta Falcons"
+      },
+      "actual": {
+        "home": 24,
+        "away": 45,
+        "total": 69
+      },
+      "market": {
+        "total": 48.5,
+        "provider": "DraftKings",
+        "overOdds": -105,
+        "underOdds": -102,
+        "source": "ESPN archived pickcenter"
+      },
+      "profiles": {
+        "home": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        },
+        "away": {
+          "games": 3,
+          "opponentContexts": 2,
+          "method": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage"
+        }
+      },
+      "models": {
+        "drive": {
+          "iterations": 200000,
+          "seed": 3748256532,
+          "mean": 62.850495,
+          "median": 63,
+          "low80": 44,
+          "high80": 82,
+          "standardDeviation": 15.038152920320263,
+          "homeMean": 28.56622,
+          "awayMean": 34.284275,
+          "overProbability": 0.82882,
+          "underProbability": 0.17118,
+          "pushProbability": 0,
+          "edge": 14.350495000000002
+        },
+        "play": {
+          "iterations": 200000,
+          "seed": 1108730550,
+          "mean": 46.131745,
+          "median": 46,
+          "low80": 33,
+          "high80": 59,
+          "standardDeviation": 10.420975398449828,
+          "homeMean": 21.345,
+          "awayMean": 24.786745,
+          "overProbability": 0.400825,
+          "underProbability": 0.599175,
+          "pushProbability": 0,
+          "edge": -2.368254999999998
+        }
+      }
+    }
+  ],
+  "summary": {
+    "generatedAt": "2026-10-08T23:38:33.069Z",
+    "completedGames": 64,
+    "drive": {
+      "games": 64,
+      "gamesWithMarket": 64,
+      "meanAbsoluteError": 16.0296,
+      "rootMeanSquaredError": 20.4567,
+      "bias": 10.3867,
+      "marketMeanAbsoluteError": 10.6875,
+      "beatMarketByAbsoluteError": 0.3438,
+      "leanAccuracy": 0.4531,
+      "brierScore": 0.3566,
+      "logLoss": 1.0702,
+      "calibration": [
+        {
+          "range": "30–40%",
+          "games": 1,
+          "predictedOver": 0.3758,
+          "actualOver": 1
+        },
+        {
+          "range": "40–50%",
+          "games": 7,
+          "predictedOver": 0.4494,
+          "actualOver": 0.7143
+        },
+        {
+          "range": "50–60%",
+          "games": 6,
+          "predictedOver": 0.5526,
+          "actualOver": 0.5
+        },
+        {
+          "range": "60–70%",
+          "games": 9,
+          "predictedOver": 0.6569,
+          "actualOver": 0.3333
+        },
+        {
+          "range": "70–80%",
+          "games": 11,
+          "predictedOver": 0.7489,
+          "actualOver": 0.5455
+        },
+        {
+          "range": "80–90%",
+          "games": 16,
+          "predictedOver": 0.8578,
+          "actualOver": 0.8125
+        },
+        {
+          "range": "90–100%",
+          "games": 14,
+          "predictedOver": 0.9352,
+          "actualOver": 0.1429
+        }
+      ],
+      "edgeBuckets": [
+        {
+          "edge": "0–1",
+          "games": 5,
+          "accuracy": 0.6
+        },
+        {
+          "edge": "1–2",
+          "games": 3,
+          "accuracy": 0.3333
+        },
+        {
+          "edge": "2–3",
+          "games": 3,
+          "accuracy": 0.3333
+        },
+        {
+          "edge": "3–5",
+          "games": 4,
+          "accuracy": 0.25
+        },
+        {
+          "edge": "5+",
+          "games": 49,
+          "accuracy": 0.4898
+        }
+      ]
+    },
+    "play": {
+      "games": 64,
+      "gamesWithMarket": 64,
+      "meanAbsoluteError": 12.0687,
+      "rootMeanSquaredError": 15.0555,
+      "bias": -1.3734,
+      "marketMeanAbsoluteError": 10.6875,
+      "beatMarketByAbsoluteError": 0.3594,
+      "leanAccuracy": 0.4063,
+      "brierScore": 0.3061,
+      "logLoss": 0.8166,
+      "calibration": [
+        {
+          "range": "20–30%",
+          "games": 7,
+          "predictedOver": 0.2799,
+          "actualOver": 0.8571
+        },
+        {
+          "range": "30–40%",
+          "games": 13,
+          "predictedOver": 0.3507,
+          "actualOver": 0.4615
+        },
+        {
+          "range": "40–50%",
+          "games": 15,
+          "predictedOver": 0.4524,
+          "actualOver": 0.6
+        },
+        {
+          "range": "50–60%",
+          "games": 13,
+          "predictedOver": 0.5571,
+          "actualOver": 0.5385
+        },
+        {
+          "range": "60–70%",
+          "games": 12,
+          "predictedOver": 0.6438,
+          "actualOver": 0.4167
+        },
+        {
+          "range": "70–80%",
+          "games": 3,
+          "predictedOver": 0.7348,
+          "actualOver": 0
+        },
+        {
+          "range": "80–90%",
+          "games": 1,
+          "predictedOver": 0.8472,
+          "actualOver": 0
+        }
+      ],
+      "edgeBuckets": [
+        {
+          "edge": "0–1",
+          "games": 11,
+          "accuracy": 0.4545
+        },
+        {
+          "edge": "1–2",
+          "games": 8,
+          "accuracy": 0.125
+        },
+        {
+          "edge": "2–3",
+          "games": 13,
+          "accuracy": 0.6923
+        },
+        {
+          "edge": "3–5",
+          "games": 20,
+          "accuracy": 0.45
+        },
+        {
+          "edge": "5+",
+          "games": 12,
+          "accuracy": 0.0833
+        }
+      ]
+    },
+    "byWeek": {
+      "1": {
+        "games": 16,
+        "drive": {
+          "games": 16,
+          "gamesWithMarket": 16,
+          "meanAbsoluteError": 13.5107,
+          "rootMeanSquaredError": 17.6042,
+          "bias": -2.83,
+          "marketMeanAbsoluteError": 11.6875,
+          "beatMarketByAbsoluteError": 0.375,
+          "leanAccuracy": 0.3125,
+          "brierScore": 0.3019,
+          "logLoss": 0.8006,
+          "calibration": [
+            {
+              "range": "30–40%",
+              "games": 1,
+              "predictedOver": 0.3758,
+              "actualOver": 1
+            },
+            {
+              "range": "40–50%",
+              "games": 7,
+              "predictedOver": 0.4494,
+              "actualOver": 0.7143
+            },
+            {
+              "range": "50–60%",
+              "games": 3,
+              "predictedOver": 0.5498,
+              "actualOver": 0.6667
+            },
+            {
+              "range": "60–70%",
+              "games": 5,
+              "predictedOver": 0.653,
+              "actualOver": 0.2
+            }
+          ],
+          "edgeBuckets": [
+            {
+              "edge": "0–1",
+              "games": 5,
+              "accuracy": 0.6
+            },
+            {
+              "edge": "1–2",
+              "games": 1,
+              "accuracy": 0
+            },
+            {
+              "edge": "2–3",
+              "games": 3,
+              "accuracy": 0.3333
+            },
+            {
+              "edge": "3–5",
+              "games": 3,
+              "accuracy": 0.3333
+            },
+            {
+              "edge": "5+",
+              "games": 4,
+              "accuracy": 0.25
+            }
+          ]
+        },
+        "play": {
+          "games": 16,
+          "gamesWithMarket": 16,
+          "meanAbsoluteError": 13.546,
+          "rootMeanSquaredError": 18.5298,
+          "bias": -6.4211,
+          "marketMeanAbsoluteError": 11.6875,
+          "beatMarketByAbsoluteError": 0.25,
+          "leanAccuracy": 0.25,
+          "brierScore": 0.3383,
+          "logLoss": 0.881,
+          "calibration": [
+            {
+              "range": "20–30%",
+              "games": 3,
+              "predictedOver": 0.273,
+              "actualOver": 1
+            },
+            {
+              "range": "30–40%",
+              "games": 5,
+              "predictedOver": 0.3431,
+              "actualOver": 0.6
+            },
+            {
+              "range": "40–50%",
+              "games": 3,
+              "predictedOver": 0.4532,
+              "actualOver": 0.6667
+            },
+            {
+              "range": "50–60%",
+              "games": 3,
+              "predictedOver": 0.5737,
+              "actualOver": 0.3333
+            },
+            {
+              "range": "60–70%",
+              "games": 2,
+              "predictedOver": 0.6175,
+              "actualOver": 0
+            }
+          ],
+          "edgeBuckets": [
+            {
+              "edge": "0–1",
+              "games": 2,
+              "accuracy": 0
+            },
+            {
+              "edge": "1–2",
+              "games": 2,
+              "accuracy": 0.5
+            },
+            {
+              "edge": "2–3",
+              "games": 3,
+              "accuracy": 0.3333
+            },
+            {
+              "edge": "3–5",
+              "games": 6,
+              "accuracy": 0.3333
+            },
+            {
+              "edge": "5+",
+              "games": 3,
+              "accuracy": 0
+            }
+          ]
+        }
+      },
+      "2": {
+        "games": 16,
+        "drive": {
+          "games": 16,
+          "gamesWithMarket": 16,
+          "meanAbsoluteError": 20.3103,
+          "rootMeanSquaredError": 25.2189,
+          "bias": 19.3071,
+          "marketMeanAbsoluteError": 10.6875,
+          "beatMarketByAbsoluteError": 0.1875,
+          "leanAccuracy": 0.375,
+          "brierScore": 0.4483,
+          "logLoss": 1.355,
+          "calibration": [
+            {
+              "range": "60–70%",
+              "games": 1,
+              "predictedOver": 0.6674,
+              "actualOver": 0
+            },
+            {
+              "range": "70–80%",
+              "games": 7,
+              "predictedOver": 0.7315,
+              "actualOver": 0.4286
+            },
+            {
+              "range": "80–90%",
+              "games": 4,
+              "predictedOver": 0.8761,
+              "actualOver": 0.75
+            },
+            {
+              "range": "90–100%",
+              "games": 4,
+              "predictedOver": 0.9434,
+              "actualOver": 0
+            }
+          ],
+          "edgeBuckets": [
+            {
+              "edge": "0–1",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "1–2",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "2–3",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "3–5",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "5+",
+              "games": 16,
+              "accuracy": 0.375
+            }
+          ]
+        },
+        "play": {
+          "games": 16,
+          "gamesWithMarket": 16,
+          "meanAbsoluteError": 11.9766,
+          "rootMeanSquaredError": 15.1397,
+          "bias": 5.0478,
+          "marketMeanAbsoluteError": 10.6875,
+          "beatMarketByAbsoluteError": 0.375,
+          "leanAccuracy": 0.5,
+          "brierScore": 0.2927,
+          "logLoss": 0.7852,
+          "calibration": [
+            {
+              "range": "20–30%",
+              "games": 2,
+              "predictedOver": 0.2865,
+              "actualOver": 1
+            },
+            {
+              "range": "30–40%",
+              "games": 2,
+              "predictedOver": 0.3532,
+              "actualOver": 0
+            },
+            {
+              "range": "40–50%",
+              "games": 4,
+              "predictedOver": 0.4819,
+              "actualOver": 0.25
+            },
+            {
+              "range": "50–60%",
+              "games": 3,
+              "predictedOver": 0.5424,
+              "actualOver": 0.3333
+            },
+            {
+              "range": "60–70%",
+              "games": 4,
+              "predictedOver": 0.6491,
+              "actualOver": 0.5
+            },
+            {
+              "range": "70–80%",
+              "games": 1,
+              "predictedOver": 0.7031,
+              "actualOver": 0
+            }
+          ],
+          "edgeBuckets": [
+            {
+              "edge": "0–1",
+              "games": 6,
+              "accuracy": 0.5
+            },
+            {
+              "edge": "1–2",
+              "games": 1,
+              "accuracy": 0
+            },
+            {
+              "edge": "2–3",
+              "games": 1,
+              "accuracy": 1
+            },
+            {
+              "edge": "3–5",
+              "games": 5,
+              "accuracy": 0.6
+            },
+            {
+              "edge": "5+",
+              "games": 3,
+              "accuracy": 0
+            }
+          ]
+        }
+      },
+      "3": {
+        "games": 16,
+        "drive": {
+          "games": 16,
+          "gamesWithMarket": 16,
+          "meanAbsoluteError": 16.3232,
+          "rootMeanSquaredError": 20.9599,
+          "bias": 12.4918,
+          "marketMeanAbsoluteError": 10.8125,
+          "beatMarketByAbsoluteError": 0.4375,
+          "leanAccuracy": 0.5,
+          "brierScore": 0.4017,
+          "logLoss": 1.3195,
+          "calibration": [
+            {
+              "range": "50–60%",
+              "games": 2,
+              "predictedOver": 0.5341,
+              "actualOver": 0.5
+            },
+            {
+              "range": "60–70%",
+              "games": 2,
+              "predictedOver": 0.6675,
+              "actualOver": 0.5
+            },
+            {
+              "range": "70–80%",
+              "games": 2,
+              "predictedOver": 0.7742,
+              "actualOver": 1
+            },
+            {
+              "range": "80–90%",
+              "games": 3,
+              "predictedOver": 0.8452,
+              "actualOver": 1
+            },
+            {
+              "range": "90–100%",
+              "games": 7,
+              "predictedOver": 0.9304,
+              "actualOver": 0.1429
+            }
+          ],
+          "edgeBuckets": [
+            {
+              "edge": "0–1",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "1–2",
+              "games": 2,
+              "accuracy": 0.5
+            },
+            {
+              "edge": "2–3",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "3–5",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "5+",
+              "games": 14,
+              "accuracy": 0.5
+            }
+          ]
+        },
+        "play": {
+          "games": 16,
+          "gamesWithMarket": 16,
+          "meanAbsoluteError": 13.2104,
+          "rootMeanSquaredError": 14.689,
+          "bias": -2.2138,
+          "marketMeanAbsoluteError": 10.8125,
+          "beatMarketByAbsoluteError": 0.3125,
+          "leanAccuracy": 0.3125,
+          "brierScore": 0.3542,
+          "logLoss": 0.9298,
+          "calibration": [
+            {
+              "range": "20–30%",
+              "games": 1,
+              "predictedOver": 0.2698,
+              "actualOver": 1
+            },
+            {
+              "range": "30–40%",
+              "games": 5,
+              "predictedOver": 0.35,
+              "actualOver": 0.6
+            },
+            {
+              "range": "40–50%",
+              "games": 3,
+              "predictedOver": 0.4504,
+              "actualOver": 0.6667
+            },
+            {
+              "range": "50–60%",
+              "games": 2,
+              "predictedOver": 0.5187,
+              "actualOver": 0.5
+            },
+            {
+              "range": "60–70%",
+              "games": 2,
+              "predictedOver": 0.6371,
+              "actualOver": 0.5
+            },
+            {
+              "range": "70–80%",
+              "games": 2,
+              "predictedOver": 0.7507,
+              "actualOver": 0
+            },
+            {
+              "range": "80–90%",
+              "games": 1,
+              "predictedOver": 0.8472,
+              "actualOver": 0
+            }
+          ],
+          "edgeBuckets": [
+            {
+              "edge": "0–1",
+              "games": 2,
+              "accuracy": 0.5
+            },
+            {
+              "edge": "1–2",
+              "games": 2,
+              "accuracy": 0
+            },
+            {
+              "edge": "2–3",
+              "games": 2,
+              "accuracy": 1
+            },
+            {
+              "edge": "3–5",
+              "games": 6,
+              "accuracy": 0.3333
+            },
+            {
+              "edge": "5+",
+              "games": 4,
+              "accuracy": 0
+            }
+          ]
+        }
+      },
+      "4": {
+        "games": 16,
+        "drive": {
+          "games": 16,
+          "gamesWithMarket": 16,
+          "meanAbsoluteError": 13.9743,
+          "rootMeanSquaredError": 16.9907,
+          "bias": 12.5779,
+          "marketMeanAbsoluteError": 9.5625,
+          "beatMarketByAbsoluteError": 0.375,
+          "leanAccuracy": 0.625,
+          "brierScore": 0.2744,
+          "logLoss": 0.8058,
+          "calibration": [
+            {
+              "range": "50–60%",
+              "games": 1,
+              "predictedOver": 0.5977,
+              "actualOver": 0
+            },
+            {
+              "range": "60–70%",
+              "games": 1,
+              "predictedOver": 0.6444,
+              "actualOver": 1
+            },
+            {
+              "range": "70–80%",
+              "games": 2,
+              "predictedOver": 0.7842,
+              "actualOver": 0.5
+            },
+            {
+              "range": "80–90%",
+              "games": 9,
+              "predictedOver": 0.8538,
+              "actualOver": 0.7778
+            },
+            {
+              "range": "90–100%",
+              "games": 3,
+              "predictedOver": 0.9354,
+              "actualOver": 0.3333
+            }
+          ],
+          "edgeBuckets": [
+            {
+              "edge": "0–1",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "1–2",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "2–3",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "3–5",
+              "games": 1,
+              "accuracy": 0
+            },
+            {
+              "edge": "5+",
+              "games": 15,
+              "accuracy": 0.6667
+            }
+          ]
+        },
+        "play": {
+          "games": 16,
+          "gamesWithMarket": 16,
+          "meanAbsoluteError": 9.542,
+          "rootMeanSquaredError": 10.8784,
+          "bias": -1.9065,
+          "marketMeanAbsoluteError": 9.5625,
+          "beatMarketByAbsoluteError": 0.5,
+          "leanAccuracy": 0.5625,
+          "brierScore": 0.239,
+          "logLoss": 0.6705,
+          "calibration": [
+            {
+              "range": "20–30%",
+              "games": 1,
+              "predictedOver": 0.2977,
+              "actualOver": 0
+            },
+            {
+              "range": "30–40%",
+              "games": 1,
+              "predictedOver": 0.3871,
+              "actualOver": 0
+            },
+            {
+              "range": "40–50%",
+              "games": 5,
+              "predictedOver": 0.4294,
+              "actualOver": 0.8
+            },
+            {
+              "range": "50–60%",
+              "games": 5,
+              "predictedOver": 0.5712,
+              "actualOver": 0.8
+            },
+            {
+              "range": "60–70%",
+              "games": 4,
+              "predictedOver": 0.6549,
+              "actualOver": 0.5
+            }
+          ],
+          "edgeBuckets": [
+            {
+              "edge": "0–1",
+              "games": 1,
+              "accuracy": 1
+            },
+            {
+              "edge": "1–2",
+              "games": 3,
+              "accuracy": 0
+            },
+            {
+              "edge": "2–3",
+              "games": 7,
+              "accuracy": 0.7143
+            },
+            {
+              "edge": "3–5",
+              "games": 3,
+              "accuracy": 0.6667
+            },
+            {
+              "edge": "5+",
+              "games": 2,
+              "accuracy": 0.5
+            }
+          ]
+        }
+      }
+    },
+    "byProfileWindow": {
+      "coldStart": {
+        "games": 16,
+        "drive": {
+          "games": 16,
+          "gamesWithMarket": 16,
+          "meanAbsoluteError": 13.5107,
+          "rootMeanSquaredError": 17.6042,
+          "bias": -2.83,
+          "marketMeanAbsoluteError": 11.6875,
+          "beatMarketByAbsoluteError": 0.375,
+          "leanAccuracy": 0.3125,
+          "brierScore": 0.3019,
+          "logLoss": 0.8006,
+          "calibration": [
+            {
+              "range": "30–40%",
+              "games": 1,
+              "predictedOver": 0.3758,
+              "actualOver": 1
+            },
+            {
+              "range": "40–50%",
+              "games": 7,
+              "predictedOver": 0.4494,
+              "actualOver": 0.7143
+            },
+            {
+              "range": "50–60%",
+              "games": 3,
+              "predictedOver": 0.5498,
+              "actualOver": 0.6667
+            },
+            {
+              "range": "60–70%",
+              "games": 5,
+              "predictedOver": 0.653,
+              "actualOver": 0.2
+            }
+          ],
+          "edgeBuckets": [
+            {
+              "edge": "0–1",
+              "games": 5,
+              "accuracy": 0.6
+            },
+            {
+              "edge": "1–2",
+              "games": 1,
+              "accuracy": 0
+            },
+            {
+              "edge": "2–3",
+              "games": 3,
+              "accuracy": 0.3333
+            },
+            {
+              "edge": "3–5",
+              "games": 3,
+              "accuracy": 0.3333
+            },
+            {
+              "edge": "5+",
+              "games": 4,
+              "accuracy": 0.25
+            }
+          ]
+        },
+        "play": {
+          "games": 16,
+          "gamesWithMarket": 16,
+          "meanAbsoluteError": 13.546,
+          "rootMeanSquaredError": 18.5298,
+          "bias": -6.4211,
+          "marketMeanAbsoluteError": 11.6875,
+          "beatMarketByAbsoluteError": 0.25,
+          "leanAccuracy": 0.25,
+          "brierScore": 0.3383,
+          "logLoss": 0.881,
+          "calibration": [
+            {
+              "range": "20–30%",
+              "games": 3,
+              "predictedOver": 0.273,
+              "actualOver": 1
+            },
+            {
+              "range": "30–40%",
+              "games": 5,
+              "predictedOver": 0.3431,
+              "actualOver": 0.6
+            },
+            {
+              "range": "40–50%",
+              "games": 3,
+              "predictedOver": 0.4532,
+              "actualOver": 0.6667
+            },
+            {
+              "range": "50–60%",
+              "games": 3,
+              "predictedOver": 0.5737,
+              "actualOver": 0.3333
+            },
+            {
+              "range": "60–70%",
+              "games": 2,
+              "predictedOver": 0.6175,
+              "actualOver": 0
+            }
+          ],
+          "edgeBuckets": [
+            {
+              "edge": "0–1",
+              "games": 2,
+              "accuracy": 0
+            },
+            {
+              "edge": "1–2",
+              "games": 2,
+              "accuracy": 0.5
+            },
+            {
+              "edge": "2–3",
+              "games": 3,
+              "accuracy": 0.3333
+            },
+            {
+              "edge": "3–5",
+              "games": 6,
+              "accuracy": 0.3333
+            },
+            {
+              "edge": "5+",
+              "games": 3,
+              "accuracy": 0
+            }
+          ]
+        }
+      },
+      "partial": {
+        "games": 32,
+        "drive": {
+          "games": 32,
+          "gamesWithMarket": 32,
+          "meanAbsoluteError": 18.3168,
+          "rootMeanSquaredError": 23.1874,
+          "bias": 15.8994,
+          "marketMeanAbsoluteError": 10.75,
+          "beatMarketByAbsoluteError": 0.3125,
+          "leanAccuracy": 0.4375,
+          "brierScore": 0.425,
+          "logLoss": 1.3373,
+          "calibration": [
+            {
+              "range": "50–60%",
+              "games": 2,
+              "predictedOver": 0.5341,
+              "actualOver": 0.5
+            },
+            {
+              "range": "60–70%",
+              "games": 3,
+              "predictedOver": 0.6675,
+              "actualOver": 0.3333
+            },
+            {
+              "range": "70–80%",
+              "games": 9,
+              "predictedOver": 0.741,
+              "actualOver": 0.5556
+            },
+            {
+              "range": "80–90%",
+              "games": 7,
+              "predictedOver": 0.8629,
+              "actualOver": 0.8571
+            },
+            {
+              "range": "90–100%",
+              "games": 11,
+              "predictedOver": 0.9351,
+              "actualOver": 0.0909
+            }
+          ],
+          "edgeBuckets": [
+            {
+              "edge": "0–1",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "1–2",
+              "games": 2,
+              "accuracy": 0.5
+            },
+            {
+              "edge": "2–3",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "3–5",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "5+",
+              "games": 30,
+              "accuracy": 0.4333
+            }
+          ]
+        },
+        "play": {
+          "games": 32,
+          "gamesWithMarket": 32,
+          "meanAbsoluteError": 12.5935,
+          "rootMeanSquaredError": 14.9161,
+          "bias": 1.417,
+          "marketMeanAbsoluteError": 10.75,
+          "beatMarketByAbsoluteError": 0.3438,
+          "leanAccuracy": 0.4063,
+          "brierScore": 0.3235,
+          "logLoss": 0.8575,
+          "calibration": [
+            {
+              "range": "20–30%",
+              "games": 3,
+              "predictedOver": 0.281,
+              "actualOver": 1
+            },
+            {
+              "range": "30–40%",
+              "games": 7,
+              "predictedOver": 0.3509,
+              "actualOver": 0.4286
+            },
+            {
+              "range": "40–50%",
+              "games": 7,
+              "predictedOver": 0.4684,
+              "actualOver": 0.4286
+            },
+            {
+              "range": "50–60%",
+              "games": 5,
+              "predictedOver": 0.5329,
+              "actualOver": 0.4
+            },
+            {
+              "range": "60–70%",
+              "games": 6,
+              "predictedOver": 0.6451,
+              "actualOver": 0.5
+            },
+            {
+              "range": "70–80%",
+              "games": 3,
+              "predictedOver": 0.7348,
+              "actualOver": 0
+            },
+            {
+              "range": "80–90%",
+              "games": 1,
+              "predictedOver": 0.8472,
+              "actualOver": 0
+            }
+          ],
+          "edgeBuckets": [
+            {
+              "edge": "0–1",
+              "games": 8,
+              "accuracy": 0.5
+            },
+            {
+              "edge": "1–2",
+              "games": 3,
+              "accuracy": 0
+            },
+            {
+              "edge": "2–3",
+              "games": 3,
+              "accuracy": 1
+            },
+            {
+              "edge": "3–5",
+              "games": 11,
+              "accuracy": 0.4545
+            },
+            {
+              "edge": "5+",
+              "games": 7,
+              "accuracy": 0
+            }
+          ]
+        }
+      },
+      "full": {
+        "games": 16,
+        "drive": {
+          "games": 16,
+          "gamesWithMarket": 16,
+          "meanAbsoluteError": 13.9743,
+          "rootMeanSquaredError": 16.9907,
+          "bias": 12.5779,
+          "marketMeanAbsoluteError": 9.5625,
+          "beatMarketByAbsoluteError": 0.375,
+          "leanAccuracy": 0.625,
+          "brierScore": 0.2744,
+          "logLoss": 0.8058,
+          "calibration": [
+            {
+              "range": "50–60%",
+              "games": 1,
+              "predictedOver": 0.5977,
+              "actualOver": 0
+            },
+            {
+              "range": "60–70%",
+              "games": 1,
+              "predictedOver": 0.6444,
+              "actualOver": 1
+            },
+            {
+              "range": "70–80%",
+              "games": 2,
+              "predictedOver": 0.7842,
+              "actualOver": 0.5
+            },
+            {
+              "range": "80–90%",
+              "games": 9,
+              "predictedOver": 0.8538,
+              "actualOver": 0.7778
+            },
+            {
+              "range": "90–100%",
+              "games": 3,
+              "predictedOver": 0.9354,
+              "actualOver": 0.3333
+            }
+          ],
+          "edgeBuckets": [
+            {
+              "edge": "0–1",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "1–2",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "2–3",
+              "games": 0,
+              "accuracy": null
+            },
+            {
+              "edge": "3–5",
+              "games": 1,
+              "accuracy": 0
+            },
+            {
+              "edge": "5+",
+              "games": 15,
+              "accuracy": 0.6667
+            }
+          ]
+        },
+        "play": {
+          "games": 16,
+          "gamesWithMarket": 16,
+          "meanAbsoluteError": 9.542,
+          "rootMeanSquaredError": 10.8784,
+          "bias": -1.9065,
+          "marketMeanAbsoluteError": 9.5625,
+          "beatMarketByAbsoluteError": 0.5,
+          "leanAccuracy": 0.5625,
+          "brierScore": 0.239,
+          "logLoss": 0.6705,
+          "calibration": [
+            {
+              "range": "20–30%",
+              "games": 1,
+              "predictedOver": 0.2977,
+              "actualOver": 0
+            },
+            {
+              "range": "30–40%",
+              "games": 1,
+              "predictedOver": 0.3871,
+              "actualOver": 0
+            },
+            {
+              "range": "40–50%",
+              "games": 5,
+              "predictedOver": 0.4294,
+              "actualOver": 0.8
+            },
+            {
+              "range": "50–60%",
+              "games": 5,
+              "predictedOver": 0.5712,
+              "actualOver": 0.8
+            },
+            {
+              "range": "60–70%",
+              "games": 4,
+              "predictedOver": 0.6549,
+              "actualOver": 0.5
+            }
+          ],
+          "edgeBuckets": [
+            {
+              "edge": "0–1",
+              "games": 1,
+              "accuracy": 1
+            },
+            {
+              "edge": "1–2",
+              "games": 3,
+              "accuracy": 0
+            },
+            {
+              "edge": "2–3",
+              "games": 7,
+              "accuracy": 0.7143
+            },
+            {
+              "edge": "3–5",
+              "games": 3,
+              "accuracy": 0.6667
+            },
+            {
+              "edge": "5+",
+              "games": 2,
+              "accuracy": 0.5
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -17,7 +17,13 @@
     "overProbability": 0.601635,
     "underProbability": 0.398365,
     "profileMethod": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage",
-    "profileGames": 4
+    "profileGames": 4,
+    "outcome": {
+      "homeScore": 16,
+      "awayScore": 25,
+      "total": 41,
+      "settledAt": "2026-10-08T22:55:12.442Z"
+    }
   },
   {
     "id": "039d5e50-c4c1-436d-b055-e7ce71f60e14",
@@ -37,7 +43,13 @@
     "overProbability": 0.599375,
     "underProbability": 0.400625,
     "profileMethod": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage",
-    "profileGames": 4
+    "profileGames": 4,
+    "outcome": {
+      "homeScore": 16,
+      "awayScore": 25,
+      "total": 41,
+      "settledAt": "2026-10-08T22:55:12.443Z"
+    }
   },
   {
     "id": "6d7f31ae-3536-41ba-816e-1a3c70612429",
@@ -57,7 +69,13 @@
     "overProbability": 0.669945,
     "underProbability": 0.330055,
     "profileMethod": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage",
-    "profileGames": 4
+    "profileGames": 4,
+    "outcome": {
+      "homeScore": 15,
+      "awayScore": 24,
+      "total": 39,
+      "settledAt": "2026-10-08T22:55:12.443Z"
+    }
   },
   {
     "id": "2c1bb2a2-e6ff-439b-8838-593d6d5aaf8c",
@@ -77,7 +95,13 @@
     "overProbability": 0.7168450155888189,
     "underProbability": 0.28315498441118114,
     "profileMethod": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage",
-    "profileGames": 4
+    "profileGames": 4,
+    "outcome": {
+      "homeScore": 15,
+      "awayScore": 24,
+      "total": 39,
+      "settledAt": "2026-10-08T22:55:12.443Z"
+    }
   },
   {
     "id": "6ea06879-5a3f-42d4-b398-e40d9a2da836",
@@ -97,6 +121,12 @@
     "overProbability": 0.579335,
     "underProbability": 0.420665,
     "profileMethod": "Opponent-adjusted estimated EPA and play outcomes with recency weighting and empirical-Bayes shrinkage",
-    "profileGames": 4
+    "profileGames": 4,
+    "outcome": {
+      "homeScore": 16,
+      "awayScore": 25,
+      "total": 41,
+      "settledAt": "2026-10-08T22:55:12.443Z"
+    }
   }
 ]
