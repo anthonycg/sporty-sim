@@ -57,11 +57,14 @@ main { width: min(1480px, calc(100% - 48px)); margin: 0 auto; padding-bottom: 80
 .panel-heading { min-height: 70px; padding: 20px 22px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; }
 .panel-heading > div { display: flex; align-items: center; gap: 12px; }
 .panel-heading .panel-actions { gap: 8px; }
+.compact-control { display: flex; align-items: center; gap: 7px; white-space: nowrap; }
+.compact-control select { width: auto; min-width: 88px; padding: 8px 9px; }
 .panel-heading h2 { margin: 0; font-size: 15px; letter-spacing: -.02em; }
 .step { color: var(--accent); font: 500 9px 'DM Mono', monospace; padding: 5px 6px; border: 1px solid rgba(219, 255, 82, .27); border-radius: 4px; }
 .feed-status { color: var(--muted); font: 9px 'DM Mono', monospace; text-transform: uppercase; }
 .feed-status::before { content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); margin-right: 7px; vertical-align: 1px; }
 .panel-intro { margin: 20px 22px 0; color: var(--muted); font-size: 12px; }
+.panel-intro span { color: #bdc8c2; }
 
 label { color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
 input, select { width: 100%; border: 1px solid var(--line); background: rgba(4, 11, 9, .47); color: var(--ink); padding: 10px 11px; border-radius: 6px; outline: none; font-size: 12px; text-transform: none; }
@@ -132,6 +135,7 @@ input[type='number'] { font-family: 'DM Mono', monospace; }
 .player-card-main strong { font-size: 12px; }
 .player-card-main span { color: var(--muted); font: 9px 'DM Mono', monospace; }
 .player-card-main b { color: var(--accent); font-weight: 500; }
+.player-card-main em { width: max-content; color: var(--blue); border: 1px solid rgba(114, 183, 255, .25); border-radius: 3px; padding: 2px 4px; font: 500 7px 'DM Mono', monospace; font-style: normal; text-transform: uppercase; }
 .player-actions { display: flex; gap: 5px; }
 .player-actions button { background: transparent; border: 1px solid var(--line); color: var(--muted); border-radius: 5px; min-width: 31px; height: 31px; }
 .player-actions button:hover { color: var(--ink); border-color: var(--line-bright); }

@@ -6,7 +6,7 @@ import { runPlaySimulation } from '../public/play-simulator.js';
 import { runSimulation, neutralTeam } from '../public/simulator.js';
 
 const ESPN_BASE = 'https://site.api.espn.com/apis/site/v2/sports/football';
-const MODEL_VERSION = '0.4.0';
+const MODEL_VERSION = '0.5.0';
 
 function argumentsFrom(argv) {
   const result = {};
@@ -25,16 +25,18 @@ const season = Number(args.season || new Date().getUTCFullYear());
 const seasonType = args['season-type'] === 'preseason' ? 'preseason' : 'regular';
 const seasonTypeNumber = seasonType === 'preseason' ? 1 : 2;
 const iterations = Number(args.iterations || 200_000);
+const profileGames = Number(args['profile-games'] || 3);
 const maximumWeek = Number(args['week-end'] || (league === 'nfl' ? 18 : 16));
 const minimumWeek = Number(args['week-start'] || 1);
 const through = args.through ? new Date(args.through) : new Date();
 const eventFilter = args.event ? String(args.event) : null;
 const gameLimit = args.limit ? Number(args.limit) : Infinity;
-const outputPath = resolve(args.output || `data/backtests/${league}-${season}-${seasonType}-v${MODEL_VERSION}.json`);
+const outputPath = resolve(args.output || `data/backtests/${league}-${season}-${seasonType}-${profileGames}g-v${MODEL_VERSION}.json`);
 const engines = args.models === 'drive' ? ['drive'] : args.models === 'play' ? ['play'] : ['drive', 'play'];
 
 if (!['nfl', 'college-football'].includes(league)) throw new Error('Use --league nfl or --league college-football.');
 if (!Number.isInteger(iterations) || iterations < 1) throw new Error('--iterations must be a positive integer.');
+if (!Number.isInteger(profileGames) || profileGames < 1 || profileGames > 8) throw new Error('--profile-games must be an integer from 1 through 8.');
 if (Number.isNaN(through.getTime())) throw new Error('--through must be a valid ISO date or timestamp.');
 
 const fetchCache = new Map();
@@ -138,7 +140,7 @@ async function loadProfile(teamId, kickoff) {
     league,
     teamId,
     before: kickoff,
-    limit: 3,
+    limit: profileGames,
     seasonType,
     seasonYear: season
   });
@@ -165,22 +167,22 @@ function compactResult(result) {
 async function readCheckpoint() {
   try {
     const value = JSON.parse(await readFile(outputPath, 'utf8'));
-    if (value.metadata?.modelVersion !== MODEL_VERSION || value.metadata?.iterations !== iterations) {
-      throw new Error(`Existing checkpoint uses model ${value.metadata?.modelVersion} and ${value.metadata?.iterations} iterations. Choose another --output path.`);
+    if (value.metadata?.modelVersion !== MODEL_VERSION || value.metadata?.iterations !== iterations || value.metadata?.profileGames !== profileGames) {
+      throw new Error(`Existing checkpoint uses model ${value.metadata?.modelVersion}, ${value.metadata?.iterations} iterations, and a ${value.metadata?.profileGames || 3}-game profile. Choose another --output path.`);
     }
     return value;
   } catch (error) {
     if (error.code !== 'ENOENT') throw error;
     return {
-      metadata: { modelVersion: MODEL_VERSION, league, season, seasonType, iterations, engines, startedAt: new Date().toISOString(), through: through.toISOString() },
+      metadata: { modelVersion: MODEL_VERSION, league, season, seasonType, iterations, profileGames, engines, startedAt: new Date().toISOString(), through: through.toISOString() },
       games: [],
-      summary: buildBacktestReport([])
+      summary: buildBacktestReport([], profileGames)
     };
   }
 }
 
 async function checkpoint(value) {
-  value.summary = buildBacktestReport(value.games);
+  value.summary = buildBacktestReport(value.games, profileGames);
   value.metadata.updatedAt = new Date().toISOString();
   await mkdir(dirname(outputPath), { recursive: true });
   const temporary = `${outputPath}.tmp`;
@@ -201,7 +203,7 @@ const complete = new Set(checkpointData.games
   .map((game) => game.eventId));
 
 console.log(`Walk-forward backtest: ${league} ${season} ${seasonType}`);
-console.log(`${schedule.length} completed games · ${iterations.toLocaleString()} simulations per engine · ${engines.join(' + ')}`);
+console.log(`${schedule.length} completed games · ${iterations.toLocaleString()} simulations per engine · ${profileGames}-game profiles · ${engines.join(' + ')}`);
 console.log(`Checkpoint: ${outputPath}`);
 
 let position = 0;
@@ -238,6 +240,7 @@ for (const game of schedule) {
     actual: { home: game.home.score, away: game.away.score, total: game.home.score + game.away.score },
     market,
     profiles: {
+      target: profileGames,
       home: { games: homeHistory.profile?.games || 0, opponentContexts: homeHistory.opponentContexts || 0, method: homeHistory.profile?.method || 'Neutral fallback' },
       away: { games: awayHistory.profile?.games || 0, opponentContexts: awayHistory.opponentContexts || 0, method: awayHistory.profile?.method || 'Neutral fallback' }
     },

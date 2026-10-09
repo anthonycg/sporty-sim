@@ -2,8 +2,8 @@ import { americanFairOdds, neutralTeam } from './simulator.js';
 import { baselineFor } from './model-baselines.js';
 import { applyRatingAdjustment, calculateTeamRatings } from './team-ratings.js';
 
-const STORAGE_KEY = 'sporty-sim:v0.4';
-const MODEL_VERSION = '0.4.0';
+const STORAGE_KEY = 'sporty-sim:v0.5';
+const MODEL_VERSION = '0.5.0';
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
@@ -25,9 +25,12 @@ const elements = {
   marketTotal: $('#marketTotal'),
   weather: $('#weatherPenalty'),
   modelMode: $('#modelMode'),
+  profileLimit: $('#profileGameLimit'),
   autoRate: $('#autoRateButton'),
   profileSummary: $('#profileSummary'),
   addPlayer: $('#addPlayerButton'),
+  refreshAvailability: $('#refreshAvailabilityButton'),
+  availabilityStatus: $('#availabilityStatus'),
   playerList: $('#playerList'),
   emptyPlayers: $('#emptyPlayers'),
   dialog: $('#playerDialog'),
@@ -147,6 +150,7 @@ function selectGame(id, options = {}) {
   elements.profileSummary.innerHTML = '';
   renderOverallRatings();
   persistState();
+  void loadAvailability();
 }
 
 function setInputValue(side, key, value) {
@@ -164,7 +168,8 @@ async function autoRateTeams() {
     return;
   }
   elements.autoRate.disabled = true;
-  elements.autoRate.textContent = 'Analyzing recent plays…';
+  const profileLimit = Number(elements.profileLimit.value) || 4;
+  elements.autoRate.textContent = `Analyzing ${profileLimit} games…`;
   try {
     const load = async (side) => {
       const query = new URLSearchParams({
@@ -173,7 +178,7 @@ async function autoRateTeams() {
         before: game.kickoff,
         seasonType: game.seasonType,
         seasonYear: String(game.seasonYear),
-        limit: '3'
+        limit: String(profileLimit)
       });
       const response = await fetch(`/api/team-profile?${query}`);
       const payload = await response.json();
@@ -211,12 +216,54 @@ async function autoRateTeams() {
     elements.results.classList.add('is-empty');
     renderOverallRatings();
     persistState();
-    showToast('Opponent-adjusted EPA profiles and trained play rates applied.');
+    showToast(`Opponent-adjusted profiles using up to ${profileLimit} games applied.`);
   } catch (error) {
     showToast(error.message || 'Could not build recent-game profiles.');
   } finally {
     elements.autoRate.disabled = false;
     elements.autoRate.textContent = '↯ Auto-rate recent games';
+  }
+}
+
+async function loadAvailability(options = {}) {
+  const game = state.selectedGame;
+  if (!game?.id) return;
+  const requestedGameId = game.id;
+  elements.refreshAvailability.disabled = true;
+  elements.refreshAvailability.textContent = 'Loading…';
+  elements.availabilityStatus.textContent = 'Loading listed injuries and depth roles…';
+  try {
+    const query = new URLSearchParams({ league: game.league, eventId: game.id });
+    const response = await fetch(`/api/availability?${query}`);
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || 'Could not load player availability.');
+    if (state.selectedGame?.id !== requestedGameId) return;
+    const manualPlayers = state.players.filter((player) => player.source !== 'automatic');
+    const manuallyOverridden = new Set(manualPlayers.map((player) => player.athleteId).filter(Boolean));
+    const automaticPlayers = (payload.players || []).map((player) => ({
+      ...player,
+      team: String(player.teamId) === String(game.home.id) ? 'home' : 'away'
+    })).filter((player) =>
+      [String(game.home.id), String(game.away.id)].includes(String(player.teamId))
+      && !manuallyOverridden.has(player.athleteId));
+    state.players = [...manualPlayers, ...automaticPlayers];
+    renderPlayers();
+    elements.results.classList.add('is-empty');
+    const quarterback = automaticPlayers.find((player) => player.unitGroup === 'quarterback' && player.playProbability === 0);
+    elements.availabilityStatus.textContent = automaticPlayers.length
+      ? `${automaticPlayers.length} listed player${automaticPlayers.length === 1 ? '' : 's'} loaded${quarterback ? ` · ${quarterback.name} out${quarterback.replacement ? ` → ${quarterback.replacement}` : ''}` : ''}.`
+      : 'No active injury designations were listed by the feed.';
+    persistState();
+    if (options.notify) showToast(`${automaticPlayers.length} availability scenario${automaticPlayers.length === 1 ? '' : 's'} refreshed.`);
+  } catch (error) {
+    if (state.selectedGame?.id !== requestedGameId) return;
+    elements.availabilityStatus.textContent = 'Automatic report unavailable; manual scenarios still work.';
+    if (options.notify) showToast(error.message || 'Could not refresh availability.');
+  } finally {
+    if (state.selectedGame?.id === requestedGameId) {
+      elements.refreshAvailability.disabled = false;
+      elements.refreshAvailability.textContent = 'Refresh report';
+    }
   }
 }
 
@@ -328,8 +375,10 @@ function savePlayer(event) {
     return;
   }
   const id = $('#editPlayerId').value || crypto.randomUUID();
+  const existing = state.players.find((item) => item.id === id);
   const player = {
     id,
+    athleteId: existing?.athleteId || '',
     name: $('#playerName').value.trim(),
     team: $('#playerTeam').value,
     unit: $('#playerUnit').value,
@@ -338,7 +387,8 @@ function savePlayer(event) {
     limitedProbability,
     pointsImpact: Number($('#pointsImpact').value),
     limitedImpact: Number($('#limitedImpact').value),
-    snapShare: Number($('#snapShare').value)
+    snapShare: Number($('#snapShare').value),
+    source: 'manual'
   };
   const index = state.players.findIndex((item) => item.id === id);
   if (index >= 0) state.players[index] = player;
@@ -357,8 +407,9 @@ function renderPlayers() {
     return `
       <div class="player-card" data-player-id="${player.id}">
         <div class="player-card-main">
-          <strong>${escapeHtml(player.name)}</strong>
-          <span>${escapeHtml(team?.abbreviation || player.team.toUpperCase())} · ${escapeHtml(player.unitGroup.replaceAll('-', ' '))} · <b>${player.playProbability}% play</b> / ${unavailable}% out · ${player.pointsImpact.toFixed(2)} pts at risk</span>
+          <strong>${escapeHtml(player.name)}${player.position ? ` · ${escapeHtml(player.position)}` : ''}</strong>
+          ${player.source === 'automatic' ? `<em>Auto · ${escapeHtml(player.status || 'listed')} · ${escapeHtml(player.depthRole || 'depth unknown')}</em>` : ''}
+          <span>${escapeHtml(team?.abbreviation || player.team.toUpperCase())} · ${escapeHtml(player.unitGroup.replaceAll('-', ' '))} · <b>${player.playProbability}% play</b> / ${unavailable}% out · ${Number(player.pointsImpact).toFixed(2)} pts at risk${player.replacement ? ` · next: ${escapeHtml(player.replacement)}` : ''}</span>
         </div>
         <div class="player-actions">
           <button type="button" data-action="edit" aria-label="Edit ${escapeHtml(player.name)}">✎</button>
@@ -503,7 +554,19 @@ async function recordPrediction(rawResult, config) {
         overProbability: result.overProbability,
         underProbability: result.underProbability,
         profileMethod: state.profiles.home?.method || 'manual assumptions',
-        profileGames: (state.profiles.home?.games || 0) + (state.profiles.away?.games || 0)
+        profileGames: (state.profiles.home?.games || 0) + (state.profiles.away?.games || 0),
+        profileLimit: Number(elements.profileLimit.value),
+        availability: state.players.map((player) => ({
+          name: player.name,
+          team: player.team,
+          position: player.position || player.unitGroup,
+          status: player.status || 'Manual',
+          playProbability: player.playProbability,
+          limitedProbability: player.limitedProbability,
+          pointsImpact: player.pointsImpact,
+          snapShare: player.snapShare,
+          source: player.source || 'manual'
+        }))
       })
     });
     const payload = await response.json();
@@ -576,6 +639,7 @@ function persistState() {
     marketTotal: elements.marketTotal.value,
     weather: elements.weather.value,
     modelMode: elements.modelMode.value,
+    profileLimit: elements.profileLimit.value,
     inputs,
     players: state.players,
     profiles: state.profiles
@@ -594,6 +658,7 @@ function restoreState() {
   elements.marketTotal.value = saved.marketTotal || '44.5';
   elements.weather.value = saved.weather || '0';
   elements.modelMode.value = saved.modelMode || 'compare';
+  elements.profileLimit.value = saved.profileLimit || '4';
   Object.entries(saved.inputs || {}).forEach(([name, value]) => {
     const input = document.querySelector(`[name="${CSS.escape(name)}"]`);
     if (input) input.value = value;
@@ -615,11 +680,13 @@ function resetEverything() {
   else elements.marketTotal.value = '44.5';
   elements.results.classList.add('is-empty');
   persistState();
+  void loadAvailability();
   showToast('All assumptions cleared.');
 }
 
 elements.loadGames.addEventListener('click', loadGames);
 elements.addPlayer.addEventListener('click', () => openPlayerDialog());
+elements.refreshAvailability.addEventListener('click', () => loadAvailability({ notify: true }));
 elements.autoRate.addEventListener('click', autoRateTeams);
 elements.playerForm.addEventListener('submit', savePlayer);
 elements.runButton.addEventListener('click', runModel);
@@ -630,6 +697,14 @@ elements.league.addEventListener('change', loadGames);
 elements.date.addEventListener('change', loadGames);
 elements.modelMode.addEventListener('change', () => {
   $('.button-label', elements.runButton).innerHTML = runButtonMarkup();
+});
+elements.profileLimit.addEventListener('change', () => {
+  state.profiles = {};
+  elements.profileSummary.classList.remove('is-visible');
+  elements.profileSummary.innerHTML = '';
+  elements.results.classList.add('is-empty');
+  persistState();
+  if (state.selectedGame) void autoRateTeams();
 });
 $$('input, select').forEach((input) => {
   input.addEventListener('input', () => {

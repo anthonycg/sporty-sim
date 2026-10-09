@@ -1,6 +1,6 @@
 # Sporty Sim
 
-Sporty Sim is a transparent football totals simulator. It loads upcoming NFL or college-football matchups, builds opponent-adjusted recent-game profiles, samples uncertain player availability, and runs both drive-level and play-level game simulations in the browser. Version 0.4 also records prospective forecasts and grades them after games finish.
+Sporty Sim is a transparent football totals simulator. It loads upcoming NFL or college-football matchups, builds opponent-adjusted recent-game profiles, imports matchup injuries and depth roles, samples uncertain player availability, and runs both drive-level and play-level game simulations in the browser. Version 0.5 also records prospective forecasts and grades them after games finish.
 
 ## Run it
 
@@ -15,8 +15,8 @@ Open [http://127.0.0.1:4173](http://127.0.0.1:4173).
 ## Tonight's workflow
 
 1. Select the league and date, then choose a game from the live slate.
-2. Select **Auto-rate recent games** to process up to three completed games strictly before kickoff. The app estimates EPA, measures play outcomes, adjusts production for available opponent history, applies recency weighting and league-average shrinkage, then fills the team inputs. You can still override any value.
-3. Add players whose availability is uncertain. `Chance limited` is included within `chance to play`; the remaining probability is fully active. The points impact is multiplied by expected snap share.
+2. Choose a 3-, 4-, 6-, or 8-game history window, then select **Auto-rate recent games**. Only completed games strictly before kickoff are eligible. The app estimates EPA, measures play outcomes, adjusts production for available opponent history, applies recency weighting and league-average shrinkage, then fills the team inputs. You can still override any value.
+3. Review the automatically loaded injury scenarios. ESPN matchup designations are joined to each team's current depth chart so starters, rotation players, and reserves receive different default impacts. Starting quarterbacks receive the largest default adjustment and show the next quarterback on the depth chart. Edit any scenario to override it or add players manually. `Chance limited` is included within `chance to play`; the remaining probability is fully active.
 4. Enter the market total and weather severity.
 5. Choose drive-level, play-level, or comparison mode. Comparison runs 200k complete games through each engine.
 6. Compare the distribution—not only the mean—to the line and inspect whether the models agree.
@@ -60,7 +60,7 @@ The kickoff timestamp is a hard cutoff, preventing the game being predicted—or
 - Uses a lower scoring environment for preseason rotation uncertainty and applies player/weather modifiers.
 - Uses a compact overtime approximation; a full NFL overtime rules engine is not yet implemented.
 
-The schedule, displayed market context, box scores, drives, and historical plays come from ESPN's public scoreboard feed. Injury probabilities remain user assumptions. Market odds are context, never a team-strength input.
+The schedule, displayed market context, box scores, drives, historical plays, injury designations, and current depth charts come from ESPN's public feeds. Availability probabilities and position impacts are transparent model assumptions and remain manually editable. Market odds are context, never a team-strength input.
 
 ## Prospective validation
 
@@ -90,6 +90,9 @@ npm run backtest -- --league nfl --season 2026 --event 401872656
 
 # A week range or explicit cutoff
 npm run backtest -- --league nfl --season 2026 --week-start 1 --week-end 4 --through 2026-10-08T23:59:59-05:00
+
+# Compare a different profile window (1 through 8 games are accepted)
+npm run backtest -- --league nfl --season 2026 --profile-games 6
 
 # Separate checkpoint file
 npm run backtest -- --league nfl --season 2026 --output data/backtests/nfl-2026-audit.json

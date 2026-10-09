@@ -21,3 +21,15 @@ test('walk-forward report compares both engines with outcomes and market totals'
   assert.match(formatBacktestReport(report), /Model MAE/);
   assert.match(formatBacktestMarkdown(report, { league: 'nfl', season: 2026, iterations: 200_000 }), /200,000 per engine/);
 });
+
+test('profile-window segments honor the configured history target', () => {
+  const matureForThree = {
+    week: 4,
+    profiles: { home: { games: 3 }, away: { games: 3 } },
+    actual: { total: 45 },
+    market: { total: 44 },
+    models: { play: { mean: 46, overProbability: 0.55 } }
+  };
+  assert.equal(buildBacktestReport([matureForThree], 3).byProfileWindow.full.games, 1);
+  assert.equal(buildBacktestReport([matureForThree], 4).byProfileWindow.partial.games, 1);
+});

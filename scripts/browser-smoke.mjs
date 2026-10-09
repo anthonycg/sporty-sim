@@ -36,7 +36,7 @@ try {
     '--headless=new', '--disable-gpu', '--no-first-run', '--no-default-browser-check',
     `--remote-debugging-port=${debugPort}`, `--user-data-dir=${chromeProfile}`, 'about:blank'
   ], { stdio: 'ignore' });
-  await waitForUrl(`http://127.0.0.1:${debugPort}/json/version`);
+  await waitForUrl(`http://127.0.0.1:${debugPort}/json/version`, 150);
   const pageResponse = await fetch(`http://127.0.0.1:${debugPort}/json/new?${encodeURIComponent(`http://127.0.0.1:${appPort}`)}`, { method: 'PUT' });
   const page = await pageResponse.json();
   const socket = new WebSocket(page.webSocketDebuggerUrl);

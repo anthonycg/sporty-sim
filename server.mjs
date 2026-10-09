@@ -3,6 +3,7 @@ import { readFile, stat } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadHistoricalProfile } from './lib/historical-profile.mjs';
+import { buildAvailabilityPlayers } from './lib/injury-profile.mjs';
 import { createPredictionLedger } from './lib/prediction-ledger.mjs';
 
 const ROOT = fileURLToPath(new URL('.', import.meta.url));
@@ -109,7 +110,7 @@ async function fetchGames(league, date) {
 
   const endpoint = `${ESPN_BASE}/${league}/scoreboard?dates=${compactDate(date)}&limit=100`;
   const response = await fetch(endpoint, {
-    headers: { 'user-agent': 'SportySim/0.1 local analytics prototype' },
+    headers: { 'user-agent': 'SportySim/0.5 local analytics prototype' },
     signal: AbortSignal.timeout(8_000)
   });
   if (!response.ok) throw new Error(`Schedule provider returned ${response.status}`);
@@ -123,11 +124,48 @@ async function fetchGames(league, date) {
   return value;
 }
 
+async function fetchMatchupAvailability(league, eventId) {
+  const key = `availability:${league}:${eventId}`;
+  const cached = cache.get(key);
+  if (cached && Date.now() - cached.createdAt < 60_000) return cached.value;
+
+  const summaryResponse = await fetch(`${ESPN_BASE}/${league}/summary?event=${eventId}`, {
+    headers: { 'user-agent': 'SportySim/0.5 local analytics prototype' },
+    signal: AbortSignal.timeout(8_000)
+  });
+  if (!summaryResponse.ok) throw new Error(`Availability provider returned ${summaryResponse.status}`);
+  const summary = await summaryResponse.json();
+  const injuryGroups = Array.isArray(summary.injuries) ? summary.injuries : [];
+  const teamIds = [...new Set(injuryGroups.map((group) => String(group.team?.id || '')).filter(Boolean))];
+  const depthEntries = await Promise.all(teamIds.map(async (teamId) => {
+    try {
+      const response = await fetch(`${ESPN_BASE}/${league}/teams/${teamId}/depthcharts`, {
+        headers: { 'user-agent': 'SportySim/0.5 local analytics prototype' },
+        signal: AbortSignal.timeout(8_000)
+      });
+      if (!response.ok) return [teamId, null];
+      return [teamId, await response.json()];
+    } catch {
+      return [teamId, null];
+    }
+  }));
+  const depthCharts = Object.fromEntries(depthEntries.filter(([, value]) => value));
+  const value = {
+    source: 'ESPN matchup injury report and team depth charts',
+    fetchedAt: new Date().toISOString(),
+    players: buildAvailabilityPlayers(injuryGroups, depthCharts),
+    depthChartsAvailable: Object.keys(depthCharts).length,
+    teamsListed: teamIds.length
+  };
+  cache.set(key, { createdAt: Date.now(), value });
+  return value;
+}
+
 async function fetchOutcome(eventId, league) {
   if (!LEAGUES.has(league)) throw new Error('Unknown league in prediction ledger.');
   const endpoint = `${ESPN_BASE}/${league}/summary?event=${eventId}`;
   const response = await fetch(endpoint, {
-    headers: { 'user-agent': 'SportySim/0.4 local analytics prototype' },
+    headers: { 'user-agent': 'SportySim/0.5 local analytics prototype' },
     signal: AbortSignal.timeout(8_000)
   });
   if (!response.ok) throw new Error(`Final-score provider returned ${response.status}`);
@@ -174,7 +212,7 @@ async function serveStatic(request, response, pathname) {
 const server = createServer(async (request, response) => {
   const url = new URL(request.url || '/', `http://${request.headers.host || 'localhost'}`);
   if (request.method === 'GET' && url.pathname === '/api/health') {
-    sendJson(response, 200, { ok: true, version: '0.4.0' });
+    sendJson(response, 200, { ok: true, version: '0.5.0' });
     return;
   }
 
@@ -193,13 +231,28 @@ const server = createServer(async (request, response) => {
     return;
   }
 
+  if (request.method === 'GET' && url.pathname === '/api/availability') {
+    const league = url.searchParams.get('league') || 'nfl';
+    const eventId = url.searchParams.get('eventId') || '';
+    if (!LEAGUES.has(league) || !/^\d+$/.test(eventId)) {
+      sendJson(response, 400, { error: 'Use a valid league and numeric eventId.' });
+      return;
+    }
+    try {
+      sendJson(response, 200, await fetchMatchupAvailability(league, eventId));
+    } catch (error) {
+      sendJson(response, 502, { error: error.message || 'Could not load player availability.' });
+    }
+    return;
+  }
+
   if (request.method === 'GET' && url.pathname === '/api/team-profile') {
     const league = url.searchParams.get('league') || 'nfl';
     const teamId = url.searchParams.get('teamId') || '';
     const before = url.searchParams.get('before') || '';
     const seasonType = url.searchParams.get('seasonType') === 'preseason' ? 'preseason' : 'regular';
     const seasonYear = Number(url.searchParams.get('seasonYear')) || new Date(before).getUTCFullYear();
-    const limit = Math.min(6, Math.max(1, Number(url.searchParams.get('limit')) || 3));
+    const limit = Math.min(8, Math.max(1, Number(url.searchParams.get('limit')) || 3));
     if (!LEAGUES.has(league) || !/^\d+$/.test(teamId) || !Number.isFinite(Date.parse(before))) {
       sendJson(response, 400, { error: 'Use a valid league, numeric teamId, and ISO before timestamp.' });
       return;

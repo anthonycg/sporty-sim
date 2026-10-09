@@ -28,7 +28,7 @@
     <main>
       <section class="hero">
         <div>
-          <div class="eyebrow">Football totals lab <span>v0.4.0</span></div>
+          <div class="eyebrow">Football totals lab <span>v0.5.0</span></div>
           <h1>Turn assumptions into<br><span>probabilities.</span></h1>
           <p>Build the matchup, price uncertain player availability, and simulate the full range of game outcomes.</p>
         </div>
@@ -77,6 +77,14 @@
                 <h2>Shape the matchup</h2>
               </div>
               <div class="panel-actions">
+                <label class="compact-control">History
+                  <select id="profileGameLimit" aria-label="Games used in team profiles">
+                    <option value="3">3 games</option>
+                    <option value="4" selected>4 games</option>
+                    <option value="6">6 games</option>
+                    <option value="8">8 games</option>
+                  </select>
+                </label>
                 <button id="autoRateButton" class="add-button" type="button">↯ Auto-rate recent games</button>
                 <button id="presetButton" class="text-button" type="button">Reset to neutral</button>
               </div>
@@ -165,9 +173,12 @@
                 <span class="step">03</span>
                 <h2>Price availability</h2>
               </div>
-              <button id="addPlayerButton" class="add-button" type="button"><span>+</span> Add player</button>
+              <div class="panel-actions">
+                <button id="refreshAvailabilityButton" class="text-button" type="button">Refresh report</button>
+                <button id="addPlayerButton" class="add-button" type="button"><span>+</span> Add player</button>
+              </div>
             </div>
-            <p class="panel-intro">Each simulation independently samples whether uncertain players are active, limited, or out.</p>
+            <p class="panel-intro">Each simulation independently samples whether uncertain players are active, limited, or out. <span id="availabilityStatus">Select a matchup to load its report.</span></p>
             <div id="playerList" class="player-list"></div>
             <div id="emptyPlayers" class="empty-players">
               <div>±</div>
